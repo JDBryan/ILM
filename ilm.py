@@ -5,21 +5,27 @@ MEANINGS = [(x, y) for x in A_COMP for y in B_COMP]
 
 
 class Grammar:
+
     def __init__(self):
         self.s_count = 1
         self.a_count = 1
         self.rules = []
 
+
     def induction(self, meaning, string):
         label = "S" + str(self.s_count)
         self.incorporate(Rule(label, meaning, string))
 
-    def generalise_pair(self, label_a, label_b):
-        rule_a = self.rules[label_a]
-        rule_b = self.rules[label_b]
+    # Uses the generalisation rules on a specific pair of rules
+    def generalise_pair(self, rule_a, rule_b):
         if rule_a.meaning == rule_b.meaning and rule_a.string == rule_b.string:
-            del self.rules[rule_b]
+            rule_b.label = rule_a.label
+        elif rule_a.label[0] == "S" and rule_b.label[0] == "S":
+            if rule_a.meaning[0] == rule_b.meaning[0] and rule_a.meaning in A_COMP:
+                return True
 
+
+    # Get all rules under a given label
     def get_rules_by_label(self, label):
         labeled_rules = []
         for rule in self.rules:
@@ -27,57 +33,53 @@ class Grammar:
                 labeled_rules.append(rule)
         return labeled_rules
 
+    # Incorporates the given rule into the grammar
     def incorporate(self, rule):
         if self.parse(rule.meaning) == "-":
             self.rules.append(rule)
             self.s_count += 1
 
+    def meaning_match(self, rule, meaning):
+        if rule.label[0] == "S":
+            if meaning[0] == rule.meaning[0] or rule.meaning[0] not in A_COMP:
+                if meaning[1] == rule.meaning[1] or rule.meaning[1] not in B_COMP:
+                    return True
+        return False
+
+
+    # Use grammar to find string for a given meaning
+    # returns "-" if no string can be generated
     def parse(self, meaning):
         for rule in self.rules:
-            if rule.label[0] == "S":
+            if self.meaning_match(rule, meaning):
                 output = self.parse_rule(meaning, rule)
                 if output != "-":
                     return output
-            return "-"
-
-    def find_subrule(self, meaning_variable, concrete_meaning, rule):
-        for item in rule.string:
-            if len(item) > 1 and item.split(":")[1] == meaning_variable:
-                rule_label = item.split(":")[0]
-                for rule in self.get_rules_by_label(rule_label):
-                    if rule.meaning == concrete_meaning:
-                        return rule
         return "-"
 
     def parse_rule(self, meaning, rule):
         output = ""
-        a_rule = ""
-        b_rule = ""
 
-        #Find subrule for first meaning variable
-        if rule.meaning[0] not in A_COMP:
-            a_rule = self.find_subrule(rule.meaning[0], meaning[0], rule)
-
-        #Find subrule for second meaning variable
-        if rule.meaning[1] not in B_COMP:
-            b_rule = self.find_subrule(rule.meaning[1], meaning[1], rule)
-
-        #Check that rule meaning matches given meaning
-        if (a_rule != "" or meaning[0] == rule.meaning[0]) and (b_rule != "" or meaning[1] == rule.meaning[1]):
-            for item in rule.string:
-                if len(item) == 1:
-                    output += item
+        for item in rule.string:
+            if len(item) == 1:
+                output += item
+            else:
+                rule_found = False
+                label = item.split(":")[0]
+                labeled_rules = self.get_rules_by_label(label)
+                meaning_var = item.split(":")[1]
+                if meaning_var == rule.meaning[0]:
+                    concrete_meaning = meaning[0]
                 else:
-                    items = item.split(":")
-                    if items[1] == rule.meaning[0]:
-                        for i in a_rule.string:
+                    concrete_meaning = meaning[1]
+                for i_rule in labeled_rules:
+                    if i_rule.meaning == concrete_meaning:
+                        rule_found = True
+                        for i in i_rule.string:
                             output += i
-                    if items[1] == rule.meaning[1]:
-                        for i in b_rule.string:
-                            output += i
-            return output
-        return "-"
-
+                if not rule_found:
+                    return "-"
+        return output
 
 class Rule:
     def __init__(self, label, meaning, string):
