@@ -3,10 +3,16 @@ class Rule:
         self.label = label
         self.meaning = meaning
         self.string = string
-        self.non_terminals = []
+        self.non_terminals = {}
+
         for item in self.string:
             if len(item) > 1:
-                self.non_terminals.append(item)
+                meaning = item.split(":")[1]
+                label = item.split(":")[0]
+                self.non_terminals[meaning] = label
+
+        if not self.is_valid():
+            raise Exception("Invalid rule: " + str(self))
 
     def __repr__(self):
         string_str = ""
@@ -19,12 +25,18 @@ class Rule:
             meaning_str = self.meaning
         return self.label + ": " + meaning_str + " -> " + string_str
 
-    def meaning_match(self, meaning):
-        if self.label == "S":
-            if meaning[0] == self.meaning[0] or self.meaning[0] not in A_COMP:
-                if meaning[1] == self.meaning[1] or self.meaning[1] not in B_COMP:
-                    return True
-        return False
+    def __eq__(self, other):
+        return self.label == other.label and self.meaning == other.meaning and self.string == other.string
+
+    def is_valid(self):
+        if self.label != "S" or (self.meaning[0] != "x" and self.meaning[1] != "y"):
+            valid = len(self.non_terminals) == 0
+        elif self.meaning[1] != "y":
+            valid = len(self.non_terminals) == 1 and "x" in self.non_terminals.keys()
+        elif self.meaning[0] != "x":
+            valid = len(self.non_terminals) == 1 and "y" in self.non_terminals.keys()
+        else:
+            valid = len(self.non_terminals) == 2 and "x" in self.non_terminals.keys() and "y" in self.non_terminals.keys()
 
     def is_substring(self, rule):
         for i in range(len(rule.string)):
