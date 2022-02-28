@@ -1,22 +1,12 @@
 class Rule:
-    def __init__(self, label, meaning, string):
+    def __init__(self, label, meaning, output):
         self.label = label
         self.meaning = meaning
-        self.string = string
-        self.non_terminals = {}
-
-        for item in self.string:
-            if len(item) > 1:
-                meaning = item.split(":")[1]
-                label = item.split(":")[0]
-                self.non_terminals[meaning] = label
-
-        if not self.is_valid():
-            raise Exception("Invalid rule: " + str(self))
+        self.output = output
 
     def __repr__(self):
         string_str = ""
-        for item in self.string:
+        for item in self.output:
             string_str += item
 
         if self.label == "S":
@@ -26,24 +16,43 @@ class Rule:
         return self.label + ": " + meaning_str + " -> " + string_str
 
     def __eq__(self, other):
-        return self.label == other.label and self.meaning == other.meaning and self.string == other.string
+        return self.label == other.label and self.meaning == other.meaning and self.output == other.output
 
-    def is_valid(self):
-        if self.label != "S" or (self.meaning[0] != "x" and self.meaning[1] != "y"):
-            valid = len(self.non_terminals) == 0
-        elif self.meaning[1] != "y":
-            valid = len(self.non_terminals) == 1 and "x" in self.non_terminals.keys()
-        elif self.meaning[0] != "x":
-            valid = len(self.non_terminals) == 1 and "y" in self.non_terminals.keys()
+    def validate(self, alphabet, comp_a, comp_b):
+        valid = True
+        if len(self.output) == 0:
+            valid = False
+
+        if self.label != "S":
+            for item in self.output:
+                if item not in alphabet:
+                    valid = False
         else:
-            valid = len(self.non_terminals) == 2 and "x" in self.non_terminals.keys() and "y" in self.non_terminals.keys()
+            if len(self.output) <= 1:
+                valid = False
+
+            meaning_labels = []
+            for i in range(2):
+                if self.meaning[i] not in comp_a + comp_b:
+                    meaning_labels += self.meaning[i]
+            output_labels = []
+            for item in self.output:
+                if item not in alphabet:
+                    output_labels += item
+            meaning_labels.sort()
+            output_labels.sort()
+            if meaning_labels != output_labels:
+                valid = False
+
+        if not valid:
+            raise Exception("Invalid rule: " + str(self))
 
     def is_substring(self, rule):
-        for i in range(len(rule.string)):
-            for j in range(len(self.string)):
-                if i+j > len(rule.string) - 1 or rule.string[i+j] != self.string[j]:
+        for i in range(len(rule.output)):
+            for j in range(len(self.output)):
+                if i+j > len(rule.output) - 1 or rule.output[i+j] != self.output[j]:
                     break
-                elif rule.string[i+j] == self.string[j] and j == len(self.string) - 1:
+                elif rule.output[i+j] == self.output[j] and j == len(self.output) - 1:
                     return i
 
         return None

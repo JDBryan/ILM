@@ -6,7 +6,7 @@ class Grammar:
     def __init__(self, a_comp, b_comp, alphabet):
         self.a_comp = a_comp
         self.b_comp = b_comp
-        self.alphabet = alphabet
+        self.alphabet = [x for x in alphabet]
         self.meanings = [(x, y) for x in self.a_comp for y in self.b_comp]
         self.a_count = 1
         self.categories = {"S": []}
@@ -20,15 +20,17 @@ class Grammar:
 
     def get_all_rules(self):
         rules = []
-        for category in self.categories:
+        for category in self.categories.values():
             rules += category
         return rules
 
     def get_sub_rule(self, label, meaning):
+        sub_rule = None
         if label in self.categories.keys():
             for rule in self.categories[label]:
                 if rule.meaning == meaning:
-                    return rule
+                    sub_rule = rule
+        return sub_rule
 
     def get_category(self, label):
         if label in self.categories.keys():
@@ -36,7 +38,12 @@ class Grammar:
         else:
             return []
 
+    def validate(self):
+        for rule in self.get_all_rules():
+            rule.validate(self.alphabet, self.a_comp, self.b_comp)
+
     def add_rule(self, rule):
+        rule.validate(self.alphabet, self.a_comp, self.b_comp)
         if rule.label in self.categories.keys():
             self.categories[rule.label] += [rule]
         else:
@@ -47,16 +54,29 @@ class Grammar:
             self.categories[rule.label].remove(rule)
 
     def relabel(self, old_label, new_label):
+        if old_label == "S":
+            return
+
         if old_label in self.categories.keys():
             category = self.categories.pop(old_label)
             self.categories[new_label] = category
+            for rule in self.categories[new_label]:
+                rule.label = new_label
 
         for start_rule in self.get_category("S"):
-            if old_label in start_rule.non_terminals.values():
+            if old_label == start_rule.meaning[0] or old_label == start_rule.meaning[1]:
+                for i in range(len(start_rule.output)):
+                    if start_rule.output[i] == old_label:
+                        start_rule.output[i] = new_label
+            if old_label == start_rule.meaning[0]:
+                start_rule.meaning = (new_label, start_rule.meaning[1])
+            if old_label == start_rule.meaning[1]:
+                start_rule.meaning = (start_rule.meaning[0], new_label)
 
+        self.validate()
 
     def generate_label(self):
-        label = "A" + str(self.a_count)
+        label = "L" + str(self.a_count)
         self.a_count += 1
         return label
 
@@ -79,15 +99,26 @@ class Grammar:
                 row += "| " + new_result + " "
             print(row)
 
-    # Get all rules under a given label
-
-
-    # Use grammar to find string for a given meaning
-    # returns None if no string can be generated
     def parse(self, meaning):
-        parsable, start_rule, sub_rules = self.parsable(meaning)
-        if parsable:
-            return self.parse_rule(start_rule, sub_rules)
+        start_rule = self.find_start_rule(meaning)
+        self.validate()
+        if start_rule is not None:
+            output = []
+
+            for item in start_rule.output:
+                if item in self.alphabet:
+                    output += item
+                else:
+                    if start_rule.meaning[0] == item:
+                        sub_meaning = meaning[0]
+                    else:
+                        sub_meaning = meaning[1]
+                    sub_rule = self.get_sub_rule(item, sub_meaning)
+                    if sub_rule is None:
+                        sub_rule = self.get_sub_rule("X", sub_meaning)
+                    output += sub_rule.output
+
+            return output
         else:
             return None
 
@@ -121,18 +152,18 @@ class Grammar:
 
     def find_closest_meaning(self, meaning):
         for i in self.a_comp:
-            if self.parse((i, meaning[1])) != "-":
+            if self.find_start_rule((i, meaning[1])) is not None:
                 closest_meaning = (i, meaning[1])
                 return closest_meaning
 
         for i in self.b_comp:
-            if self.parse((meaning[0], i)) != "-":
+            if self.find_start_rule((meaning[0], i)) is not None:
                 closest_meaning = (meaning[0], i)
                 return closest_meaning
 
         for i in self.a_comp:
             for j in self.b_comp:
-                if self.parse((i, j)) != "-":
+                if self.find_start_rule((i, j)) is not None:
                     closest_meaning = (i, j)
                     return closest_meaning
         return None
@@ -141,6 +172,7 @@ class Grammar:
         closest_meaning = self.find_closest_meaning(meaning)
         if closest_meaning is None:
             return self.generate_random_string()
+
         if meaning[0] == closest_meaning[0]:
             intersection = (meaning[0], "d2")
         elif meaning[1] == closest_meaning[1]:
@@ -148,12 +180,11 @@ class Grammar:
         else:
             intersection = ("d1", "d2")
 
-        d1_rule = ""
+        d1_rule = None
+        d2_rule = None
         if intersection[0] == "d1":
             d1_rule = Rule("X", "d1", self.generate_random_string())
             self.add_rule(d1_rule)
-
-        d2_rule = ""
         if intersection[1] == "d2":
             d2_rule = Rule("X", "d2", self.generate_random_string())
             self.add_rule(d2_rule)
@@ -162,10 +193,9 @@ class Grammar:
         if invention is None:
             invention = self.generate_random_string()
 
-        if intersection[0] == "d1":
+        if d1_rule is not None:
             self.remove_rule(d1_rule)
-
-        if intersection[1] == "d2":
+        if d2_rule is not None:
             self.remove_rule(d2_rule)
 
         return invention
@@ -179,14 +209,13 @@ class Grammar:
                 for j in range(len(all_rules)):
                     if i == j:
                         continue
-                    if changed:
-                        break
-                    if all_rules[i] == all_rules[j]:
-                        self.remove_rule(all_rules[i])
+                    elif all_rules[i] == all_rules[j]:
+                        self.remove_rule(all_rules[j])
                         changed = True
                         break
                 if changed:
                     break
+        self.validate()
 
     def split_list(self, list_l, split_marker):
         marker = -1
@@ -230,126 +259,108 @@ class Grammar:
 
     def do_chunk(self, rule_a, rule_b, chunk_a, chunk_b, remaining):
         comparison = []
+        meaning_components = self.a_comp + self.b_comp
 
         if chunk_a is None or chunk_b is None:
             return False
 
         for i in range(2):
-            if rule_a.meaning[i] == rule_b.meaning[i] and rule_a.meaning[i] in (self.a_comp + self.b_comp):
+            if rule_a.meaning[i] == rule_b.meaning[i] and rule_a.meaning[i] in meaning_components:
                 comparison += ["c=c"]
-            elif rule_a.meaning[i] == rule_b.meaning[i] and rule_a.meaning[i] not in (self.a_comp + self.b_comp):
+            elif rule_a.meaning[i] not in meaning_components and rule_b.meaning[i] not in meaning_components:
                 comparison += ["v=v"]
-            elif rule_a.meaning[i] not in (self.a_comp + self.b_comp) or rule_b.meaning[i] not in (self.a_comp + self.b_comp):
+            elif rule_a.meaning[i] not in meaning_components or rule_b.meaning[i] not in meaning_components:
                 comparison += ["c=v"]
             else:
                 comparison += ["-"]
 
-        if comparison[0] == "c=v" and comparison[1] != "-":
-            if len(chunk_a) == 1 and len(chunk_a[0]) > 1:
-                label = chunk_a[0].split(":")[0]
-                self.add_rule(Rule(label, rule_b.meaning[0], chunk_b))
-                self.remove_rule(rule_b)
-                return True
-            elif len(chunk_b) == 1 and len(chunk_b[0]) > 1:
-                label = chunk_b[0].split(":")[0]
-                self.add_rule(Rule(label, rule_a.meaning[0], chunk_a))
-                self.remove_rule(rule_a)
-                return True
-        elif comparison[1] == "c=v" and comparison[0] != "-":
-            if len(chunk_a) == 1 and len(chunk_a[0]) > 1:
-                label = chunk_a[0].split(":")[0]
-                self.add_rule(Rule(label, rule_b.meaning[1], chunk_b))
-                self.remove_rule(rule_a)
-                return True
-            elif len(chunk_b) == 1 and len(chunk_b[0]) > 1:
-                label = chunk_b[0].split(":")[0]
-                self.add_rule(Rule(label, rule_a.meaning[1], chunk_a))
-                self.remove_rule(rule_a)
-                return True
+        a_comp_single_chunkable = comparison[0] == "c=v" and (comparison[1] == "c=c" or comparison[1] == "v=v")
+        b_comp_single_chunkable = comparison[1] == "c=v" and (comparison[0] == "c=c" or comparison[0] == "v=v")
+        chunk_a_is_label = len(chunk_a) == 1 and chunk_a[0] not in self.alphabet
+        chunk_b_is_label = len(chunk_b) == 1 and chunk_b[0] not in self.alphabet
 
-        for item in chunk_a + chunk_b:
-            if len(item) > 1:
+        if (a_comp_single_chunkable or b_comp_single_chunkable) and (chunk_a_is_label or chunk_b_is_label):
+            if chunk_a_is_label:
+                if a_comp_single_chunkable:
+                    self.add_rule(Rule(chunk_a[0], rule_b.meaning[0], chunk_b))
+                else:
+                    self.add_rule(Rule(chunk_a[0], rule_b.meaning[1], chunk_b))
+                self.remove_rule(rule_b)
+            else:
+                if a_comp_single_chunkable:
+                    self.add_rule(Rule(chunk_b[0], rule_a.meaning[0], chunk_a))
+                else:
+                    self.add_rule(Rule(chunk_b[0], rule_a.meaning[1], chunk_a))
+                self.remove_rule(rule_a)
+
+            return True
+
+        for item in (chunk_a + chunk_b):
+            if item not in self.alphabet:
                 return False
 
-        if comparison[0] == "c=c" or comparison[0] == "v=v" and comparison[1] == "-":
-            new_label = "B"
-            splits = self.split_list(remaining, "-")
-            non_terminal = new_label + ":" + "y"
-            new_string = splits[0] + [non_terminal] + splits[1]
-            new_a_rule = Rule(new_label, rule_a.meaning[1], chunk_a)
-            new_b_rule = Rule(new_label, rule_b.meaning[1], chunk_b)
-            self.add_rule(new_a_rule)
-            self.add_rule(new_b_rule)
-            self.add_rule(Rule("S", (rule_a.meaning[0], "y"), new_string))
-            self.remove_rule(rule_a)
-            self.remove_rule(rule_b)
-            return True
-        elif comparison[1] == "c=c" or comparison[1] == "v=v" and comparison[0] == "-":
-            new_label = "A"
-            splits = self.split_list(remaining, "-")
-            non_terminal = new_label + ":" + "x"
-            new_string = splits[0] + [non_terminal] + splits[1]
-            new_a_rule = Rule(new_label, rule_a.meaning[0], chunk_a)
-            new_b_rule = Rule(new_label, rule_b.meaning[0], chunk_b)
-            new_s_rule = Rule("S", ("x", rule_a.meaning[1]), new_string)
-            self.add_rule(new_a_rule)
-            self.add_rule(new_b_rule)
-            self.add_rule(new_s_rule)
-            self.remove_rule(rule_a)
-            self.remove_rule(rule_b)
+        b_comp_double_chunkable = (comparison[0] == "c=c" or comparison[0] == "v=v") and comparison[1] == "-"
+        a_comp_double_chunkable = (comparison[1] == "c=c" or comparison[1] == "v=v") and comparison[0] == "-"
 
+        if a_comp_double_chunkable or b_comp_double_chunkable:
+            new_label = self.generate_label()
+            splits = self.split_list(remaining, "-")
+            new_string = splits[0] + [new_label] + splits[1]
+
+            if b_comp_double_chunkable:
+                self.add_rule(Rule(new_label, rule_a.meaning[1], chunk_a))
+                self.add_rule(Rule(new_label, rule_b.meaning[1], chunk_b))
+                self.add_rule(Rule("S", (rule_a.meaning[0], new_label), new_string))
+            else:
+                self.add_rule(Rule(new_label, rule_a.meaning[0], chunk_a))
+                self.add_rule(Rule(new_label, rule_b.meaning[0], chunk_b))
+                self.add_rule(Rule("S", (new_label, rule_a.meaning[1]), new_string))
+
+            self.remove_rule(rule_a)
+            self.remove_rule(rule_b)
             return True
+
         return False
 
     def do_substring(self, rule_a, rule_b, substring_marker):
         if substring_marker is None:
             return False
+        if rule_a.meaning != rule_b.meaning[0] and rule_a.meaning != rule_b.meaning[1]:
+            return False
+
+        new_string = rule_b.output[:substring_marker] + [rule_a.label]
+        new_string += rule_b.output[substring_marker + len(rule_a.output):]
+
         if rule_a.meaning == rule_b.meaning[0]:
-            new_string = rule_b.string[:substring_marker] + [rule_a.label + ":x"]
-            new_string += rule_b.string[substring_marker + len(rule_a.string):]
-            new_rule = Rule("S", ("x", rule_b.meaning[1]), new_string)
-            self.add_rule(new_rule)
+            self.add_rule(Rule("S", (rule_a.label, rule_b.meaning[1]), new_string))
             self.remove_rule(rule_b)
-        if rule_a.meaning == rule_b.meaning[1]:
-            new_string = rule_b.string[:substring_marker] + [rule_a.label + ":y"]
-            new_string += rule_b.string[substring_marker + len(rule_a.string):]
-            new_rule = Rule("S", (rule_b.meaning[0], "y"), new_string)
-            self.add_rule(new_rule)
+        else:
+            self.add_rule(Rule("S", (rule_b.meaning[0], rule_a.label), new_string))
             self.remove_rule(rule_b)
         return True
 
     def do_relabel(self, rule_a, rule_b):
-        relabel = {}
-        if rule_a.label == "S" and rule_b.label == "S" and len(rule_a.string) == len(rule_b.string) and rule_a.string != rule_b.string:
-            for i in range(len(rule_a.string)):
-                if rule_a.string[i] != rule_b.string[i] and (len(rule_a.string[i]) == 1 or len(rule_b.string[i]) == 1):
-                    return False
-                elif rule_a.string[i] != rule_b.string[i]:
-                    a_meaning = rule_a.string[i].split(":")[1]
-                    b_meaning = rule_b.string[i].split(":")[1]
-                    a_label = rule_a.string[i].split(":")[0]
-                    b_label = rule_b.string[i].split(":")[0]
-                    if a_meaning == b_meaning:
-                        relabel[a_label] = b_label
-                    else:
-                        return False
-
-        elif rule_a.meaning == rule_b.meaning and rule_a.string == rule_b.string:
-            rule_b.label = rule_a.label
+        alpha = [i for i in self.alphabet]
+        if rule_a.output == rule_b.output and rule_a.meaning == rule_b.meaning:
+            self.relabel(rule_b.label, rule_a.label)
             return True
 
-        else:
-            return False
+        if rule_a.label == "S" and rule_b.label == "S":
+            if len(rule_a.output) == len(rule_b.output) and rule_a.output != rule_b.output:
+                old_label = ""
+                new_label = ""
+                for i in range(len(rule_a.output)):
+                    a_char = rule_a.output[i]
+                    b_char = rule_b.output[i]
+                    if a_char != b_char and a_char not in self.alphabet and b_char not in self.alphabet:
+                        old_label = b_char
+                        new_label = a_char
+                    elif a_char != b_char:
+                        return False
+                if old_label != "":
+                    self.relabel(old_label, new_label)
 
-        for rule in self.get_all_rules():
-            if rule.label in relabel.keys():
-                rule.label = relabel[rule.label]
-            for i in range(len(rule.string)):
-                if len(rule.string[i]) > 1:
-                    if rule.string[i].split(":")[0] in relabel.keys():
-                        rule.string[i] = relabel[rule.string[i].split(":")[0]] + ":" + rule.string[i].split(":")[1]
-
-        return True
+        return False
 
     # Uses the generalisation rules on a specific pair of rules
     def generalise_pair(self, rule_a, rule_b):
@@ -361,7 +372,7 @@ class Grammar:
                 substring_marker = rule_a.is_substring(rule_b)
 
         if rule_a.label == "S" and rule_b.label == "S":
-            chunk_a, chunk_b, remaining = self.chunk(rule_a.string, rule_b.string)
+            chunk_a, chunk_b, remaining = self.chunk(rule_a.output, rule_b.output)
         else:
             chunk_a = None
             chunk_b = None
@@ -380,49 +391,35 @@ class Grammar:
             changed = self.do_substring(rule_a, rule_b, substring_marker)
 
         self.remove_duplicates()
+
         return changed
 
     # Incorporates the given rule into the grammar
     def incorporate(self, meaning, string):
-        parsable, _, _ = self.parsable(meaning)
-        if not parsable:
-            new_rule = Rule("S", meaning, string)
-            self.add_rule(new_rule)
+        start_rule = self.find_start_rule(meaning)
+        if start_rule is None:
+            self.add_rule(Rule("S", meaning, string))
             self.generalise()
 
-    # Checks whether a given meaning can be parsed by the grammar
-    # Returns bool parsable and Rule for the start rule to parse
-    # TODO: Fix this
-    def parsable(self, meaning):
-        start_rules = self.get_category("S")
-        for rule in start_rules:
-            sub_rules = {}
+    def find_start_rule(self, meaning):
+        meaning_components = self.a_comp + self.b_comp
 
-            if rule.meaning[0] not in self.a_comp:
-                sub_rule = self.get_sub_rule(rule.non_terminals[rule.meaning[0]], meaning[0])
-                if sub_rule is not None:
-                    sub_rules[rule.meaning[0]] = sub_rule
+        for rule in self.get_category("S"):
+            found = True
+            sub_rules = []
+            for i in range(2):
+                if rule.meaning[i] not in meaning_components:
+                    sub_rule = self.get_sub_rule(rule.meaning[i], meaning[i])
+                    if sub_rule is None:
+                        sub_rule = self.get_sub_rule("X", meaning[i])
+                    if sub_rule is None:
+                        found = False
+                    else:
+                        sub_rules += [sub_rule]
+                if rule.meaning[i] in meaning_components and rule.meaning[i] != meaning[i]:
+                    found = False
 
-            if rule.meaning[1] not in self.b_comp:
-                sub_rule = self.get_sub_rule(rule.non_terminals[rule.meaning[1]], meaning[1])
-                if sub_rule is not None:
-                    sub_rules[rule.meaning[1]] = sub_rule
+            if found:
+                return rule
+        return None
 
-            if rule.meaning[0] == meaning[0] or rule.meaning[0] in sub_rules.keys():
-                if rule.meaning[1] == meaning[1] or rule.meaning[1] in sub_rules.keys():
-                    return True, rule, sub_rules
-
-        return False, None, None
-
-    # Parses a meaning using a given start rule, only used on meanings that are known to be parsable
-    def parse_rule(self, start_rule, sub_rules):
-        output = []
-
-        for item in start_rule.string:
-            if len(item) == 1:
-                output += item
-            else:
-                for sub_item in sub_rules[item.split(":")[1]].string:
-                    output += sub_item
-
-        return output
