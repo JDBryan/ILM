@@ -3,13 +3,14 @@ import random
 
 
 class Grammar:
-    def __init__(self, a_comp, b_comp, alphabet):
+    def __init__(self, a_comp, b_comp, alphabet, verbose):
         self.a_comp = a_comp
         self.b_comp = b_comp
         self.alphabet = [x for x in alphabet]
         self.meanings = [(x, y) for x in self.a_comp for y in self.b_comp]
         self.a_count = 1
         self.categories = {"S": []}
+        self.verbose = verbose
 
     def __repr__(self):
         output = ""
@@ -151,22 +152,22 @@ class Grammar:
             return chunk_a, chunk_b, remaining
 
     def find_closest_meaning(self, meaning):
-        for i in self.a_comp:
-            if self.find_start_rule((i, meaning[1])) is not None:
-                closest_meaning = (i, meaning[1])
-                return closest_meaning
+        max_closeness = -1
+        closest_meaning = None
+        meaning_list = self.meanings
+        random.shuffle(meaning_list)
 
-        for i in self.b_comp:
-            if self.find_start_rule((meaning[0], i)) is not None:
-                closest_meaning = (meaning[0], i)
-                return closest_meaning
+        for full_meaning in meaning_list:
+            if self.find_start_rule(full_meaning) is not None:
+                closeness = 0
+                for i in range(2):
+                    if full_meaning[i] == meaning[i]:
+                        closeness += 1
+                if closeness > max_closeness:
+                    max_closeness = closeness
+                    closest_meaning = full_meaning
 
-        for i in self.a_comp:
-            for j in self.b_comp:
-                if self.find_start_rule((i, j)) is not None:
-                    closest_meaning = (i, j)
-                    return closest_meaning
-        return None
+        return closest_meaning
 
     def invent(self, meaning):
         closest_meaning = self.find_closest_meaning(meaning)
@@ -228,19 +229,9 @@ class Grammar:
         new_list.append(list_l[marker + 1:])
         return new_list
 
-    #TODO: change the use of continue
     def generalise(self):
-        # changed = True
-        # if len(self.rules) <= 1:
-        #     return
-        # while changed:
-        #     i = 0
-        #     j = 0
-        #     while i == j:
-        #         i = random.randint(0, len(self.rules) - 1)
-        #         j = random.randint(0, len(self.rules) - 1)
-        #     changed = self.generalise_pair(self.rules[i], self.rules[j])
-
+        if self.verbose:
+            print("Starting generalisation")
         changed = True
         while changed:
             changed = False
@@ -256,12 +247,76 @@ class Grammar:
                     else:
                         rule_b = all_rules[j]
                         changed = self.generalise_pair(rule_a, rule_b)
+        if self.verbose:
+            print("Finished generalisation")
+
+    def generalise_pair(self, rule_a, rule_b):
+        if self.verbose:
+            print("Generalising pair: ")
+            print(rule_a)
+            print(rule_b)
+
+        changed = False
+        substring_marker = None
+
+        if rule_b.label == "S" and rule_a.label != "S":
+            if rule_a.meaning == rule_b.meaning[0] or rule_a.meaning == rule_b.meaning[0]:
+                substring_marker = rule_a.is_substring(rule_b)
+
+        if rule_a.label == "S" and rule_b.label == "S":
+            chunk_a, chunk_b, remaining = self.chunk(rule_a.output, rule_b.output)
+        else:
+            chunk_a = None
+            chunk_b = None
+            remaining = None
+
+        # Attempt relabel
+        if not changed:
+            changed = self.do_relabel(rule_a, rule_b)
+            if changed:
+                if self.verbose:
+                    print("Relabelling occurred")
+                self.remove_duplicates()
+                self.validate()
+
+        # Attempt chunk
+        if not changed:
+            changed = self.do_chunk(rule_a, rule_b, chunk_a, chunk_b, remaining)
+            if changed:
+                if self.verbose:
+                    print("Chunking occurred")
+                self.remove_duplicates()
+                self.validate()
+
+        # Attempt substring
+        if not changed:
+            changed = self.do_substring(rule_a, rule_b, substring_marker)
+            if changed:
+                if self.verbose:
+                    print("Substring occurred")
+                self.remove_duplicates()
+                self.validate()
+
+        return changed
 
     def do_chunk(self, rule_a, rule_b, chunk_a, chunk_b, remaining):
         comparison = []
         meaning_components = self.a_comp + self.b_comp
 
         if chunk_a is None or chunk_b is None:
+            return False
+
+        chunk_a_contains_label = False
+        for item in chunk_a:
+            if item not in self.alphabet:
+                chunk_a_contains_label = True
+
+        chunk_b_contains_label = False
+        for item in chunk_b:
+            if item not in self.alphabet:
+                chunk_b_contains_label = True
+
+        if chunk_a_contains_label and chunk_b_contains_label:
             return False
 
         for i in range(2):
@@ -276,8 +331,8 @@ class Grammar:
 
         a_comp_single_chunkable = comparison[0] == "c=v" and (comparison[1] == "c=c" or comparison[1] == "v=v")
         b_comp_single_chunkable = comparison[1] == "c=v" and (comparison[0] == "c=c" or comparison[0] == "v=v")
-        chunk_a_is_label = len(chunk_a) == 1 and chunk_a[0] not in self.alphabet
-        chunk_b_is_label = len(chunk_b) == 1 and chunk_b[0] not in self.alphabet
+        chunk_a_is_label = len(chunk_a) == 1 and chunk_a_contains_label
+        chunk_b_is_label = len(chunk_b) == 1 and chunk_b_contains_label
 
         if (a_comp_single_chunkable or b_comp_single_chunkable) and (chunk_a_is_label or chunk_b_is_label):
             if chunk_a_is_label:
@@ -362,44 +417,18 @@ class Grammar:
 
         return False
 
-    # Uses the generalisation rules on a specific pair of rules
-    def generalise_pair(self, rule_a, rule_b):
-        changed = False
-        substring_marker = None
-
-        if rule_b.label == "S" and rule_a.label != "S":
-            if rule_a.meaning == rule_b.meaning[0] or rule_a.meaning == rule_b.meaning[0]:
-                substring_marker = rule_a.is_substring(rule_b)
-
-        if rule_a.label == "S" and rule_b.label == "S":
-            chunk_a, chunk_b, remaining = self.chunk(rule_a.output, rule_b.output)
-        else:
-            chunk_a = None
-            chunk_b = None
-            remaining = None
-
-        # Attempt relabel
-        if not changed:
-            changed = self.do_relabel(rule_a, rule_b)
-
-        # Attempt chunk
-        if not changed:
-            changed = self.do_chunk(rule_a, rule_b, chunk_a, chunk_b, remaining)
-
-        # Attempt substring
-        if not changed:
-            changed = self.do_substring(rule_a, rule_b, substring_marker)
-
-        self.remove_duplicates()
-
-        return changed
-
-    # Incorporates the given rule into the grammar
     def incorporate(self, meaning, string):
         start_rule = self.find_start_rule(meaning)
         if start_rule is None:
+            if self.verbose:
+                print_string = ""
+                for item in string:
+                    print_string += item
+                print("Incorporating string '" + print_string + "' for meaning " + str(meaning))
             self.add_rule(Rule("S", meaning, string))
             self.generalise()
+        elif self.verbose:
+            print("Already have utterance for meaning" + str(meaning))
 
     def find_start_rule(self, meaning):
         meaning_components = self.a_comp + self.b_comp
