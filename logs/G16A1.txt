@@ -1,0 +1,1139 @@
+AGENT G16A1:
+Learning utterance hevhsm for meaning ('a2', 'b4') from teacher G15A0
+Incorporating string 'hevhsm' for meaning ('a2', 'b4')
+Adding rule S: (a2,b4) -> hevhsm
+
+Beginning generalisation
+Finished generalisation
+
+Learning utterance vasdrk for meaning ('a3', 'b3') from teacher G15A1
+Incorporating string 'vasdrk' for meaning ('a3', 'b3')
+Adding rule S: (a3,b3) -> vasdrk
+
+Beginning generalisation
+Finished generalisation
+
+Learning utterance tzjhb for meaning ('a2', 'b2') from teacher G15A0
+Incorporating string 'tzjhb' for meaning ('a2', 'b2')
+Adding rule S: (a2,b2) -> tzjhb
+
+Beginning generalisation
+Finished generalisation
+
+Learning utterance jw for meaning ('a5', 'b3') from teacher G15A1
+Incorporating string 'jw' for meaning ('a5', 'b3')
+Adding rule S: (a5,b3) -> jw
+
+Beginning generalisation
+Finished generalisation
+
+Learning utterance yxr for meaning ('a2', 'b3') from teacher G15A0
+Incorporating string 'yxr' for meaning ('a2', 'b3')
+Adding rule S: (a2,b3) -> yxr
+
+Beginning generalisation
+Finished generalisation
+
+Learning utterance zgys for meaning ('a3', 'b3') from teacher G15A0
+Already have utterance for meaning('a3', 'b3')
+
+Learning utterance yzgywkqqby for meaning ('a3', 'b5') from teacher G15A0
+Incorporating string 'yzgywkqqby' for meaning ('a3', 'b5')
+Adding rule S: (a3,b5) -> yzgywkqqby
+
+Beginning generalisation
+Finished generalisation
+
+Learning utterance vgwkqqby for meaning ('a3', 'b5') from teacher G15A1
+Already have utterance for meaning('a3', 'b5')
+
+Learning utterance cjudd for meaning ('a4', 'b1') from teacher G15A0
+Incorporating string 'cjudd' for meaning ('a4', 'b1')
+Adding rule S: (a4,b1) -> cjudd
+
+Beginning generalisation
+Finished generalisation
+
+Learning utterance hlcgnhsm for meaning ('a5', 'b4') from teacher G15A0
+Incorporating string 'hlcgnhsm' for meaning ('a5', 'b4')
+Adding rule S: (a5,b4) -> hlcgnhsm
+
+Beginning generalisation
+Adding rule L1: a2 -> ev
+Adding rule L1: a5 -> lcgn
+Adding rule S: (L1,b4) -> hL1hsm
+Removing rule S: (a2,b4) -> hevhsm
+Removing rule S: (a5,b4) -> hlcgnhsm
+Chunking occurred on rules:
+S: (a2,b4) -> hevhsm
+S: (a5,b4) -> hlcgnhsm
+Old Grammar:
+S: (a2,b4) -> hevhsm
+S: (a3,b3) -> vasdrk
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (a3,b5) -> yzgywkqqby
+S: (a4,b1) -> cjudd
+S: (a5,b4) -> hlcgnhsm
+
+New Grammar:
+S: (a3,b3) -> vasdrk
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (a3,b5) -> yzgywkqqby
+S: (a4,b1) -> cjudd
+S: (L1,b4) -> hL1hsm
+L1: a2 -> ev
+L1: a5 -> lcgn
+Finished generalisation
+
+Learning utterance vxtyzaaggiym for meaning ('a1', 'b5') from teacher G15A0
+Incorporating string 'vxtyzaaggiym' for meaning ('a1', 'b5')
+Adding rule S: (a1,b5) -> vxtyzaaggiym
+
+Beginning generalisation
+Finished generalisation
+
+Learning utterance ycjudwkqqby for meaning ('a4', 'b5') from teacher G15A0
+Incorporating string 'ycjudwkqqby' for meaning ('a4', 'b5')
+Adding rule S: (a4,b5) -> ycjudwkqqby
+
+Beginning generalisation
+Adding rule L2: a3 -> zgy
+Adding rule L2: a4 -> cjud
+Adding rule S: (L2,b5) -> yL2wkqqby
+Removing rule S: (a3,b5) -> yzgywkqqby
+Removing rule S: (a4,b5) -> ycjudwkqqby
+Chunking occurred on rules:
+S: (a3,b5) -> yzgywkqqby
+S: (a4,b5) -> ycjudwkqqby
+Old Grammar:
+S: (a3,b3) -> vasdrk
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (a3,b5) -> yzgywkqqby
+S: (a4,b1) -> cjudd
+S: (L1,b4) -> hL1hsm
+S: (a1,b5) -> vxtyzaaggiym
+S: (a4,b5) -> ycjudwkqqby
+L1: a2 -> ev
+L1: a5 -> lcgn
+
+New Grammar:
+S: (a3,b3) -> vasdrk
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (a4,b1) -> cjudd
+S: (L1,b4) -> hL1hsm
+S: (a1,b5) -> vxtyzaaggiym
+S: (L2,b5) -> yL2wkqqby
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+Adding rule S: (L2,b1) -> L2d
+Removing rule S: (a4,b1) -> cjudd
+Substring occurred on rules:
+L2: a4 -> cjud
+S: (a4,b1) -> cjudd
+Old Grammar:
+S: (a3,b3) -> vasdrk
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (a4,b1) -> cjudd
+S: (L1,b4) -> hL1hsm
+S: (a1,b5) -> vxtyzaaggiym
+S: (L2,b5) -> yL2wkqqby
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+
+New Grammar:
+S: (a3,b3) -> vasdrk
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (a1,b5) -> vxtyzaaggiym
+S: (L2,b5) -> yL2wkqqby
+S: (L2,b1) -> L2d
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+Finished generalisation
+
+Learning utterance isoyz for meaning ('a2', 'b3') from teacher G15A1
+Already have utterance for meaning('a2', 'b3')
+
+Learning utterance vb for meaning ('a3', 'b2') from teacher G15A1
+Incorporating string 'vb' for meaning ('a3', 'b2')
+Adding rule S: (a3,b2) -> vb
+
+Beginning generalisation
+Adding rule L3: b3 -> asdrk
+Adding rule L3: b2 -> b
+Adding rule S: (a3,L3) -> vL3
+Removing rule S: (a3,b3) -> vasdrk
+Removing rule S: (a3,b2) -> vb
+Chunking occurred on rules:
+S: (a3,b3) -> vasdrk
+S: (a3,b2) -> vb
+Old Grammar:
+S: (a3,b3) -> vasdrk
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (a1,b5) -> vxtyzaaggiym
+S: (L2,b5) -> yL2wkqqby
+S: (L2,b1) -> L2d
+S: (a3,b2) -> vb
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+
+New Grammar:
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (a1,b5) -> vxtyzaaggiym
+S: (L2,b5) -> yL2wkqqby
+S: (L2,b1) -> L2d
+S: (a3,L3) -> vL3
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+L3: b3 -> asdrk
+L3: b2 -> b
+Finished generalisation
+
+Learning utterance cjuds for meaning ('a4', 'b3') from teacher G15A0
+Incorporating string 'cjuds' for meaning ('a4', 'b3')
+Adding rule S: (a4,b3) -> cjuds
+
+Beginning generalisation
+Adding rule S: (L2,b3) -> L2s
+Removing rule S: (a4,b3) -> cjuds
+Substring occurred on rules:
+L2: a4 -> cjud
+S: (a4,b3) -> cjuds
+Old Grammar:
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (a1,b5) -> vxtyzaaggiym
+S: (L2,b5) -> yL2wkqqby
+S: (L2,b1) -> L2d
+S: (a3,L3) -> vL3
+S: (a4,b3) -> cjuds
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+L3: b3 -> asdrk
+L3: b2 -> b
+
+New Grammar:
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (a1,b5) -> vxtyzaaggiym
+S: (L2,b5) -> yL2wkqqby
+S: (L2,b1) -> L2d
+S: (a3,L3) -> vL3
+S: (L2,b3) -> L2s
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+L3: b3 -> asdrk
+L3: b2 -> b
+Adding rule L4: b1 -> d
+Adding rule L4: b3 -> s
+Adding rule S: (L2,L4) -> L2L4
+Removing rule S: (L2,b1) -> L2d
+Removing rule S: (L2,b3) -> L2s
+Chunking occurred on rules:
+S: (L2,b1) -> L2d
+S: (L2,b3) -> L2s
+Old Grammar:
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (a1,b5) -> vxtyzaaggiym
+S: (L2,b5) -> yL2wkqqby
+S: (L2,b1) -> L2d
+S: (a3,L3) -> vL3
+S: (L2,b3) -> L2s
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+L3: b3 -> asdrk
+L3: b2 -> b
+
+New Grammar:
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (a1,b5) -> vxtyzaaggiym
+S: (L2,b5) -> yL2wkqqby
+S: (a3,L3) -> vL3
+S: (L2,L4) -> L2L4
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+L3: b3 -> asdrk
+L3: b2 -> b
+L4: b1 -> d
+L4: b3 -> s
+Relabelling L4 to L3
+Relabelling occurred on rules:
+L3: b3 -> asdrk
+L3: b3 -> s
+Old Grammar:
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (a1,b5) -> vxtyzaaggiym
+S: (L2,b5) -> yL2wkqqby
+S: (a3,L3) -> vL3
+S: (L2,L4) -> L2L4
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+L3: b3 -> asdrk
+L3: b2 -> b
+L4: b1 -> d
+L4: b3 -> s
+
+New Grammar:
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (a1,b5) -> vxtyzaaggiym
+S: (L2,b5) -> yL2wkqqby
+S: (a3,L3) -> vL3
+S: (L2,L3) -> L2L3
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+L3: b1 -> d
+L3: b3 -> s
+Adding rule L2: a3 -> v
+Removing rule S: (a3,L3) -> vL3
+Removing rule L2: a3 -> v
+Chunking occurred on rules:
+S: (a3,L3) -> vL3
+S: (L2,L3) -> L2L3
+Old Grammar:
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (a1,b5) -> vxtyzaaggiym
+S: (L2,b5) -> yL2wkqqby
+S: (a3,L3) -> vL3
+S: (L2,L3) -> L2L3
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+L3: b1 -> d
+L3: b3 -> s
+
+New Grammar:
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (a1,b5) -> vxtyzaaggiym
+S: (L2,b5) -> yL2wkqqby
+S: (L2,L3) -> L2L3
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+L3: b1 -> d
+L3: b3 -> s
+Finished generalisation
+
+Learning utterance vxtybm for meaning ('a1', 'b2') from teacher G15A1
+Incorporating string 'vxtybm' for meaning ('a1', 'b2')
+Adding rule S: (a1,b2) -> vxtybm
+
+Beginning generalisation
+Adding rule L5: b5 -> zaaggiy
+Adding rule L5: b2 -> b
+Adding rule S: (a1,L5) -> vxtyL5m
+Removing rule S: (a1,b5) -> vxtyzaaggiym
+Removing rule S: (a1,b2) -> vxtybm
+Chunking occurred on rules:
+S: (a1,b5) -> vxtyzaaggiym
+S: (a1,b2) -> vxtybm
+Old Grammar:
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (a1,b5) -> vxtyzaaggiym
+S: (L2,b5) -> yL2wkqqby
+S: (L2,L3) -> L2L3
+S: (a1,b2) -> vxtybm
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+L3: b1 -> d
+L3: b3 -> s
+
+New Grammar:
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L2,b5) -> yL2wkqqby
+S: (L2,L3) -> L2L3
+S: (a1,L5) -> vxtyL5m
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+L3: b1 -> d
+L3: b3 -> s
+L5: b5 -> zaaggiy
+L5: b2 -> b
+Finished generalisation
+
+Learning utterance vqqbyydhsm for meaning ('a3', 'b4') from teacher G15A1
+Incorporating string 'vqqbyydhsm' for meaning ('a3', 'b4')
+Adding rule S: (a3,b4) -> vqqbyydhsm
+
+Beginning generalisation
+Finished generalisation
+
+Learning utterance sqgwkqqby for meaning ('a2', 'b5') from teacher G15A1
+Incorporating string 'sqgwkqqby' for meaning ('a2', 'b5')
+Adding rule S: (a2,b5) -> sqgwkqqby
+
+Beginning generalisation
+Finished generalisation
+
+Learning utterance wb for meaning ('a4', 'b2') from teacher G15A1
+Incorporating string 'wb' for meaning ('a4', 'b2')
+Adding rule S: (a4,b2) -> wb
+
+Beginning generalisation
+Adding rule L6: a2 -> tzjh
+Adding rule L6: a4 -> w
+Adding rule S: (L6,b2) -> L6b
+Removing rule S: (a2,b2) -> tzjhb
+Removing rule S: (a4,b2) -> wb
+Chunking occurred on rules:
+S: (a2,b2) -> tzjhb
+S: (a4,b2) -> wb
+Old Grammar:
+S: (a2,b2) -> tzjhb
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L2,b5) -> yL2wkqqby
+S: (L2,L3) -> L2L3
+S: (a1,L5) -> vxtyL5m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (a4,b2) -> wb
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+L3: b1 -> d
+L3: b3 -> s
+L5: b5 -> zaaggiy
+L5: b2 -> b
+
+New Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L2,b5) -> yL2wkqqby
+S: (L2,L3) -> L2L3
+S: (a1,L5) -> vxtyL5m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (L6,b2) -> L6b
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+L3: b1 -> d
+L3: b3 -> s
+L5: b5 -> zaaggiy
+L5: b2 -> b
+L6: a2 -> tzjh
+L6: a4 -> w
+Relabelling L6 to L1
+Relabelling occurred on rules:
+L1: a2 -> ev
+L1: a2 -> tzjh
+Old Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L2,b5) -> yL2wkqqby
+S: (L2,L3) -> L2L3
+S: (a1,L5) -> vxtyL5m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (L6,b2) -> L6b
+L1: a2 -> ev
+L1: a5 -> lcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+L3: b1 -> d
+L3: b3 -> s
+L5: b5 -> zaaggiy
+L5: b2 -> b
+L6: a2 -> tzjh
+L6: a4 -> w
+
+New Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L2,b5) -> yL2wkqqby
+S: (L2,L3) -> L2L3
+S: (a1,L5) -> vxtyL5m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (L1,b2) -> L1b
+L1: a2 -> tzjh
+L1: a4 -> w
+L2: a3 -> zgy
+L2: a4 -> cjud
+L3: b1 -> d
+L3: b3 -> s
+L5: b5 -> zaaggiy
+L5: b2 -> b
+Relabelling L2 to L1
+Relabelling occurred on rules:
+L1: a4 -> w
+L1: a4 -> cjud
+Old Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L2,b5) -> yL2wkqqby
+S: (L2,L3) -> L2L3
+S: (a1,L5) -> vxtyL5m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (L1,b2) -> L1b
+L1: a2 -> tzjh
+L1: a4 -> w
+L2: a3 -> zgy
+L2: a4 -> cjud
+L3: b1 -> d
+L3: b3 -> s
+L5: b5 -> zaaggiy
+L5: b2 -> b
+
+New Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L5) -> vxtyL5m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (L1,b2) -> L1b
+L1: a3 -> zgy
+L1: a4 -> cjud
+L3: b1 -> d
+L3: b3 -> s
+L5: b5 -> zaaggiy
+L5: b2 -> b
+Adding rule L3: b2 -> b
+Removing rule S: (L1,b2) -> L1b
+Chunking occurred on rules:
+S: (L1,L3) -> L1L3
+S: (L1,b2) -> L1b
+Old Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L5) -> vxtyL5m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (L1,b2) -> L1b
+L1: a3 -> zgy
+L1: a4 -> cjud
+L3: b1 -> d
+L3: b3 -> s
+L5: b5 -> zaaggiy
+L5: b2 -> b
+
+New Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L5) -> vxtyL5m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+L1: a3 -> zgy
+L1: a4 -> cjud
+L3: b1 -> d
+L3: b3 -> s
+L3: b2 -> b
+L5: b5 -> zaaggiy
+L5: b2 -> b
+Relabelling L5 to L3
+Relabelling occurred on rules:
+L3: b2 -> b
+L3: b2 -> b
+Old Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L5) -> vxtyL5m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+L1: a3 -> zgy
+L1: a4 -> cjud
+L3: b1 -> d
+L3: b3 -> s
+L3: b2 -> b
+L5: b5 -> zaaggiy
+L5: b2 -> b
+
+New Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+L1: a3 -> zgy
+L1: a4 -> cjud
+L3: b5 -> zaaggiy
+L3: b2 -> b
+Finished generalisation
+
+Learning utterance hevhsm for meaning ('a2', 'b4') from teacher G15A0
+Incorporating string 'hevhsm' for meaning ('a2', 'b4')
+Adding rule S: (a2,b4) -> hevhsm
+
+Beginning generalisation
+Adding rule L1: a2 -> ev
+Removing rule S: (a2,b4) -> hevhsm
+Chunking occurred on rules:
+S: (L1,b4) -> hL1hsm
+S: (a2,b4) -> hevhsm
+Old Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (a2,b4) -> hevhsm
+L1: a3 -> zgy
+L1: a4 -> cjud
+L3: b5 -> zaaggiy
+L3: b2 -> b
+
+New Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a2 -> ev
+L3: b5 -> zaaggiy
+L3: b2 -> b
+Finished generalisation
+
+Learning utterance wqqbyydhsm for meaning ('a4', 'b4') from teacher G15A1
+Already have utterance for meaning('a4', 'b4')
+
+Learning utterance wb for meaning ('a4', 'b2') from teacher G15A1
+Already have utterance for meaning('a4', 'b2')
+
+Learning utterance vxtyqqbyydhsmm for meaning ('a1', 'b4') from teacher G15A1
+Incorporating string 'vxtyqqbyydhsmm' for meaning ('a1', 'b4')
+Adding rule S: (a1,b4) -> vxtyqqbyydhsmm
+
+Beginning generalisation
+Adding rule L3: b4 -> qqbyydhsm
+Removing rule S: (a1,b4) -> vxtyqqbyydhsmm
+Chunking occurred on rules:
+S: (a1,L3) -> vxtyL3m
+S: (a1,b4) -> vxtyqqbyydhsmm
+Old Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (a1,b4) -> vxtyqqbyydhsmm
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a2 -> ev
+L3: b5 -> zaaggiy
+L3: b2 -> b
+
+New Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a2 -> ev
+L3: b5 -> zaaggiy
+L3: b2 -> b
+L3: b4 -> qqbyydhsm
+Finished generalisation
+
+Learning utterance wwczhk for meaning ('a1', 'b1') from teacher G15A0
+Incorporating string 'wwczhk' for meaning ('a1', 'b1')
+Adding rule S: (a1,b1) -> wwczhk
+
+Beginning generalisation
+Finished generalisation
+
+Learning utterance vxtysm for meaning ('a1', 'b3') from teacher G15A0
+Incorporating string 'vxtysm' for meaning ('a1', 'b3')
+Adding rule S: (a1,b3) -> vxtysm
+
+Beginning generalisation
+Adding rule L3: b3 -> s
+Removing rule S: (a1,b3) -> vxtysm
+Chunking occurred on rules:
+S: (a1,L3) -> vxtyL3m
+S: (a1,b3) -> vxtysm
+Old Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (a1,b1) -> wwczhk
+S: (a1,b3) -> vxtysm
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a2 -> ev
+L3: b5 -> zaaggiy
+L3: b2 -> b
+L3: b4 -> qqbyydhsm
+
+New Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (a1,b1) -> wwczhk
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a2 -> ev
+L3: b5 -> zaaggiy
+L3: b2 -> b
+L3: b4 -> qqbyydhsm
+L3: b3 -> s
+Finished generalisation
+
+Learning utterance wqqbyydhsm for meaning ('a4', 'b4') from teacher G15A1
+Already have utterance for meaning('a4', 'b4')
+
+Learning utterance tdfgu for meaning ('a5', 'b4') from teacher G15A1
+Incorporating string 'tdfgu' for meaning ('a5', 'b4')
+Adding rule S: (a5,b4) -> tdfgu
+
+Beginning generalisation
+Finished generalisation
+
+Learning utterance wwmxwjy for meaning ('a4', 'b3') from teacher G15A1
+Already have utterance for meaning('a4', 'b3')
+
+Learning utterance wc for meaning ('a2', 'b5') from teacher G15A0
+Already have utterance for meaning('a2', 'b5')
+
+Learning utterance hlcgnb for meaning ('a5', 'b2') from teacher G15A0
+Incorporating string 'hlcgnb' for meaning ('a5', 'b2')
+Adding rule S: (a5,b2) -> hlcgnb
+
+Beginning generalisation
+Finished generalisation
+
+Learning utterance ywfsiwkqqby for meaning ('a1', 'b5') from teacher G15A0
+Already have utterance for meaning('a1', 'b5')
+
+Learning utterance vxtyhsmm for meaning ('a1', 'b4') from teacher G15A0
+Already have utterance for meaning('a1', 'b4')
+
+Learning utterance vteidq for meaning ('a2', 'b3') from teacher G15A1
+Already have utterance for meaning('a2', 'b3')
+
+Learning utterance vqqbyydhsm for meaning ('a3', 'b4') from teacher G15A1
+Already have utterance for meaning('a3', 'b4')
+
+Learning utterance vxtyhsmm for meaning ('a1', 'b4') from teacher G15A0
+Already have utterance for meaning('a1', 'b4')
+
+Learning utterance ptzxugwkqqby for meaning ('a2', 'b5') from teacher G15A1
+Already have utterance for meaning('a2', 'b5')
+
+Learning utterance hlcgnb for meaning ('a5', 'b2') from teacher G15A0
+Already have utterance for meaning('a5', 'b2')
+
+Learning utterance zgys for meaning ('a3', 'b3') from teacher G15A0
+Already have utterance for meaning('a3', 'b3')
+
+Learning utterance jyzggwkqqby for meaning ('a2', 'b5') from teacher G15A1
+Already have utterance for meaning('a2', 'b5')
+
+Learning utterance ugsrfo for meaning ('a2', 'b1') from teacher G15A1
+Incorporating string 'ugsrfo' for meaning ('a2', 'b1')
+Adding rule S: (a2,b1) -> ugsrfo
+
+Beginning generalisation
+Finished generalisation
+
+Learning utterance uyg for meaning ('a1', 'b3') from teacher G15A1
+Already have utterance for meaning('a1', 'b3')
+
+Learning utterance yxr for meaning ('a2', 'b3') from teacher G15A0
+Already have utterance for meaning('a2', 'b3')
+
+Learning utterance zgyb for meaning ('a3', 'b2') from teacher G15A0
+Already have utterance for meaning('a3', 'b2')
+
+Learning utterance ycjudwkqqby for meaning ('a4', 'b5') from teacher G15A0
+Already have utterance for meaning('a4', 'b5')
+
+Learning utterance hlcgnd for meaning ('a5', 'b1') from teacher G15A0
+Incorporating string 'hlcgnd' for meaning ('a5', 'b1')
+Adding rule S: (a5,b1) -> hlcgnd
+
+Beginning generalisation
+Adding rule L7: b2 -> b
+Adding rule L7: b1 -> d
+Adding rule S: (a5,L7) -> hlcgnL7
+Removing rule S: (a5,b2) -> hlcgnb
+Removing rule S: (a5,b1) -> hlcgnd
+Chunking occurred on rules:
+S: (a5,b2) -> hlcgnb
+S: (a5,b1) -> hlcgnd
+Old Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (a1,b1) -> wwczhk
+S: (a5,b4) -> tdfgu
+S: (a5,b2) -> hlcgnb
+S: (a2,b1) -> ugsrfo
+S: (a5,b1) -> hlcgnd
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a2 -> ev
+L3: b5 -> zaaggiy
+L3: b2 -> b
+L3: b4 -> qqbyydhsm
+L3: b3 -> s
+
+New Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (a1,b1) -> wwczhk
+S: (a5,b4) -> tdfgu
+S: (a2,b1) -> ugsrfo
+S: (a5,L7) -> hlcgnL7
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a2 -> ev
+L3: b5 -> zaaggiy
+L3: b2 -> b
+L3: b4 -> qqbyydhsm
+L3: b3 -> s
+L7: b2 -> b
+L7: b1 -> d
+Relabelling L7 to L3
+Relabelling occurred on rules:
+L3: b2 -> b
+L3: b2 -> b
+Old Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (a1,b1) -> wwczhk
+S: (a5,b4) -> tdfgu
+S: (a2,b1) -> ugsrfo
+S: (a5,L7) -> hlcgnL7
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a2 -> ev
+L3: b5 -> zaaggiy
+L3: b2 -> b
+L3: b4 -> qqbyydhsm
+L3: b3 -> s
+L7: b2 -> b
+L7: b1 -> d
+
+New Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (a1,b1) -> wwczhk
+S: (a5,b4) -> tdfgu
+S: (a2,b1) -> ugsrfo
+S: (a5,L3) -> hlcgnL3
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a2 -> ev
+L3: b2 -> b
+L3: b1 -> d
+Adding rule L1: a5 -> hlcgn
+Removing rule S: (a5,L3) -> hlcgnL3
+Chunking occurred on rules:
+S: (L1,L3) -> L1L3
+S: (a5,L3) -> hlcgnL3
+Old Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (a1,b1) -> wwczhk
+S: (a5,b4) -> tdfgu
+S: (a2,b1) -> ugsrfo
+S: (a5,L3) -> hlcgnL3
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a2 -> ev
+L3: b2 -> b
+L3: b1 -> d
+
+New Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (a1,b1) -> wwczhk
+S: (a5,b4) -> tdfgu
+S: (a2,b1) -> ugsrfo
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a2 -> ev
+L1: a5 -> hlcgn
+L3: b2 -> b
+L3: b1 -> d
+Finished generalisation
+
+Learning utterance vuqtbkh for meaning ('a3', 'b3') from teacher G15A1
+Incorporating string 'vuqtbkh' for meaning ('a3', 'b3')
+Adding rule S: (a3,b3) -> vuqtbkh
+
+Beginning generalisation
+Adding rule L8: b4 -> qqbyydhsm
+Adding rule L8: b3 -> uqtbkh
+Adding rule S: (a3,L8) -> vL8
+Removing rule S: (a3,b4) -> vqqbyydhsm
+Removing rule S: (a3,b3) -> vuqtbkh
+Chunking occurred on rules:
+S: (a3,b4) -> vqqbyydhsm
+S: (a3,b3) -> vuqtbkh
+Old Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a3,b4) -> vqqbyydhsm
+S: (a2,b5) -> sqgwkqqby
+S: (a1,b1) -> wwczhk
+S: (a5,b4) -> tdfgu
+S: (a2,b1) -> ugsrfo
+S: (a3,b3) -> vuqtbkh
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a2 -> ev
+L1: a5 -> hlcgn
+L3: b2 -> b
+L3: b1 -> d
+
+New Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a2,b5) -> sqgwkqqby
+S: (a1,b1) -> wwczhk
+S: (a5,b4) -> tdfgu
+S: (a2,b1) -> ugsrfo
+S: (a3,L8) -> vL8
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a2 -> ev
+L1: a5 -> hlcgn
+L3: b2 -> b
+L3: b1 -> d
+L8: b4 -> qqbyydhsm
+L8: b3 -> uqtbkh
+Finished generalisation
+
+Learning utterance ycjudwkqqby for meaning ('a4', 'b5') from teacher G15A0
+Already have utterance for meaning('a4', 'b5')
+
+Learning utterance vxtybm for meaning ('a1', 'b2') from teacher G15A0
+Already have utterance for meaning('a1', 'b2')
+
+Learning utterance vxtybm for meaning ('a1', 'b2') from teacher G15A1
+Already have utterance for meaning('a1', 'b2')
+
+Learning utterance vxtygwkqqbym for meaning ('a1', 'b5') from teacher G15A1
+Incorporating string 'vxtygwkqqbym' for meaning ('a1', 'b5')
+Adding rule S: (a1,b5) -> vxtygwkqqbym
+
+Beginning generalisation
+Adding rule L3: b5 -> gwkqqby
+Removing rule S: (a1,b5) -> vxtygwkqqbym
+Chunking occurred on rules:
+S: (a1,L3) -> vxtyL3m
+S: (a1,b5) -> vxtygwkqqbym
+Old Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a2,b5) -> sqgwkqqby
+S: (a1,b1) -> wwczhk
+S: (a5,b4) -> tdfgu
+S: (a2,b1) -> ugsrfo
+S: (a3,L8) -> vL8
+S: (a1,b5) -> vxtygwkqqbym
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a2 -> ev
+L1: a5 -> hlcgn
+L3: b2 -> b
+L3: b1 -> d
+L8: b4 -> qqbyydhsm
+L8: b3 -> uqtbkh
+
+New Grammar:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a2,b5) -> sqgwkqqby
+S: (a1,b1) -> wwczhk
+S: (a5,b4) -> tdfgu
+S: (a2,b1) -> ugsrfo
+S: (a3,L8) -> vL8
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a2 -> ev
+L1: a5 -> hlcgn
+L3: b2 -> b
+L3: b1 -> d
+L3: b5 -> gwkqqby
+L8: b4 -> qqbyydhsm
+L8: b3 -> uqtbkh
+Finished generalisation
+
+Adding rule X: d2 -> cjcqd
+Removing rule X: d2 -> cjcqd
+Adding rule X: d2 -> kgmkuf
+Removing rule X: d2 -> kgmkuf
+Adding rule X: d1 -> epf
+Removing rule X: d1 -> epf
+Adding rule X: d2 -> zjvdczm
+Removing rule X: d2 -> zjvdczm
+Adding rule X: d1 -> abtyvrs
+Removing rule X: d1 -> abtyvrs
+Adding rule X: d1 -> pricyql
+Removing rule X: d1 -> pricyql

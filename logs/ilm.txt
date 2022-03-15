@@ -1,0 +1,1729 @@
+GENERATION 0:
+AGENT G0A0:
+
+I-LANGUAGE:
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | - | - | - | - | - 
+ b2 | - | - | - | - | - 
+ b3 | - | - | - | - | - 
+ b4 | - | - | - | - | - 
+ b5 | - | - | - | - | - 
+
+AGENT G0A1:
+
+I-LANGUAGE:
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | - | - | - | - | - 
+ b2 | - | - | - | - | - 
+ b3 | - | - | - | - | - 
+ b4 | - | - | - | - | - 
+ b5 | - | - | - | - | - 
+
+GENERATION 1:
+AGENT G1A0:
+
+I-LANGUAGE:
+S: (a1,b5) -> bume
+S: (a1,b4) -> gu
+S: (a1,b2) -> vb
+S: (a5,b5) -> inpnn
+S: (a3,b5) -> oxru
+S: (L1,b4) -> L1z
+S: (a2,b3) -> bojeifu
+S: (a4,b1) -> xhj
+S: (a4,b5) -> fxtvena
+S: (a4,b3) -> gvfawuc
+S: (a3,b3) -> azcjn
+S: (L4,L2) -> L4L2
+S: (L4,b2) -> rcexL4
+S: (L4,b5) -> wL4mbuj
+S: (a3,b1) -> pf
+S: (a4,b2) -> joex
+S: (a5,b1) -> atg
+S: (a1,b3) -> es
+S: (L4,b1) -> cpL4a
+L1: a4 -> p
+L1: a3 -> yjzm
+L2: b4 -> xzyo
+L2: b2 -> f
+L4: a5 -> j
+L4: a2 -> r
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | - | cpra | pf | xhj | atg 
+ b2 | vb | rf | - | joex | jf 
+ b3 | es | bojeifu | azcjn | gvfawuc | - 
+ b4 | gu | rxzyo | yjzmz | pz | jxzyo 
+ b5 | bume | wrmbuj | oxru | fxtvena | inpnn 
+
+AGENT G1A1:
+
+I-LANGUAGE:
+S: (a1,b4) -> xau
+S: (a5,b3) -> kqusaj
+S: (a3,b2) -> ovurwq
+S: (a2,b4) -> iq
+S: (a3,b3) -> jzwf
+S: (a2,b2) -> ldbbvdr
+S: (a5,b4) -> toxbjjt
+S: (a5,b1) -> aq
+S: (a1,b2) -> gl
+S: (a4,b5) -> zkeuy
+S: (a1,b5) -> wogqw
+S: (a5,b2) -> du
+S: (a1,b1) -> eiy
+S: (a3,b4) -> daw
+S: (a4,b2) -> vxsx
+S: (a2,b3) -> ey
+S: (L1,b1) -> L1c
+S: (a1,b3) -> vlgguys
+S: (a4,b3) -> wyzupe
+S: (a4,b4) -> ksxm
+S: (a2,b5) -> ak
+L1: a2 -> kqqbym
+L1: a3 -> twyy
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | eiy | kqqbymc | twyyc | - | aq 
+ b2 | gl | ldbbvdr | ovurwq | vxsx | du 
+ b3 | vlgguys | ey | jzwf | wyzupe | kqusaj 
+ b4 | xau | iq | daw | ksxm | toxbjjt 
+ b5 | wogqw | ak | - | zkeuy | - 
+
+GENERATION 2:
+AGENT G2A0:
+
+I-LANGUAGE:
+S: (a5,b1) -> atg
+S: (a5,b2) -> du
+S: (a4,b5) -> fxtvena
+S: (a2,b3) -> bojeifu
+S: (a5,b4) -> jxzyo
+S: (a4,b4) -> ksxm
+S: (a5,b5) -> inpnn
+S: (a1,b1) -> owejanx
+S: (a2,b2) -> rf
+S: (a1,b4) -> xau
+S: (a5,b3) -> er
+S: (L2,b5) -> wL2
+S: (L2,L1) -> L2L1
+S: (a4,b3) -> wyzupe
+S: (L5,b1) -> L5c
+S: (a2,b5) -> ak
+L1: b2 -> b
+L1: b3 -> lgguys
+L2: a3 -> a
+L2: a1 -> v
+L5: a4 -> el
+L5: a2 -> kqqbym
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | owejanx | kqqbymc | - | elc | atg 
+ b2 | vb | rf | ab | - | du 
+ b3 | vlgguys | bojeifu | algguys | wyzupe | er 
+ b4 | xau | - | - | ksxm | jxzyo 
+ b5 | wv | ak | wa | fxtvena | inpnn 
+
+AGENT G2A1:
+
+I-LANGUAGE:
+S: (a3,b4) -> daw
+S: (a3,b3) -> jzwf
+S: (a4,b5) -> fxtvena
+S: (a4,b4) -> pz
+S: (a5,b5) -> inpnn
+S: (a4,b2) -> joex
+S: (a1,b2) -> vb
+S: (a5,b2) -> du
+S: (a4,b3) -> wyzupe
+S: (a1,b1) -> eiy
+S: (a2,b5) -> ak
+S: (a2,b3) -> bojeifu
+S: (a5,b4) -> toxbjjt
+S: (a3,b5) -> uxpz
+S: (a5,b3) -> kqusaj
+S: (a3,b2) -> ovurwq
+S: (L1,b1) -> L1c
+S: (a2,L2) -> rL2
+S: (a4,b1) -> kkw
+L1: a3 -> twyy
+L1: a2 -> kqqbym
+L2: b4 -> xzyo
+L2: b2 -> f
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | eiy | kqqbymc | twyyc | kkw | - 
+ b2 | vb | rf | ovurwq | joex | du 
+ b3 | - | bojeifu | jzwf | wyzupe | kqusaj 
+ b4 | - | rxzyo | daw | pz | toxbjjt 
+ b5 | - | ak | uxpz | fxtvena | inpnn 
+
+GENERATION 3:
+AGENT G3A0:
+
+I-LANGUAGE:
+S: (a2,b3) -> bojeifu
+S: (a3,b5) -> uxpz
+S: (a4,b3) -> wyzupe
+S: (a2,b4) -> rxzyo
+S: (a1,b4) -> xau
+S: (a5,b4) -> toxbjjt
+S: (a5,b2) -> du
+S: (a4,b1) -> kkw
+S: (a5,b1) -> atg
+S: (a4,b2) -> joex
+S: (L3,L1) -> L3L1
+S: (a4,b4) -> pz
+S: (a2,b5) -> ak
+S: (a4,b5) -> fxtvena
+S: (a5,b3) -> er
+S: (a5,b5) -> inpnn
+S: (a1,b3) -> vlgguys
+S: (a1,b1) -> owejanx
+L1: b3 -> lgguys
+L1: b2 -> b
+L1: b1 -> c
+L3: a3 -> twyy
+L3: a2 -> kqqbym
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | owejanx | kqqbymc | twyyc | kkw | atg 
+ b2 | - | kqqbymb | twyyb | joex | du 
+ b3 | vlgguys | bojeifu | twyylgguys | wyzupe | er 
+ b4 | xau | rxzyo | - | pz | toxbjjt 
+ b5 | - | ak | uxpz | fxtvena | inpnn 
+
+AGENT G3A1:
+
+I-LANGUAGE:
+S: (a5,b5) -> inpnn
+S: (a2,b4) -> ejqh
+S: (a2,b2) -> rf
+S: (a3,b3) -> jzwf
+S: (a4,b3) -> wyzupe
+S: (a1,b1) -> owejanx
+S: (a2,b3) -> bojeifu
+S: (a4,b5) -> fxtvena
+S: (a3,b4) -> lkx
+S: (a4,b4) -> pz
+S: (a2,b5) -> ak
+S: (L2,L1) -> L1L2
+S: (L6,L1) -> L6L1
+S: (L6,b5) -> wL6
+S: (a5,b3) -> kqusaj
+S: (a5,b1) -> plt
+S: (a5,b2) -> du
+L1: b2 -> b
+L1: b3 -> lgguys
+L1: b1 -> k
+L2: a4 -> kw
+L2: a2 -> qqbymc
+L6: a3 -> a
+L6: a1 -> v
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | owejanx | kqqbymc | ak | kkw | plt 
+ b2 | vb | rf | ab | bkw | du 
+ b3 | vlgguys | bojeifu | jzwf | wyzupe | kqusaj 
+ b4 | - | ejqh | lkx | pz | - 
+ b5 | wv | ak | wa | fxtvena | inpnn 
+
+GENERATION 4:
+AGENT G4A0:
+
+I-LANGUAGE:
+S: (a5,b2) -> du
+S: (L3,L1) -> L1L3
+S: (a5,b4) -> nw
+S: (a4,b4) -> pz
+S: (a1,b4) -> jwkarhs
+S: (a4,b1) -> fxtvena
+S: (a3,b1) -> ak
+S: (L6,L1) -> L6L1
+S: (a2,b3) -> bojeifu
+S: (a5,b1) -> inpnn
+S: (a2,b4) -> rxzyo
+S: (L6,b1) -> kL6
+S: (a1,b5) -> ajf
+L1: b3 -> ojeifu
+L1: b4 -> avkmf
+L3: a5 -> t
+L3: a4 -> kw
+L6: a1 -> hqg
+L6: a2 -> qqbymc
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | khqg | kqqbymc | ak | fxtvena | inpnn 
+ b2 | - | - | - | - | du 
+ b3 | hqgojeifu | qqbymcojeifu | - | ojeifukw | ojeifut 
+ b4 | jwkarhs | qqbymcavkmf | - | avkmfkw | avkmft 
+ b5 | ajf | - | - | - | - 
+
+AGENT G4A1:
+
+I-LANGUAGE:
+S: (a4,b3) -> wyzupe
+S: (a5,b1) -> inpnn
+S: (a5,b2) -> du
+S: (a3,b4) -> rxzyo
+S: (a5,b3) -> kqusaj
+S: (a4,b4) -> pz
+S: (L4,L1) -> L1L4
+S: (a3,b3) -> jzwf
+S: (L6,L1) -> L6L1
+S: (a3,b1) -> ak
+S: (L6,b5) -> wL6
+L1: b1 -> c
+L1: b2 -> b
+L4: a4 -> kw
+L4: a5 -> t
+L6: a1 -> v
+L6: a2 -> kqqbym
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | vc | kqqbymc | ak | ckw | inpnn 
+ b2 | vb | kqqbymb | - | bkw | du 
+ b3 | - | - | jzwf | wyzupe | kqusaj 
+ b4 | - | - | rxzyo | pz | - 
+ b5 | wv | wkqqbym | - | - | - 
+
+GENERATION 5:
+AGENT G5A0:
+
+I-LANGUAGE:
+S: (a5,b1) -> inpnn
+S: (a1,b3) -> hqgojeifu
+S: (a1,b4) -> jwkarhs
+S: (a4,b1) -> fxtvena
+S: (a1,b2) -> vb
+S: (a3,b3) -> jzwf
+S: (a5,b2) -> du
+S: (L1,L3) -> L3L1
+S: (a2,b1) -> kqqbymc
+S: (a5,b5) -> uqt
+S: (a3,b5) -> ciacba
+S: (a3,L3) -> aL3
+L1: a2 -> e
+L1: a5 -> tlysiyt
+L3: b1 -> k
+L3: b4 -> qm
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | - | ke | ak | fxtvena | inpnn 
+ b2 | vb | - | - | - | du 
+ b3 | hqgojeifu | - | jzwf | - | - 
+ b4 | jwkarhs | qme | aqm | - | qmtlysiyt 
+ b5 | - | - | ciacba | - | uqt 
+
+AGENT G5A1:
+
+I-LANGUAGE:
+S: (a4,b1) -> fxtvena
+S: (a3,b3) -> jzwf
+S: (a3,b1) -> ak
+S: (a4,b4) -> pz
+S: (L1,b5) -> wL1
+S: (L1,L2) -> L1hL2
+S: (L3,b2) -> tL3
+S: (a1,b2) -> hqgadwm
+S: (L1,L4) -> L1L4
+S: (a4,b3) -> wyzupe
+S: (a5,b2) -> du
+S: (a3,b5) -> lb
+S: (a5,L2) -> L2t
+S: (a2,b3) -> lnitrmz
+S: (a4,b5) -> vcifdblkw
+S: (a5,b1) -> inpnn
+S: (a3,b4) -> rxzyo
+L1: a2 -> kqqbym
+L1: a1 -> v
+L2: b4 -> sm
+L2: b5 -> berun
+L2: b3 -> ojeifu
+L3: a3 -> ocoo
+L3: a4 -> rznbnkw
+L4: b2 -> b
+L4: b1 -> c
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | vc | kqqbymc | ak | fxtvena | inpnn 
+ b2 | hqgadwm | kqqbymb | tocoo | trznbnkw | du 
+ b3 | vhojeifu | kqqbymhojeifu | jzwf | wyzupe | ojeifut 
+ b4 | vhsm | kqqbymhsm | rxzyo | pz | smt 
+ b5 | wv | wkqqbym | lb | vcifdblkw | berunt 
+
+GENERATION 6:
+AGENT G6A0:
+
+I-LANGUAGE:
+S: (a3,b3) -> jzwf
+S: (a4,b2) -> trznbnkw
+S: (a4,b4) -> qmalixi
+S: (a1,b4) -> jwkarhs
+S: (a3,b4) -> rxzyo
+S: (a5,b1) -> inpnn
+S: (a2,L1) -> L1e
+S: (a5,b2) -> du
+S: (L4,L1) -> L4L1
+S: (L4,b5) -> ljhrhL4
+S: (L7,L5) -> L5L7
+S: (a4,b3) -> wyzupe
+S: (a4,b1) -> fxtvena
+S: (a4,b5) -> mxbu
+L1: b3 -> hojeifu
+L1: b1 -> c
+L1: b2 -> b
+L4: a3 -> a
+L4: a1 -> v
+L5: b5 -> wkqqby
+L5: b4 -> kqqbymhs
+L7: a5 -> t
+L7: a2 -> m
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | vc | ce | ac | fxtvena | inpnn 
+ b2 | vb | be | ab | trznbnkw | du 
+ b3 | vhojeifu | hojeifue | jzwf | wyzupe | - 
+ b4 | jwkarhs | kqqbymhsm | rxzyo | qmalixi | kqqbymhst 
+ b5 | ljhrhv | wkqqbym | ljhrha | mxbu | wkqqbyt 
+
+AGENT G6A1:
+
+I-LANGUAGE:
+S: (a3,b5) -> lb
+S: (a5,b1) -> inpnn
+S: (a5,b2) -> du
+S: (a3,b3) -> jzwf
+S: (a1,b5) -> oytzj
+S: (a4,b1) -> fxtvena
+S: (a2,L2) -> L2e
+S: (L1,L2) -> L1L2
+S: (a4,b4) -> pz
+L1: a1 -> v
+L1: a2 -> kqqbym
+L2: b2 -> t
+L2: b5 -> w
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | - | - | - | fxtvena | inpnn 
+ b2 | vt | te | - | - | du 
+ b3 | - | - | jzwf | - | - 
+ b4 | - | - | - | pz | - 
+ b5 | oytzj | we | lb | - | - 
+
+GENERATION 7:
+AGENT G7A0:
+
+I-LANGUAGE:
+S: (a5,b1) -> inpnn
+S: (a1,b4) -> jwkarhs
+S: (a3,b2) -> kuq
+S: (a3,b3) -> jzwf
+S: (a3,b4) -> ddnea
+S: (a2,b2) -> uwlj
+S: (a5,b2) -> du
+S: (a1,L1) -> vL1
+S: (a3,b5) -> lb
+S: (L2,L1) -> L1L2
+S: (L2,b4) -> kqqbyL2hsm
+S: (a4,b2) -> quwtt
+S: (a3,b1) -> xclhhfk
+L1: b5 -> wkqqby
+L1: b3 -> sxpgag
+L2: a5 -> hlcgn
+L2: a4 -> qmalix
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | - | - | xclhhfk | - | inpnn 
+ b2 | - | uwlj | kuq | quwtt | du 
+ b3 | vsxpgag | - | jzwf | sxpgagqmalix | sxpgaghlcgn 
+ b4 | jwkarhs | - | ddnea | kqqbyqmalixhsm | kqqbyhlcgnhsm 
+ b5 | vwkqqby | - | lb | wkqqbyqmalix | wkqqbyhlcgn 
+
+AGENT G7A1:
+
+I-LANGUAGE:
+S: (a5,b1) -> inpnn
+S: (a3,b3) -> jzwf
+S: (a2,L1) -> L1e
+S: (a1,b3) -> byk
+S: (a4,b4) -> qmalixi
+S: (a4,b2) -> trznbnkw
+S: (a4,b3) -> yjdum
+S: (a3,b4) -> rxzyo
+S: (a2,b5) -> wkqqbym
+S: (a3,b5) -> lb
+S: (L4,L1) -> L4L1
+S: (a4,b5) -> mxbu
+S: (a1,b4) -> jwkarhs
+S: (a4,b1) -> fxtvena
+S: (a5,b3) -> uo
+S: (a5,b2) -> du
+L1: b1 -> uzg
+L1: b2 -> b
+L4: a3 -> a
+L4: a1 -> v
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | vuzg | uzge | auzg | fxtvena | inpnn 
+ b2 | vb | be | ab | trznbnkw | du 
+ b3 | byk | - | jzwf | yjdum | uo 
+ b4 | jwkarhs | - | rxzyo | qmalixi | - 
+ b5 | - | wkqqbym | lb | mxbu | - 
+
+GENERATION 8:
+AGENT G8A0:
+
+I-LANGUAGE:
+S: (a3,b2) -> kuq
+S: (a5,b2) -> du
+S: (a3,b1) -> xclhhfk
+S: (a3,b4) -> ddnea
+S: (a4,b2) -> trznbnkw
+S: (a1,b4) -> jwkarhs
+S: (a5,b3) -> uo
+S: (a3,b5) -> lb
+S: (a1,L1) -> vL1
+S: (L4,L1) -> L1L4
+S: (L4,b4) -> kqqbyymL4hsm
+S: (a2,b3) -> zyqoi
+S: (a2,b2) -> uwlj
+S: (a3,b3) -> jzwf
+L1: b2 -> b
+L1: b1 -> uzg
+L1: b3 -> sxpgag
+L1: b5 -> wkqqby
+L4: a5 -> hlcgn
+L4: a4 -> qmalix
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | vuzg | - | xclhhfk | uzgqmalix | uzghlcgn 
+ b2 | vb | uwlj | kuq | trznbnkw | du 
+ b3 | vsxpgag | zyqoi | jzwf | sxpgagqmalix | uo 
+ b4 | jwkarhs | - | ddnea | kqqbyymqmalixhsm | kqqbyymhlcgnhsm 
+ b5 | vwkqqby | - | lb | wkqqbyqmalix | wkqqbyhlcgn 
+
+AGENT G8A1:
+
+I-LANGUAGE:
+S: (a3,b4) -> rxzyo
+S: (a5,b2) -> du
+S: (a4,b3) -> yjdum
+S: (a3,b5) -> lb
+S: (a3,b1) -> xclhhfk
+S: (a3,b3) -> jzwf
+S: (a3,b2) -> kuq
+S: (L1,L2) -> L1L2
+S: (L1,b4) -> kqqbyL1hsm
+S: (L1,L7) -> L7L1
+S: (a2,L2) -> L2e
+S: (a4,b4) -> qmalixi
+S: (a4,b5) -> wkqqbyqmalix
+S: (a1,b1) -> vudd
+L1: a2 -> tzjh
+L1: a5 -> hlcgn
+L2: b2 -> b
+L2: b3 -> knyw
+L7: b5 -> w
+L7: b1 -> f
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | vudd | ftzjh | xclhhfk | - | fhlcgn 
+ b2 | - | tzjhb | kuq | - | du 
+ b3 | - | tzjhknyw | jzwf | yjdum | hlcgnknyw 
+ b4 | - | kqqbytzjhhsm | rxzyo | qmalixi | kqqbyhlcgnhsm 
+ b5 | - | wtzjh | lb | wkqqbyqmalix | whlcgn 
+
+GENERATION 9:
+AGENT G9A0:
+
+I-LANGUAGE:
+S: (L1,L2) -> L1L2
+S: (a5,b3) -> hlcgnknyw
+S: (a3,b4) -> ddnea
+S: (a4,b4) -> qmalixi
+S: (a1,b4) -> jwkarhs
+S: (a3,b3) -> jzwf
+S: (a3,b5) -> lb
+S: (a3,b2) -> kuq
+S: (a5,b2) -> du
+S: (L1,b4) -> kqqbyL1hsm
+S: (a4,L2) -> L2qmalix
+S: (a1,b5) -> vwkqqby
+L1: a4 -> cj
+L1: a2 -> tzjh
+L2: b5 -> wkqqby
+L2: b1 -> udd
+L2: b2 -> b
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | - | tzjhudd | - | cjudd | - 
+ b2 | - | tzjhb | kuq | cjb | du 
+ b3 | - | - | jzwf | - | hlcgnknyw 
+ b4 | jwkarhs | kqqbytzjhhsm | ddnea | qmalixi | - 
+ b5 | vwkqqby | tzjhwkqqby | lb | cjwkqqby | - 
+
+AGENT G9A1:
+
+I-LANGUAGE:
+S: (a3,b5) -> lb
+S: (a1,b4) -> jwkarhs
+S: (a3,b2) -> kuq
+S: (a4,L2) -> L2x
+S: (L1,L2) -> L1L2
+S: (a1,L2) -> vL2g
+S: (L1,L8) -> L8L1
+S: (L1,b4) -> kqqbyL1hsm
+S: (a3,b4) -> ddnea
+S: (a2,b5) -> wkqqbyczupt
+S: (a1,b2) -> vb
+L1: a5 -> hlcgn
+L1: a4 -> ymqmalix
+L1: a2 -> tzjh
+L2: b1 -> zghlcgn
+L2: b3 -> o
+L8: b5 -> wkqqby
+L8: b2 -> d
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | vzghlcgng | tzjhzghlcgn | - | zghlcgnx | hlcgnzghlcgn 
+ b2 | vb | dtzjh | kuq | dymqmalix | dhlcgn 
+ b3 | vog | tzjho | - | ox | hlcgno 
+ b4 | jwkarhs | kqqbytzjhhsm | ddnea | kqqbyymqmalixhsm | kqqbyhlcgnhsm 
+ b5 | - | wkqqbytzjh | lb | wkqqbyymqmalix | wkqqbyhlcgn 
+
+GENERATION 10:
+AGENT G10A0:
+
+I-LANGUAGE:
+S: (a3,b3) -> jzwf
+S: (a5,b4) -> pwfabz
+S: (a1,L2) -> vL2
+S: (a3,b1) -> xzwmyw
+S: (a3,b4) -> ddnea
+S: (a4,b1) -> cjudd
+S: (L1,L2) -> L2L1
+S: (L1,b4) -> kqqbyymqmaliL1hsm
+S: (a3,b5) -> lb
+L1: a4 -> x
+L1: a5 -> hlcgn
+L1: a2 -> tzjh
+L2: b2 -> b
+L2: b3 -> o
+L2: b5 -> wkqqby
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | - | - | xzwmyw | cjudd | - 
+ b2 | vb | btzjh | - | bx | bhlcgn 
+ b3 | vo | otzjh | jzwf | ox | ohlcgn 
+ b4 | - | kqqbyymqmalitzjhhsm | ddnea | kqqbyymqmalixhsm | pwfabz 
+ b5 | vwkqqby | wkqqbytzjh | lb | wkqqbyx | wkqqbyhlcgn 
+
+AGENT G10A1:
+
+I-LANGUAGE:
+S: (a2,b3) -> qiwbjmj
+S: (a1,b4) -> jwkarhs
+S: (L2,b4) -> kqqbyL2hsm
+S: (a5,b4) -> bod
+S: (L2,L1) -> L2L1
+S: (L2,L5) -> L5L2
+S: (a4,b3) -> ihgh
+S: (a4,b2) -> cjb
+S: (a4,L1) -> L1x
+L1: b1 -> zghlcgn
+L1: b5 -> wkqqbyymqmali
+L2: a1 -> bhia
+L2: a3 -> uo
+L2: a2 -> tzjh
+L2: a5 -> w
+L5: b2 -> d
+L5: b3 -> l
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | bhiazghlcgn | tzjhzghlcgn | uozghlcgn | zghlcgnx | wzghlcgn 
+ b2 | dbhia | dtzjh | duo | cjb | dw 
+ b3 | lbhia | qiwbjmj | luo | ihgh | lw 
+ b4 | jwkarhs | kqqbytzjhhsm | kqqbyuohsm | - | kqqbywhsm 
+ b5 | bhiawkqqbyymqmali | tzjhwkqqbyymqmali | uowkqqbyymqmali | wkqqbyymqmalix | wwkqqbyymqmali 
+
+GENERATION 11:
+AGENT G11A0:
+
+I-LANGUAGE:
+S: (a3,b1) -> xzwmyw
+S: (L2,b4) -> kqqbyL2hsm
+S: (L2,L1) -> L2L1
+S: (L2,b3) -> qiwL2jmj
+S: (a4,b3) -> ihgh
+S: (a1,b4) -> jwkarhs
+S: (a4,b5) -> wkqqbyx
+S: (a1,b2) -> dbhia
+L1: b2 -> d
+L1: b5 -> wkqqby
+L2: a5 -> hlcgn
+L2: a2 -> tzjh
+L2: a3 -> uo
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | - | - | xzwmyw | - | - 
+ b2 | dbhia | tzjhd | uod | - | hlcgnd 
+ b3 | - | qiwtzjhjmj | qiwuojmj | ihgh | qiwhlcgnjmj 
+ b4 | jwkarhs | kqqbytzjhhsm | kqqbyuohsm | - | kqqbyhlcgnhsm 
+ b5 | - | tzjhwkqqby | uowkqqby | wkqqbyx | hlcgnwkqqby 
+
+AGENT G11A1:
+
+I-LANGUAGE:
+S: (a3,b3) -> jzwf
+S: (a1,b4) -> jwkarhs
+S: (L1,L2) -> L2L1
+S: (a2,L5) -> kL5
+S: (L1,b4) -> kqqbyymqmaliL1hsm
+S: (a4,b1) -> cjudd
+S: (L1,L5) -> L1L5hlcgn
+S: (a5,b4) -> pwfabz
+S: (a5,b5) -> wwkqqbyymqmali
+L1: a3 -> uo
+L1: a1 -> bhia
+L1: a4 -> x
+L1: a2 -> tzjh
+L2: b3 -> o
+L2: b2 -> b
+L5: b5 -> kqqby
+L5: b1 -> zg
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | bhiazghlcgn | kzg | uozghlcgn | cjudd | - 
+ b2 | bbhia | btzjh | buo | bx | - 
+ b3 | obhia | otzjh | jzwf | ox | - 
+ b4 | jwkarhs | kqqbyymqmalitzjhhsm | kqqbyymqmaliuohsm | kqqbyymqmalixhsm | pwfabz 
+ b5 | bhiakqqbyhlcgn | kkqqby | uokqqbyhlcgn | xkqqbyhlcgn | wwkqqbyymqmali 
+
+GENERATION 12:
+AGENT G12A0:
+
+I-LANGUAGE:
+S: (a5,b4) -> pwfabz
+S: (a1,b2) -> dbhia
+S: (a1,b1) -> wwczhk
+S: (L1,b5) -> L1wkqqby
+S: (a4,b3) -> ihgh
+S: (L1,b4) -> kqqbyymqmaliL1hsm
+S: (a4,b1) -> cjudd
+S: (a3,b1) -> xzwmyw
+S: (a2,L4) -> kL4
+S: (a5,b5) -> wwkqqbyymqmali
+S: (L1,b3) -> qiwL1jmj
+S: (a1,b4) -> jwkarhs
+S: (L1,L4) -> L4L1
+L1: a5 -> hlcgn
+L1: a4 -> shplj
+L1: a3 -> uo
+L1: a2 -> tzjh
+L4: b2 -> b
+L4: b1 -> urkzg
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | wwczhk | kurkzg | xzwmyw | cjudd | urkzghlcgn 
+ b2 | dbhia | kb | buo | bshplj | bhlcgn 
+ b3 | - | qiwtzjhjmj | qiwuojmj | ihgh | qiwhlcgnjmj 
+ b4 | jwkarhs | kqqbyymqmalitzjhhsm | kqqbyymqmaliuohsm | kqqbyymqmalishpljhsm | pwfabz 
+ b5 | - | tzjhwkqqby | uowkqqby | shpljwkqqby | hlcgnwkqqby 
+
+AGENT G12A1:
+
+I-LANGUAGE:
+S: (a2,b1) -> kzg
+S: (a1,b3) -> uyg
+S: (L1,L3) -> L1L3
+S: (L1,b4) -> kqqbyL1hsm
+S: (L1,b2) -> bL1
+S: (a3,b3) -> jzwf
+S: (a5,b3) -> ohtbka
+L1: a4 -> cjud
+L1: a1 -> vxty
+L3: b5 -> wkqqby
+L3: b2 -> d
+L3: b1 -> d
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | vxtyd | kzg | - | cjudd | - 
+ b2 | vxtyd | - | - | cjudd | - 
+ b3 | uyg | - | jzwf | - | ohtbka 
+ b4 | kqqbyvxtyhsm | - | - | kqqbycjudhsm | - 
+ b5 | vxtywkqqby | - | - | cjudwkqqby | - 
+
+GENERATION 13:
+AGENT G13A0:
+
+I-LANGUAGE:
+S: (a2,b3) -> xb
+S: (L1,L3) -> L1L3
+S: (a1,b4) -> jwkarhs
+S: (a4,b3) -> ws
+S: (L4,b3) -> qiwL4jmj
+S: (L4,b5) -> L4wkqqby
+S: (L4,b4) -> kqqbyL4hsm
+S: (a1,b1) -> wwczhk
+S: (L4,L3) -> L3L4
+S: (a2,b5) -> wc
+S: (a1,b2) -> dbhia
+S: (a4,b1) -> cjudd
+L1: a2 -> tzjh
+L1: a1 -> vxty
+L3: b1 -> zg
+L3: b4 -> qqbyymqmalitzjhhsm
+L4: a3 -> yd
+L4: a5 -> rkzghlcgn
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | vxtyzg | tzjhzg | zgyd | cjudd | zgrkzghlcgn 
+ b2 | dbhia | - | - | - | - 
+ b3 | - | xb | qiwydjmj | ws | qiwrkzghlcgnjmj 
+ b4 | vxtyqqbyymqmalitzjhhsm | tzjhqqbyymqmalitzjhhsm | kqqbyydhsm | - | kqqbyrkzghlcgnhsm 
+ b5 | - | wc | ydwkqqby | - | rkzghlcgnwkqqby 
+
+AGENT G13A1:
+
+I-LANGUAGE:
+S: (a5,b4) -> tdfgu
+S: (a1,b4) -> jwkarhs
+S: (a4,b3) -> ihgh
+S: (L2,L1) -> L2L1
+S: (a1,b3) -> uyg
+S: (a5,L1) -> L1hlcgn
+S: (a5,b3) -> qiwhlcgnjmj
+S: (L2,b4) -> kqqbyL2hsm
+S: (a1,b1) -> wwczhk
+S: (a2,b1) -> kzg
+S: (a2,b2) -> mibd
+S: (a2,b3) -> yxr
+S: (a1,b5) -> vxtywkqqby
+L1: b1 -> urkzg
+L1: b2 -> b
+L1: b5 -> wkqqby
+L2: a4 -> ymqmalishplj
+L2: a3 -> kg
+L2: a2 -> ymqmalitzjh
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | wwczhk | ymqmalitzjhurkzg | kgurkzg | ymqmalishpljurkzg | urkzghlcgn 
+ b2 | - | ymqmalitzjhb | kgb | ymqmalishpljb | bhlcgn 
+ b3 | uyg | yxr | - | ihgh | qiwhlcgnjmj 
+ b4 | jwkarhs | kqqbyymqmalitzjhhsm | kqqbykghsm | kqqbyymqmalishpljhsm | tdfgu 
+ b5 | vxtywkqqby | ymqmalitzjhwkqqby | kgwkqqby | ymqmalishpljwkqqby | wkqqbyhlcgn 
+
+GENERATION 14:
+AGENT G14A0:
+
+I-LANGUAGE:
+S: (L1,b5) -> yL1wkqqby
+S: (a1,b1) -> vxtyzg
+S: (a1,b5) -> jqzewkqqby
+S: (L1,b3) -> qiwL1jmj
+S: (L1,L5) -> L5L1
+S: (a2,b5) -> wc
+S: (a2,L5) -> yL5
+S: (L1,L8) -> L1L8
+L1: a4 -> cjud
+L1: a3 -> zgy
+L5: b2 -> mqmalitzjhb
+L5: b3 -> xr
+L8: b4 -> hsm
+L8: b1 -> d
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | vxtyzg | - | zgyd | cjudd | - 
+ b2 | - | ymqmalitzjhb | mqmalitzjhbzgy | mqmalitzjhbcjud | - 
+ b3 | - | yxr | qiwzgyjmj | qiwcjudjmj | - 
+ b4 | - | - | zgyhsm | cjudhsm | - 
+ b5 | jqzewkqqby | wc | yzgywkqqby | ycjudwkqqby | - 
+
+AGENT G14A1:
+
+I-LANGUAGE:
+S: (a1,b1) -> wwczhk
+S: (a1,L1) -> vxtyL1m
+S: (a3,L1) -> kL1
+S: (a4,b1) -> cjudd
+S: (a5,b3) -> qiwhlcgnjmj
+S: (L3,b4) -> kqqbyL3hsm
+S: (L3,b1) -> uL3
+S: (L3,L4) -> L3L4
+S: (L3,b5) -> ymqmaliL3wkqqby
+S: (a1,b2) -> cplgb
+S: (a5,b5) -> wkqqbyhlcgn
+S: (a5,b4) -> tdfgu
+S: (a1,b3) -> uyg
+L1: b5 -> gwkqqby
+L1: b4 -> qqbyydhsm
+L3: a4 -> w
+L3: a3 -> v
+L3: a2 -> tzjh
+L4: b2 -> b
+L4: b3 -> s
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | wwczhk | utzjh | uv | cjudd | - 
+ b2 | cplgb | tzjhb | vb | wb | - 
+ b3 | uyg | tzjhs | vs | ws | qiwhlcgnjmj 
+ b4 | vxtyqqbyydhsmm | kqqbytzjhhsm | kqqbyydhsm | kqqbywhsm | tdfgu 
+ b5 | vxtygwkqqbym | ymqmalitzjhwkqqby | kgwkqqby | ymqmaliwwkqqby | wkqqbyhlcgn 
+
+GENERATION 15:
+AGENT G15A0:
+
+I-LANGUAGE:
+S: (a2,b3) -> yxr
+S: (a1,b1) -> wwczhk
+S: (a1,L1) -> vxtyL1m
+S: (L2,b5) -> yL2wkqqby
+S: (a2,b5) -> wc
+S: (L2,L1) -> L2L1
+S: (a4,b3) -> ws
+S: (L2,b3) -> qiwL2jmj
+S: (a3,b5) -> kgwkqqby
+S: (a2,b4) -> hevhsm
+S: (a2,b2) -> tzjhb
+L1: b2 -> b
+L1: b3 -> s
+L1: b4 -> hsm
+L1: b1 -> d
+L2: a5 -> hlcgn
+L2: a3 -> zgy
+L2: a4 -> cjud
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | wwczhk | - | zgyd | cjudd | hlcgnd 
+ b2 | vxtybm | tzjhb | zgyb | cjudb | hlcgnb 
+ b3 | vxtysm | yxr | zgys | cjuds | hlcgns 
+ b4 | vxtyhsmm | hevhsm | zgyhsm | cjudhsm | hlcgnhsm 
+ b5 | - | wc | yzgywkqqby | ycjudwkqqby | yhlcgnwkqqby 
+
+AGENT G15A1:
+
+I-LANGUAGE:
+S: (a5,b4) -> tdfgu
+S: (L1,b1) -> uL1
+S: (a1,b3) -> uyg
+S: (L1,L2) -> L1L2
+S: (a1,L2) -> vxtyL2m
+S: (a2,b4) -> kqqbytzjhhsm
+S: (L10,b5) -> yL10wkqqby
+S: (a5,b2) -> mqmalitzjhbmsegclv
+S: (L10,b1) -> wL10
+S: (a2,b2) -> tzjhb
+L1: a3 -> v
+L1: a4 -> w
+L2: b5 -> gwkqqby
+L2: b4 -> qqbyydhsm
+L2: b2 -> b
+L10: a1 -> wczhk
+L10: a5 -> vkl
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | wwczhk | - | uv | uw | wvkl 
+ b2 | vxtybm | tzjhb | vb | wb | mqmalitzjhbmsegclv 
+ b3 | uyg | - | - | - | - 
+ b4 | vxtyqqbyydhsmm | kqqbytzjhhsm | vqqbyydhsm | wqqbyydhsm | tdfgu 
+ b5 | vxtygwkqqbym | - | vgwkqqby | wgwkqqby | yvklwkqqby 
+
+GENERATION 16:
+AGENT G16A0:
+
+I-LANGUAGE:
+S: (L1,L2) -> L1L2
+S: (L1,b5) -> yL1wkqqby
+S: (a1,b2) -> vxtybm
+S: (a1,b1) -> wwczhk
+S: (a3,b1) -> uv
+S: (a4,b3) -> wjn
+S: (a2,b5) -> wc
+S: (a2,b2) -> tzjhb
+S: (a2,b4) -> kqqbytzjhhsm
+L1: a3 -> vqu
+L1: a5 -> hlcgn
+L1: a4 -> cjud
+L2: b2 -> b
+L2: b3 -> s
+L2: b4 -> hsm
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | wwczhk | - | uv | - | - 
+ b2 | vxtybm | tzjhb | vqub | cjudb | hlcgnb 
+ b3 | - | - | vqus | cjuds | hlcgns 
+ b4 | - | kqqbytzjhhsm | vquhsm | cjudhsm | hlcgnhsm 
+ b5 | - | wc | yvquwkqqby | ycjudwkqqby | yhlcgnwkqqby 
+
+AGENT G16A1:
+
+I-LANGUAGE:
+S: (a5,b3) -> jw
+S: (a2,b3) -> yxr
+S: (L1,b4) -> hL1hsm
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> vxtyL3m
+S: (a2,b5) -> sqgwkqqby
+S: (a1,b1) -> wwczhk
+S: (a5,b4) -> tdfgu
+S: (a2,b1) -> ugsrfo
+S: (a3,L8) -> vL8
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a2 -> ev
+L1: a5 -> hlcgn
+L3: b2 -> b
+L3: b1 -> d
+L3: b5 -> gwkqqby
+L8: b4 -> qqbyydhsm
+L8: b3 -> uqtbkh
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | vxtydm | evd | zgyd | cjudd | hlcgnd 
+ b2 | vxtybm | evb | zgyb | cjudb | hlcgnb 
+ b3 | - | yxr | vuqtbkh | - | jw 
+ b4 | - | hevhsm | hzgyhsm | hcjudhsm | hhlcgnhsm 
+ b5 | vxtygwkqqbym | yevwkqqby | yzgywkqqby | ycjudwkqqby | yhlcgnwkqqby 
+
+GENERATION 17:
+AGENT G17A0:
+
+I-LANGUAGE:
+S: (a2,b3) -> yxr
+S: (a5,b3) -> jw
+S: (L2,L1) -> L2L1
+S: (a2,b5) -> wc
+S: (a1,L1) -> vxtyL1m
+S: (L2,b5) -> yL2wkqqby
+S: (a2,b2) -> tzjhb
+L1: b3 -> uqtbkh
+L1: b4 -> quhsm
+L1: b2 -> b
+L2: a3 -> zgy
+L2: a5 -> hlcgn
+L2: a4 -> cjud
+L2: a1 -> wda
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | - | - | - | - | - 
+ b2 | wdab | tzjhb | zgyb | cjudb | hlcgnb 
+ b3 | wdauqtbkh | yxr | zgyuqtbkh | cjuduqtbkh | jw 
+ b4 | wdaquhsm | - | zgyquhsm | cjudquhsm | hlcgnquhsm 
+ b5 | ywdawkqqby | wc | yzgywkqqby | ycjudwkqqby | yhlcgnwkqqby 
+
+AGENT G17A1:
+
+I-LANGUAGE:
+S: (a2,b3) -> owziv
+S: (a1,b3) -> pvxkuu
+S: (a5,b3) -> jw
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L2) -> L1L2
+S: (a2,b1) -> mt
+S: (a1,L2) -> vxtyL2m
+S: (a1,b1) -> wwczhk
+S: (L1,b4) -> hL1hsm
+S: (a2,b2) -> evb
+S: (a2,b4) -> kqqbytzjhhsm
+S: (a2,b5) -> wc
+L1: a4 -> cjud
+L1: a3 -> zgy
+L1: a5 -> hlcgn
+L2: b2 -> b
+L2: b5 -> gwkqqby
+L2: b3 -> s
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | wwczhk | mt | - | - | - 
+ b2 | vxtybm | evb | zgyb | cjudb | hlcgnb 
+ b3 | pvxkuu | owziv | zgys | cjuds | jw 
+ b4 | - | kqqbytzjhhsm | hzgyhsm | hcjudhsm | hhlcgnhsm 
+ b5 | vxtygwkqqbym | wc | yzgywkqqby | ycjudwkqqby | yhlcgnwkqqby 
+
+GENERATION 18:
+AGENT G18A0:
+
+I-LANGUAGE:
+S: (a2,b5) -> wc
+S: (L3,L1) -> L3L1
+S: (L3,b5) -> yL3dawkqqby
+S: (a2,b3) -> yxr
+S: (a2,b1) -> vqyl
+S: (a2,b2) -> tzjhb
+L1: b1 -> mqmfk
+L1: b3 -> uqtbkh
+L1: b4 -> daquhsm
+L1: b2 -> dab
+L3: a1 -> w
+L3: a4 -> cjud
+L3: a5 -> hlcgn
+L3: a3 -> zgy
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | wmqmfk | vqyl | zgymqmfk | cjudmqmfk | hlcgnmqmfk 
+ b2 | wdab | tzjhb | zgydab | cjuddab | hlcgndab 
+ b3 | wuqtbkh | yxr | zgyuqtbkh | cjuduqtbkh | hlcgnuqtbkh 
+ b4 | wdaquhsm | - | zgydaquhsm | cjuddaquhsm | hlcgndaquhsm 
+ b5 | ywdawkqqby | wc | yzgydawkqqby | ycjuddawkqqby | yhlcgndawkqqby 
+
+AGENT G18A1:
+
+I-LANGUAGE:
+S: (a1,b1) -> wdavwsolkt
+S: (a2,b1) -> tx
+S: (L1,b5) -> yL1wkqqby
+S: (a1,b3) -> pvxkuu
+S: (a5,b3) -> jw
+S: (a1,L2) -> L2m
+S: (L1,L2) -> L1L2
+S: (a2,b2) -> evb
+S: (a2,b3) -> owziv
+L1: a3 -> zgy
+L1: a4 -> cjud
+L1: a5 -> hlcgn
+L2: b4 -> quhsm
+L2: b1 -> pqtu
+L2: b2 -> b
+L2: b3 -> uqtbkh
+L2: b5 -> vxtygwkqqby
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | wdavwsolkt | tx | zgypqtu | cjudpqtu | hlcgnpqtu 
+ b2 | bm | evb | zgyb | cjudb | hlcgnb 
+ b3 | pvxkuu | owziv | zgyuqtbkh | cjuduqtbkh | jw 
+ b4 | quhsmm | - | zgyquhsm | cjudquhsm | hlcgnquhsm 
+ b5 | vxtygwkqqbym | - | yzgywkqqby | ycjudwkqqby | yhlcgnwkqqby 
+
+GENERATION 19:
+AGENT G19A0:
+
+I-LANGUAGE:
+S: (a2,b3) -> yxr
+S: (L3,L1) -> L3L1
+S: (a2,b5) -> wc
+S: (a1,b3) -> pvxkuu
+S: (L3,b5) -> yL3dawkqqby
+S: (a5,b3) -> jw
+S: (a1,b1) -> wmqmfk
+S: (a2,b1) -> vqyl
+S: (a4,b2) -> cjudb
+L1: b3 -> uqtbkh
+L1: b1 -> pqtu
+L1: b4 -> daquhsm
+L1: b2 -> b
+L3: a2 -> ev
+L3: a5 -> hlcgnda
+L3: a3 -> zgy
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | wmqmfk | evpqtu | zgypqtu | - | hlcgndapqtu 
+ b2 | - | evb | zgyb | cjudb | hlcgndab 
+ b3 | pvxkuu | yxr | zgyuqtbkh | - | hlcgndauqtbkh 
+ b4 | - | evdaquhsm | zgydaquhsm | - | hlcgndadaquhsm 
+ b5 | - | wc | yzgydawkqqby | - | yhlcgndadawkqqby 
+
+AGENT G19A1:
+
+I-LANGUAGE:
+S: (L2,b5) -> yL2dawkqqby
+S: (a2,b5) -> ybjjwkqqby
+S: (a2,b3) -> owziv
+S: (L2,L1) -> L2L1
+S: (a2,b2) -> evb
+S: (a1,b4) -> wdaquhsm
+S: (a2,b1) -> tx
+L1: b1 -> mqmfk
+L1: b2 -> dab
+L1: b4 -> quhsm
+L1: b3 -> uqtbkh
+L2: a4 -> cjud
+L2: a3 -> zgy
+L2: a5 -> hlcgn
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | - | tx | zgymqmfk | cjudmqmfk | hlcgnmqmfk 
+ b2 | - | evb | zgydab | cjuddab | hlcgndab 
+ b3 | - | owziv | zgyuqtbkh | cjuduqtbkh | hlcgnuqtbkh 
+ b4 | wdaquhsm | - | zgyquhsm | cjudquhsm | hlcgnquhsm 
+ b5 | - | ybjjwkqqby | yzgydawkqqby | ycjuddawkqqby | yhlcgndawkqqby 
+
+GENERATION 20:
+AGENT G20A0:
+
+I-LANGUAGE:
+S: (L1,b5) -> yL1wkqqby
+S: (L1,b3) -> pvL1kuu
+S: (a1,b4) -> wdaquhsm
+S: (a4,b5) -> alpjx
+S: (L1,L3) -> L1L3
+S: (a2,b1) -> evpqtu
+L1: a1 -> jsisy
+L1: a4 -> cjud
+L3: b2 -> b
+L3: b3 -> uqtbkh
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | - | evpqtu | - | - | - 
+ b2 | jsisyb | - | - | cjudb | - 
+ b3 | pvjsisykuu | - | - | pvcjudkuu | - 
+ b4 | wdaquhsm | - | - | - | - 
+ b5 | yjsisywkqqby | - | - | ycjudwkqqby | - 
+
+AGENT G20A1:
+
+I-LANGUAGE:
+S: (L2,b5) -> yL2wkqqby
+S: (L2,L1) -> L2L1
+S: (a2,b3) -> yxr
+S: (L2,b4) -> hL2
+L1: b3 -> uqtbkh
+L1: b2 -> b
+L2: a4 -> bp
+L2: a5 -> lcgnquhsm
+L2: a3 -> zgy
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | - | - | - | - | - 
+ b2 | - | - | zgyb | bpb | lcgnquhsmb 
+ b3 | - | yxr | zgyuqtbkh | bpuqtbkh | lcgnquhsmuqtbkh 
+ b4 | - | - | hzgy | hbp | hlcgnquhsm 
+ b5 | - | - | yzgywkqqby | ybpwkqqby | ylcgnquhsmwkqqby 
+
+GENERATION 21:
+AGENT G21A0:
+
+I-LANGUAGE:
+S: (a4,b4) -> kg
+S: (a2,b5) -> tqpg
+S: (L2,b3) -> pvL2kuu
+S: (a2,b4) -> bpw
+S: (L2,b5) -> yL2wkqqby
+S: (L2,b2) -> cL2
+S: (a3,b4) -> iazz
+S: (a1,L1) -> L1m
+S: (L2,L1) -> L2L1
+S: (L2,b1) -> lcgnquL2smmmutdq
+S: (a5,b3) -> lcgnquhsmuqtbkh
+L1: b1 -> tjxa
+L1: b3 -> uqtbkh
+L1: b2 -> b
+L2: a2 -> ndna
+L2: a4 -> judb
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | tjxam | ndnatjxa | - | judbtjxa | - 
+ b2 | bm | cndna | - | cjudb | - 
+ b3 | uqtbkhm | pvndnakuu | - | pvjudbkuu | lcgnquhsmuqtbkh 
+ b4 | - | bpw | iazz | kg | - 
+ b5 | - | tqpg | - | yjudbwkqqby | - 
+
+AGENT G21A1:
+
+I-LANGUAGE:
+S: (L1,b5) -> yL1wkqqby
+S: (a1,b4) -> wdaquhsm
+S: (a1,b1) -> ugpiwdtuvk
+S: (L1,L3) -> L1L3
+S: (a2,b4) -> vuceiqb
+S: (a2,b3) -> yxr
+S: (L1,b3) -> pvL1kuu
+L1: a3 -> ktfhvus
+L1: a1 -> jsisy
+L1: a5 -> lcgnquhsm
+L1: a4 -> cjud
+L1: a2 -> efne
+L3: b2 -> b
+L3: b1 -> dvscjah
+L3: b4 -> pmfx
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | ugpiwdtuvk | efnedvscjah | ktfhvusdvscjah | cjuddvscjah | lcgnquhsmdvscjah 
+ b2 | jsisyb | efneb | ktfhvusb | cjudb | lcgnquhsmb 
+ b3 | pvjsisykuu | yxr | pvktfhvuskuu | pvcjudkuu | pvlcgnquhsmkuu 
+ b4 | wdaquhsm | efnepmfx | ktfhvuspmfx | cjudpmfx | lcgnquhsmpmfx 
+ b5 | yjsisywkqqby | yefnewkqqby | yktfhvuswkqqby | ycjudwkqqby | ylcgnquhsmwkqqby 
+
+GENERATION 22:
+AGENT G22A0:
+
+I-LANGUAGE:
+S: (L1,b2) -> cL1
+S: (L1,b3) -> pvL1kuu
+S: (L1,b5) -> yL1wkqqby
+S: (a3,b4) -> iazz
+S: (a5,b2) -> lcgnquhsmb
+S: (L1,L5) -> L1L5
+S: (L1,b1) -> jL1tjxa
+L1: a4 -> udb
+L1: a3 -> xoscwj
+L1: a2 -> ndna
+L1: a5 -> vbaazo
+L1: a1 -> cxjcz
+L5: b1 -> tjxa
+L5: b4 -> m
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | cxjcztjxa | ndnatjxa | xoscwjtjxa | udbtjxa | vbaazotjxa 
+ b2 | ccxjcz | cndna | cxoscwj | cudb | cvbaazo 
+ b3 | pvcxjczkuu | pvndnakuu | pvxoscwjkuu | pvudbkuu | pvvbaazokuu 
+ b4 | cxjczm | ndnam | iazz | udbm | vbaazom 
+ b5 | ycxjczwkqqby | yndnawkqqby | yxoscwjwkqqby | yudbwkqqby | yvbaazowkqqby 
+
+AGENT G22A1:
+
+I-LANGUAGE:
+S: (a2,b4) -> bpw
+S: (L3,b5) -> yjL3wkqqby
+S: (L3,b3) -> pvjL3kuu
+S: (a1,L1) -> L1m
+S: (L3,b2) -> cL3
+S: (a2,b3) -> yxr
+S: (L3,L1) -> L3L1
+L1: b1 -> dvscjah
+L1: b2 -> b
+L1: b4 -> pmfx
+L3: a2 -> efne
+L3: a5 -> lcgnquhsm
+L3: a4 -> judb
+L3: a3 -> ktfhvus
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | dvscjahm | efnedvscjah | ktfhvusdvscjah | judbdvscjah | lcgnquhsmdvscjah 
+ b2 | bm | cefne | cktfhvus | cjudb | clcgnquhsm 
+ b3 | - | pvjefnekuu | pvjktfhvuskuu | pvjjudbkuu | pvjlcgnquhsmkuu 
+ b4 | pmfxm | bpw | ktfhvuspmfx | judbpmfx | lcgnquhsmpmfx 
+ b5 | - | yjefnewkqqby | yjktfhvuswkqqby | yjjudbwkqqby | yjlcgnquhsmwkqqby 
+
+GENERATION 23:
+AGENT G23A0:
+
+I-LANGUAGE:
+S: (L1,b5) -> yL1wkqqby
+S: (L1,b3) -> pvjL1kuu
+S: (L1,b2) -> cL1
+S: (L1,L3) -> L1L3
+S: (a1,L3) -> L3m
+L1: a5 -> lcgnquhsm
+L1: a2 -> efne
+L1: a3 -> ktfhvus
+L1: a4 -> udb
+L3: b4 -> pmfx
+L3: b1 -> dvscjah
+L3: b2 -> b
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | dvscjahm | efnedvscjah | ktfhvusdvscjah | udbdvscjah | lcgnquhsmdvscjah 
+ b2 | bm | cefne | cktfhvus | cudb | clcgnquhsm 
+ b3 | - | pvjefnekuu | pvjktfhvuskuu | pvjudbkuu | pvjlcgnquhsmkuu 
+ b4 | pmfxm | efnepmfx | ktfhvuspmfx | udbpmfx | lcgnquhsmpmfx 
+ b5 | - | yefnewkqqby | yktfhvuswkqqby | yudbwkqqby | ylcgnquhsmwkqqby 
+
+AGENT G23A1:
+
+I-LANGUAGE:
+S: (L1,b3) -> pvL1kuu
+S: (a5,b2) -> lcgnquhsmpmfx
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L4) -> L1L4
+S: (L1,b2) -> cL1
+L1: a2 -> ndna
+L1: a1 -> cxjcz
+L1: a3 -> xoscwj
+L1: a4 -> udb
+L1: a5 -> vbaazo
+L4: b1 -> dvscjah
+L4: b4 -> pmfx
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | cxjczdvscjah | ndnadvscjah | xoscwjdvscjah | udbdvscjah | vbaazodvscjah 
+ b2 | ccxjcz | cndna | cxoscwj | cudb | lcgnquhsmpmfx 
+ b3 | pvcxjczkuu | pvndnakuu | pvxoscwjkuu | pvudbkuu | pvvbaazokuu 
+ b4 | cxjczpmfx | ndnapmfx | xoscwjpmfx | udbpmfx | vbaazopmfx 
+ b5 | ycxjczwkqqby | yndnawkqqby | yxoscwjwkqqby | yudbwkqqby | yvbaazowkqqby 
+
+GENERATION 24:
+AGENT G24A0:
+
+I-LANGUAGE:
+S: (L1,b2) -> cL1
+S: (L1,L2) -> L1L2
+S: (L1,b3) -> pvjL1kuu
+S: (L1,b5) -> yL1wkqqby
+L1: a2 -> efne
+L1: a4 -> udb
+L1: a1 -> cxjcz
+L1: a3 -> ktfhvus
+L1: a5 -> lcgnquhsm
+L2: b4 -> pmfx
+L2: b1 -> dvscjah
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | cxjczdvscjah | efnedvscjah | ktfhvusdvscjah | udbdvscjah | lcgnquhsmdvscjah 
+ b2 | ccxjcz | cefne | cktfhvus | cudb | clcgnquhsm 
+ b3 | pvjcxjczkuu | pvjefnekuu | pvjktfhvuskuu | pvjudbkuu | pvjlcgnquhsmkuu 
+ b4 | cxjczpmfx | efnepmfx | ktfhvuspmfx | udbpmfx | lcgnquhsmpmfx 
+ b5 | ycxjczwkqqby | yefnewkqqby | yktfhvuswkqqby | yudbwkqqby | ylcgnquhsmwkqqby 
+
+AGENT G24A1:
+
+I-LANGUAGE:
+S: (L1,b3) -> pvL1kuu
+S: (L1,b2) -> cL1
+S: (L1,b5) -> yL1wkqqby
+S: (L1,L4) -> L1L4
+L1: a5 -> lcgnquhsm
+L1: a1 -> cxjcz
+L1: a2 -> efne
+L1: a3 -> xoscwj
+L1: a4 -> judb
+L4: b1 -> dvscjah
+L4: b4 -> pmfx
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | cxjczdvscjah | efnedvscjah | xoscwjdvscjah | judbdvscjah | lcgnquhsmdvscjah 
+ b2 | ccxjcz | cefne | cxoscwj | cjudb | clcgnquhsm 
+ b3 | pvcxjczkuu | pvefnekuu | pvxoscwjkuu | pvjudbkuu | pvlcgnquhsmkuu 
+ b4 | cxjczpmfx | efnepmfx | xoscwjpmfx | judbpmfx | lcgnquhsmpmfx 
+ b5 | ycxjczwkqqby | yefnewkqqby | yxoscwjwkqqby | yjudbwkqqby | ylcgnquhsmwkqqby 
+
+GENERATION 25:
+AGENT G25A0:
+
+I-LANGUAGE:
+S: (L1,L3) -> L1L3
+S: (L1,b2) -> cL1
+S: (L1,b5) -> yL1wkqqby
+S: (L1,b3) -> pvjL1kuu
+L1: a3 -> xoscwj
+L1: a5 -> lcgnquhsm
+L1: a4 -> judb
+L1: a1 -> cxjcz
+L1: a2 -> efne
+L3: b1 -> dvscjah
+L3: b4 -> pmfx
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | cxjczdvscjah | efnedvscjah | xoscwjdvscjah | judbdvscjah | lcgnquhsmdvscjah 
+ b2 | ccxjcz | cefne | cxoscwj | cjudb | clcgnquhsm 
+ b3 | pvjcxjczkuu | pvjefnekuu | pvjxoscwjkuu | pvjjudbkuu | pvjlcgnquhsmkuu 
+ b4 | cxjczpmfx | efnepmfx | xoscwjpmfx | judbpmfx | lcgnquhsmpmfx 
+ b5 | ycxjczwkqqby | yefnewkqqby | yxoscwjwkqqby | yjudbwkqqby | ylcgnquhsmwkqqby 
+
+AGENT G25A1:
+
+I-LANGUAGE:
+S: (L1,L2) -> L1L2
+S: (L1,b2) -> cL1
+S: (L1,b5) -> yL1wkqqby
+S: (L1,b3) -> pvL1kuu
+S: (L1,b4) -> jL1pmfx
+L1: a4 -> udb
+L1: a3 -> xoscwj
+L1: a2 -> efne
+L1: a1 -> cxjcz
+L1: a5 -> lcgnquhsm
+L2: b4 -> pmfx
+L2: b1 -> dvscjah
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | cxjczdvscjah | efnedvscjah | xoscwjdvscjah | udbdvscjah | lcgnquhsmdvscjah 
+ b2 | ccxjcz | cefne | cxoscwj | cudb | clcgnquhsm 
+ b3 | pvcxjczkuu | pvefnekuu | pvxoscwjkuu | pvudbkuu | pvlcgnquhsmkuu 
+ b4 | cxjczpmfx | efnepmfx | xoscwjpmfx | udbpmfx | lcgnquhsmpmfx 
+ b5 | ycxjczwkqqby | yefnewkqqby | yxoscwjwkqqby | yudbwkqqby | ylcgnquhsmwkqqby 
+
+GENERATION 26:
+AGENT G26A0:
+
+I-LANGUAGE:
+S: (L1,b5) -> yL1wkqqby
+S: (L1,b3) -> pvjL1kuu
+S: (L1,b2) -> cL1
+S: (L1,L3) -> L1L3
+S: (L1,b4) -> jL1pmfx
+L1: a1 -> cxjcz
+L1: a5 -> lcgnquhsm
+L1: a3 -> xoscwj
+L1: a4 -> udb
+L1: a2 -> efne
+L3: b4 -> pmfx
+L3: b1 -> dvscjah
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | cxjczdvscjah | efnedvscjah | xoscwjdvscjah | udbdvscjah | lcgnquhsmdvscjah 
+ b2 | ccxjcz | cefne | cxoscwj | cudb | clcgnquhsm 
+ b3 | pvjcxjczkuu | pvjefnekuu | pvjxoscwjkuu | pvjudbkuu | pvjlcgnquhsmkuu 
+ b4 | cxjczpmfx | efnepmfx | xoscwjpmfx | udbpmfx | lcgnquhsmpmfx 
+ b5 | ycxjczwkqqby | yefnewkqqby | yxoscwjwkqqby | yudbwkqqby | ylcgnquhsmwkqqby 
+
+AGENT G26A1:
+
+I-LANGUAGE:
+S: (L1,b2) -> cL1
+S: (L1,b5) -> yjL1wkqqby
+S: (L1,b4) -> jL1pmfx
+S: (L1,b1) -> L1dvscjah
+S: (L1,b3) -> pvL1kuu
+L1: a2 -> efne
+L1: a4 -> udb
+L1: a5 -> lcgnquhsm
+L1: a1 -> cxjcz
+L1: a3 -> xoscwj
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | cxjczdvscjah | efnedvscjah | xoscwjdvscjah | udbdvscjah | lcgnquhsmdvscjah 
+ b2 | ccxjcz | cefne | cxoscwj | cudb | clcgnquhsm 
+ b3 | pvcxjczkuu | pvefnekuu | pvxoscwjkuu | pvudbkuu | pvlcgnquhsmkuu 
+ b4 | jcxjczpmfx | jefnepmfx | jxoscwjpmfx | judbpmfx | jlcgnquhsmpmfx 
+ b5 | yjcxjczwkqqby | yjefnewkqqby | yjxoscwjwkqqby | yjudbwkqqby | yjlcgnquhsmwkqqby 
+
+GENERATION 27:
+AGENT G27A0:
+
+I-LANGUAGE:
+S: (L1,b5) -> yL1wkqqby
+S: (L1,b2) -> cL1
+S: (L1,b3) -> pvL1kuu
+S: (L1,L3) -> L1L3
+L1: a3 -> xoscwj
+L1: a5 -> jlcgnquhsm
+L1: a1 -> cxjcz
+L1: a4 -> udb
+L1: a2 -> efne
+L3: b1 -> dvscjah
+L3: b4 -> pmfx
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | cxjczdvscjah | efnedvscjah | xoscwjdvscjah | udbdvscjah | jlcgnquhsmdvscjah 
+ b2 | ccxjcz | cefne | cxoscwj | cudb | cjlcgnquhsm 
+ b3 | pvcxjczkuu | pvefnekuu | pvxoscwjkuu | pvudbkuu | pvjlcgnquhsmkuu 
+ b4 | cxjczpmfx | efnepmfx | xoscwjpmfx | udbpmfx | jlcgnquhsmpmfx 
+ b5 | ycxjczwkqqby | yefnewkqqby | yxoscwjwkqqby | yudbwkqqby | yjlcgnquhsmwkqqby 
+
+AGENT G27A1:
+
+I-LANGUAGE:
+S: (L1,b5) -> yjL1wkqqby
+S: (L1,b2) -> cL1
+S: (L1,L3) -> L1L3
+S: (L1,b3) -> pvjL1kuu
+S: (L1,b4) -> jL1pmfx
+L1: a5 -> lcgnquhsm
+L1: a4 -> udb
+L1: a1 -> cxjcz
+L1: a2 -> efne
+L1: a3 -> xoscwj
+L3: b1 -> dvscjah
+L3: b4 -> pmfx
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | cxjczdvscjah | efnedvscjah | xoscwjdvscjah | udbdvscjah | lcgnquhsmdvscjah 
+ b2 | ccxjcz | cefne | cxoscwj | cudb | clcgnquhsm 
+ b3 | pvjcxjczkuu | pvjefnekuu | pvjxoscwjkuu | pvjudbkuu | pvjlcgnquhsmkuu 
+ b4 | cxjczpmfx | efnepmfx | xoscwjpmfx | udbpmfx | lcgnquhsmpmfx 
+ b5 | yjcxjczwkqqby | yjefnewkqqby | yjxoscwjwkqqby | yjudbwkqqby | yjlcgnquhsmwkqqby 
+
+GENERATION 28:
+AGENT G28A0:
+
+I-LANGUAGE:
+S: (L1,b5) -> yjL1wkqqby
+S: (L1,b3) -> pvL1kuu
+S: (L1,b2) -> cL1
+S: (L1,L5) -> L1L5
+L1: a1 -> cxjcz
+L1: a4 -> udb
+L1: a5 -> lcgnquhsm
+L1: a3 -> xoscwj
+L1: a2 -> efne
+L5: b1 -> dvscjah
+L5: b4 -> pmfx
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | cxjczdvscjah | efnedvscjah | xoscwjdvscjah | udbdvscjah | lcgnquhsmdvscjah 
+ b2 | ccxjcz | cefne | cxoscwj | cudb | clcgnquhsm 
+ b3 | pvcxjczkuu | pvefnekuu | pvxoscwjkuu | pvudbkuu | pvlcgnquhsmkuu 
+ b4 | cxjczpmfx | efnepmfx | xoscwjpmfx | udbpmfx | lcgnquhsmpmfx 
+ b5 | yjcxjczwkqqby | yjefnewkqqby | yjxoscwjwkqqby | yjudbwkqqby | yjlcgnquhsmwkqqby 
+
+AGENT G28A1:
+
+I-LANGUAGE:
+S: (L1,b5) -> yjL1wkqqby
+S: (L1,b3) -> pvL1kuu
+S: (L1,b2) -> cL1
+S: (L1,L5) -> L1L5
+S: (a3,b4) -> xoscwjpmfx
+L1: a1 -> cxjcz
+L1: a4 -> udb
+L1: a2 -> efne
+L1: a5 -> lcgnquhsm
+L1: a3 -> jxoscwj
+L5: b4 -> pmfx
+L5: b1 -> dvscjah
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | cxjczdvscjah | efnedvscjah | jxoscwjdvscjah | udbdvscjah | lcgnquhsmdvscjah 
+ b2 | ccxjcz | cefne | cjxoscwj | cudb | clcgnquhsm 
+ b3 | pvcxjczkuu | pvefnekuu | pvjxoscwjkuu | pvudbkuu | pvlcgnquhsmkuu 
+ b4 | cxjczpmfx | efnepmfx | jxoscwjpmfx | udbpmfx | lcgnquhsmpmfx 
+ b5 | yjcxjczwkqqby | yjefnewkqqby | yjjxoscwjwkqqby | yjudbwkqqby | yjlcgnquhsmwkqqby 
+
+GENERATION 29:
+AGENT G29A0:
+
+I-LANGUAGE:
+S: (L1,b3) -> pvL1kuu
+S: (L1,b5) -> yjL1wkqqby
+S: (L1,b2) -> cjL1
+S: (L1,L4) -> L1L4
+S: (a3,b2) -> cxoscwj
+S: (a3,b1) -> xoscwjdvscjah
+L1: a2 -> efne
+L1: a1 -> cxjcz
+L1: a4 -> udb
+L1: a5 -> lcgnquhsm
+L4: b1 -> dvscjah
+L4: b4 -> pmfx
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | cxjczdvscjah | efnedvscjah | xoscwjdvscjah | udbdvscjah | lcgnquhsmdvscjah 
+ b2 | cjcxjcz | cjefne | cxoscwj | cjudb | cjlcgnquhsm 
+ b3 | pvcxjczkuu | pvefnekuu | - | pvudbkuu | pvlcgnquhsmkuu 
+ b4 | cxjczpmfx | efnepmfx | - | udbpmfx | lcgnquhsmpmfx 
+ b5 | yjcxjczwkqqby | yjefnewkqqby | - | yjudbwkqqby | yjlcgnquhsmwkqqby 
+
+AGENT G29A1:
+
+I-LANGUAGE:
+S: (L1,b3) -> pvL1kuu
+S: (L1,b4) -> L1pmfx
+S: (L1,b1) -> jL1dvscjah
+S: (L1,b5) -> yjL1wkqqby
+S: (L1,b2) -> cL1
+L1: a3 -> xoscwj
+L1: a1 -> cxjcz
+L1: a2 -> efne
+L1: a4 -> udb
+L1: a5 -> lcgnquhsm
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | jcxjczdvscjah | jefnedvscjah | jxoscwjdvscjah | judbdvscjah | jlcgnquhsmdvscjah 
+ b2 | ccxjcz | cefne | cxoscwj | cudb | clcgnquhsm 
+ b3 | pvcxjczkuu | pvefnekuu | pvxoscwjkuu | pvudbkuu | pvlcgnquhsmkuu 
+ b4 | cxjczpmfx | efnepmfx | xoscwjpmfx | udbpmfx | lcgnquhsmpmfx 
+ b5 | yjcxjczwkqqby | yjefnewkqqby | yjxoscwjwkqqby | yjudbwkqqby | yjlcgnquhsmwkqqby 
+
+GENERATION 30:
+AGENT G30A0:
+
+I-LANGUAGE:
+S: (L1,b5) -> yjL1wkqqby
+S: (L1,b1) -> jL1dvscjah
+S: (L1,b3) -> pvL1kuu
+S: (L1,L3) -> L1L3
+S: (L1,b2) -> cL1
+L1: a3 -> xoscwj
+L1: a1 -> cxjcz
+L1: a2 -> efne
+L1: a4 -> judb
+L1: a5 -> lcgnquhsm
+L3: b1 -> dvscjah
+L3: b4 -> pmfx
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | jcxjczdvscjah | jefnedvscjah | jxoscwjdvscjah | jjudbdvscjah | jlcgnquhsmdvscjah 
+ b2 | ccxjcz | cefne | cxoscwj | cjudb | clcgnquhsm 
+ b3 | pvcxjczkuu | pvefnekuu | pvxoscwjkuu | pvjudbkuu | pvlcgnquhsmkuu 
+ b4 | cxjczpmfx | efnepmfx | xoscwjpmfx | judbpmfx | lcgnquhsmpmfx 
+ b5 | yjcxjczwkqqby | yjefnewkqqby | yjxoscwjwkqqby | yjjudbwkqqby | yjlcgnquhsmwkqqby 
+
+AGENT G30A1:
+
+I-LANGUAGE:
+S: (L1,b2) -> cjL1
+S: (L1,b5) -> yjL1wkqqby
+S: (L1,b1) -> jL1dvscjah
+S: (L1,b3) -> pvL1kuu
+S: (L1,L2) -> L1L2
+L1: a5 -> lcgnquhsm
+L1: a1 -> cxjcz
+L1: a3 -> xoscwj
+L1: a2 -> efne
+L1: a4 -> udb
+L2: b1 -> dvscjah
+L2: b4 -> pmfx
+
+E-LANGUAGE:
+ xx | a1 | a2 | a3 | a4 | a5 
+ b1 | jcxjczdvscjah | jefnedvscjah | jxoscwjdvscjah | judbdvscjah | jlcgnquhsmdvscjah 
+ b2 | cjcxjcz | cjefne | cjxoscwj | cjudb | cjlcgnquhsm 
+ b3 | pvcxjczkuu | pvefnekuu | pvxoscwjkuu | pvudbkuu | pvlcgnquhsmkuu 
+ b4 | cxjczpmfx | efnepmfx | xoscwjpmfx | udbpmfx | lcgnquhsmpmfx 
+ b5 | yjcxjczwkqqby | yjefnewkqqby | yjxoscwjwkqqby | yjudbwkqqby | yjlcgnquhsmwkqqby 
+

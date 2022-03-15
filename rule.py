@@ -31,6 +31,9 @@ class Rule:
             if len(self.output) <= 1:
                 valid = False
 
+            # if self.meaning[0] == self.meaning[1]:
+            #     valid = False
+
             meaning_labels = []
             for i in range(2):
                 if self.meaning[i] not in comp_a + comp_b:
@@ -46,6 +49,26 @@ class Rule:
 
         if not valid:
             raise Exception("Invalid rule: " + str(self))
+
+    def get_domain(self, sub_rules, meaning_comps):
+        a_comp = []
+        b_comp = []
+
+        if self.meaning[0] in meaning_comps:
+            a_comp = [self.meaning[0]]
+        else:
+            for rule in sub_rules:
+                if rule.label == self.meaning[0]:
+                    a_comp.append(rule.meaning)
+
+        if self.meaning[1] in meaning_comps:
+            b_comp = [self.meaning[1]]
+        else:
+            for rule in sub_rules:
+                if rule.label == self.meaning[1]:
+                    b_comp.append(rule.meaning)
+
+        return [(a,b) for a in a_comp for b in b_comp]
 
     def is_substring(self, rule):
         for i in range(len(rule.output)):

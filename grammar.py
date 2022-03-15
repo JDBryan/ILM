@@ -3,14 +3,16 @@ import random
 
 
 class Grammar:
-    def __init__(self, a_comp, b_comp, alphabet, verbose):
+    def __init__(self, a_comp, b_comp, alphabet, name):
         self.a_comp = a_comp
         self.b_comp = b_comp
+        self.name = name
         self.alphabet = [x for x in alphabet]
         self.meanings = [(x, y) for x in self.a_comp for y in self.b_comp]
         self.a_count = 1
         self.categories = {"S": []}
-        self.verbose = verbose
+        self.log = open("logs/" + name + ".txt", "w+")
+        self.log.write("AGENT " + name + ":\n")
 
     def __repr__(self):
         output = ""
@@ -33,28 +35,62 @@ class Grammar:
                     sub_rule = rule
         return sub_rule
 
+    def get_all_sub_rules(self):
+        rules = []
+        for label in self.categories.keys():
+            if label != "S":
+                rules += self.get_category(label)
+        return rules
+
+    def measure_compositionality(self):
+        return len(self.get_all_rules())
+
     def get_category(self, label):
         if label in self.categories.keys():
             return self.categories[label]
         else:
             return []
 
+    def validate_domain(self):
+        domain = []
+        for rule in self.get_category("S"):
+            new_domain = rule.get_domain(self.get_all_sub_rules(), self.a_comp + self.b_comp)
+            for meaning in new_domain:
+                if meaning in domain:
+                    raise Exception("Multiple utterances for meaning: " + meaning)
+
     def validate(self):
         for rule in self.get_all_rules():
             rule.validate(self.alphabet, self.a_comp, self.b_comp)
 
+    def learn(self, teacher):
+        meaning = self.meanings[random.randint(0, len(self.meanings) - 1)]
+        utterance = teacher.parse(meaning)
+        if utterance is None:
+            utterance = teacher.invent(meaning)
+        utterance_string = ""
+        for char in utterance:
+            utterance_string += char
+        self.log.write("Learning utterance " + utterance_string + " for meaning " + str(meaning) + " from teacher " + teacher.name + "\n")
+        self.incorporate(meaning, utterance)
+
     def add_rule(self, rule):
         rule.validate(self.alphabet, self.a_comp, self.b_comp)
+        self.log.write("Adding rule " + str(rule) + "\n")
         if rule.label in self.categories.keys():
             self.categories[rule.label] += [rule]
         else:
             self.categories[rule.label] = [rule]
 
     def remove_rule(self, rule):
+        self.log.write("Removing rule " + str(rule) + "\n")
         if rule.label in self.categories.keys():
             self.categories[rule.label].remove(rule)
 
     def relabel(self, old_label, new_label):
+
+        self.log.write("Relabelling " + old_label + " to " + new_label + "\n")
+
         if old_label == "S":
             return
 
@@ -81,13 +117,13 @@ class Grammar:
         self.a_count += 1
         return label
 
-    def print_word_table(self):
-        top_row = " xx "
+    def get_word_table(self):
+        output = " xx "
         for a in self.a_comp:
-            top_row += "| " + a + " "
-        print(top_row)
+            output += "| " + a + " "
+        output += "\n"
         for b in self.b_comp:
-            row = " " + b + " "
+            output += " " + b + " "
             for a in self.a_comp:
                 meaning = (a, b)
                 result = self.parse(meaning)
@@ -97,8 +133,9 @@ class Grammar:
                     new_result = ""
                     for item in result:
                         new_result += item
-                row += "| " + new_result + " "
-            print(row)
+                output += "| " + new_result + " "
+            output += "\n"
+        return output
 
     def parse(self, meaning):
         start_rule = self.find_start_rule(meaning)
@@ -210,7 +247,7 @@ class Grammar:
                 for j in range(len(all_rules)):
                     if i == j:
                         continue
-                    elif all_rules[i] == all_rules[j]:
+                    elif all_rules[i].meaning == all_rules[j].meaning and all_rules[i].label == all_rules[j].label:
                         self.remove_rule(all_rules[j])
                         changed = True
                         break
@@ -230,39 +267,60 @@ class Grammar:
         return new_list
 
     def generalise(self):
-        if self.verbose:
-            print("Starting generalisation")
         changed = True
         while changed:
             changed = False
             all_rules = self.get_all_rules()
             for i in range(len(all_rules)):
-                if changed:
-                    break
-                else:
+                if not changed:
                     rule_a = all_rules[i]
-                for j in range(len(all_rules)):
-                    if i == j or changed:
-                        break
-                    else:
+                    for j in range(len(all_rules)):
                         rule_b = all_rules[j]
-                        changed = self.generalise_pair(rule_a, rule_b)
-        if self.verbose:
-            print("Finished generalisation")
+                        if rule_a == rule_b:
+                            continue
+                        elif changed:
+                            break
+                        else:
+                            changed = self.generalise_pair(rule_a, rule_b)
+                else:
+                    break
 
     def generalise_pair(self, rule_a, rule_b):
-        if self.verbose:
-            print("Generalising pair: ")
-            print(rule_a)
-            print(rule_b)
+        old_grammar = str(self)
 
         changed = False
-        substring_marker = None
 
-        if rule_b.label == "S" and rule_a.label != "S":
-            if rule_a.meaning == rule_b.meaning[0] or rule_a.meaning == rule_b.meaning[0]:
-                substring_marker = rule_a.is_substring(rule_b)
+        # Attempt relabel
+        if not changed:
+            changed = self.attempt_relabel(rule_a, rule_b)
+            if changed:
+                self.remove_duplicates()
+                self.log.write("Relabelling occurred on rules:\n" + str(rule_a) + "\n" + str(rule_b) + "\n")
+                self.log.write("Old Grammar:\n" + old_grammar + "\nNew Grammar:\n" + str(self))
+                self.validate()
 
+        # Attempt chunk
+        if not changed:
+            changed = self.attempt_chunk(rule_a, rule_b)
+            if changed:
+
+                self.remove_duplicates()
+                self.log.write("Chunking occurred on rules:\n" + str(rule_a) + "\n" + str(rule_b) + "\n")
+                self.log.write("Old Grammar:\n" + old_grammar + "\nNew Grammar:\n" + str(self))
+                self.validate()
+
+        # Attempt substring
+        if not changed:
+            changed = self.attempt_substring(rule_a, rule_b)
+            if changed:
+                self.remove_duplicates()
+                self.log.write("Substring occurred on rules:\n" + str(rule_a) + "\n" + str(rule_b) + "\n")
+                self.log.write("Old Grammar:\n" + old_grammar + "\nNew Grammar:\n" + str(self))
+                self.validate()
+
+        return changed
+
+    def attempt_chunk(self, rule_a, rule_b):
         if rule_a.label == "S" and rule_b.label == "S":
             chunk_a, chunk_b, remaining = self.chunk(rule_a.output, rule_b.output)
         else:
@@ -270,36 +328,6 @@ class Grammar:
             chunk_b = None
             remaining = None
 
-        # Attempt relabel
-        if not changed:
-            changed = self.do_relabel(rule_a, rule_b)
-            if changed:
-                if self.verbose:
-                    print("Relabelling occurred")
-                self.remove_duplicates()
-                self.validate()
-
-        # Attempt chunk
-        if not changed:
-            changed = self.do_chunk(rule_a, rule_b, chunk_a, chunk_b, remaining)
-            if changed:
-                if self.verbose:
-                    print("Chunking occurred")
-                self.remove_duplicates()
-                self.validate()
-
-        # Attempt substring
-        if not changed:
-            changed = self.do_substring(rule_a, rule_b, substring_marker)
-            if changed:
-                if self.verbose:
-                    print("Substring occurred")
-                self.remove_duplicates()
-                self.validate()
-
-        return changed
-
-    def do_chunk(self, rule_a, rule_b, chunk_a, chunk_b, remaining):
         comparison = []
         meaning_components = self.a_comp + self.b_comp
 
@@ -377,7 +405,13 @@ class Grammar:
 
         return False
 
-    def do_substring(self, rule_a, rule_b, substring_marker):
+    def attempt_substring(self, rule_a, rule_b):
+        substring_marker = None
+
+        if rule_b.label == "S" and rule_a.label != "S":
+            if rule_a.meaning == rule_b.meaning[0] or rule_a.meaning == rule_b.meaning[0]:
+                substring_marker = rule_a.is_substring(rule_b)
+
         if substring_marker is None:
             return False
         if rule_a.meaning != rule_b.meaning[0] and rule_a.meaning != rule_b.meaning[1]:
@@ -394,41 +428,52 @@ class Grammar:
             self.remove_rule(rule_b)
         return True
 
-    def do_relabel(self, rule_a, rule_b):
-        alpha = [i for i in self.alphabet]
-        if rule_a.output == rule_b.output and rule_a.meaning == rule_b.meaning:
+    def attempt_relabel(self, rule_a, rule_b):
+        if rule_a.label != "S" and rule_a.meaning == rule_b.meaning:
             self.relabel(rule_b.label, rule_a.label)
             return True
 
         if rule_a.label == "S" and rule_b.label == "S":
-            if len(rule_a.output) == len(rule_b.output) and rule_a.output != rule_b.output:
-                old_label = ""
-                new_label = ""
-                for i in range(len(rule_a.output)):
-                    a_char = rule_a.output[i]
-                    b_char = rule_b.output[i]
-                    if a_char != b_char and a_char not in self.alphabet and b_char not in self.alphabet:
-                        old_label = b_char
-                        new_label = a_char
-                    elif a_char != b_char:
+
+            relabel = {}
+            for i in range(2):
+                if rule_a.meaning[i] in self.alphabet and rule_b.meaning[i] in self.alphabet:
+                    if rule_a.meaning[i] != rule_b.meaning[i]:
                         return False
-                if old_label != "":
+                elif rule_a.meaning[i] not in self.alphabet and rule_b.meaning[i] not in self.alphabet:
+                    relabel[rule_b.meaning[i]] = rule_a.meaning[i]
+                else:
+                    return False
+
+            relabelled_b = []
+            for char in rule_b.output:
+                if char not in relabel.keys():
+                    relabelled_b.append(char)
+                else:
+                    relabelled_b.append(relabel[char])
+
+            if relabelled_b == rule_a.output:
+                for old_label in relabel.keys():
+                    new_label = relabel[old_label]
                     self.relabel(old_label, new_label)
+                return True
 
         return False
 
     def incorporate(self, meaning, string):
         start_rule = self.find_start_rule(meaning)
         if start_rule is None:
-            if self.verbose:
-                print_string = ""
-                for item in string:
-                    print_string += item
-                print("Incorporating string '" + print_string + "' for meaning " + str(meaning))
+            print_string = ""
+            for item in string:
+                print_string += item
+            self.log.write("Incorporating string '" + print_string + "' for meaning " + str(meaning) + "\n")
             self.add_rule(Rule("S", meaning, string))
+            self.log.write("\n")
+            self.log.write("Beginning generalisation\n")
             self.generalise()
-        elif self.verbose:
-            print("Already have utterance for meaning" + str(meaning))
+            self.log.write("Finished generalisation\n\n")
+        else:
+            self.log.write("Already have utterance for meaning" + str(meaning) + "\n\n")
 
     def find_start_rule(self, meaning):
         meaning_components = self.a_comp + self.b_comp
