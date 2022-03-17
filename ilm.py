@@ -1,11 +1,10 @@
 import random
 import os
-import shutil
-from grammar import Grammar
+from agent import Agent
 
 ALPHABET = "abcdefghijklmnopqrstuvwxyz"
-A_COMP = ["a1", "a2", "a3", "a4", "a5"]
-B_COMP = ["b1", "b2", "b3", "b4", "b5"]
+A_COMP = ["a" + str(i) for i in range(1, 6)]
+B_COMP = ["b" + str(i) for i in range(1, 6)]
 MEANINGS = [(x, y) for x in A_COMP for y in B_COMP]
 
 
@@ -20,35 +19,84 @@ class Ilm:
         self.alphabet = alphabet
         self.exposure = exposure
         self.gen = 0
-        self.population = [Grammar(a_comp, b_comp, alphabet, "G" + str(self.gen) + "A" + str(i)) for i in range(pop_size)]
+        self.populations = {
+            "BASE": [Agent(a_comp, b_comp, alphabet, "Gen:" + str(self.gen) + "_Pop:BASE" + "_Agent:" + str(i)) for i in range(pop_size)]}
         self.log = open("logs/ilm.txt", "w+")
         self.log.write(str(self))
 
     def __repr__(self):
         output = "GENERATION " + str(self.gen) + ":\n"
-        for agent in self.population:
-            output += "AGENT " + str(agent.name) + ":\n\n"
-            output += "I-LANGUAGE:\n"
-            output += str(agent) + "\n"
-            output += "E-LANGUAGE:\n"
-            output += agent.get_word_table() + "\n"
+        for pop_name in self.populations.keys():
+            output += "POPULATION " + pop_name + ":\n"
+            for agent in self.populations[pop_name]:
+                output += "AGENT " + str(agent.name) + ":\n\n"
+                output += "I-LANGUAGE:\n"
+                output += str(agent) + "\n"
+                output += "E-LANGUAGE:\n"
+                output += agent.get_word_table() + "\n"
         return output
 
     def run_single_generation(self):
         self.gen += 1
-        new_population = [Grammar(self.a_comp, self.b_comp, self.alphabet, "G" + str(self.gen) + "A" + str(i)) for i in range(self.pop_size)]
+        self.log.write("Running generation " + str(self.gen) + "\n")
+        for pop_name in self.populations.keys():
+            self.run_single_generation_for_population(pop_name)
+
+    def run_single_generation_for_population(self, pop_name):
+        new_population = [Agent(self.a_comp, self.b_comp, self.alphabet, "Gen:" + str(self.gen) + "_Pop:" + pop_name + "_Agent:" + str(i)) for i in
+                          range(self.pop_size)]
         for learner in new_population:
             for i in range(self.exposure):
-                teacher = self.population[random.randint(0, self.pop_size - 1)]
+                teacher = self.populations[pop_name][random.randint(0, len(self.populations[pop_name]) - 1)]
                 learner.learn(teacher)
-        self.population = new_population
-        self.log.write(str(self))
+        self.populations[pop_name] = new_population
 
     def run_generations(self, generations):
         for i in range(generations):
             self.run_single_generation()
 
+    def split_population(self, pop_name):
+        self.log.write("Splitting population " + pop_name + "\n")
+        if pop_name in self.populations:
+            pop = self.populations.pop(pop_name)
+            a_split = pop[:int(len(pop)/2)]
+            b_split = pop[int(len(pop)/2):]
+            self.populations[pop_name + "-A"] = a_split
+            self.populations[pop_name + "-B"] = b_split
+
+    def merge_populations(self, pop_names, new_name):
+        print("Merging populations " + str(pop_names) + " into population " + new_name)
+        self.populations[new_name] = []
+        for pop_name in pop_names:
+            self.populations[new_name] += self.populations.pop(pop_name)
+
+    def measure_population_conformity(self, pop_name):
+        conformities = []
+        for meaning in self.meanings:
+            utterance_dict = {}
+            total = 0
+            for agent in self.populations[pop_name]:
+                char_list = agent.parse(meaning)
+
+                if char_list is not None:
+                    utterance = ""
+                    for char in char_list:
+                        utterance += char
+                    total += 1
+                    if utterance in utterance_dict.keys():
+                        utterance_dict[utterance] += 1
+                    else:
+                        utterance_dict[utterance] = 1
+                if len(utterance_dict) == 0:
+                    conformities.append(1)
+                else:
+                    conformities.append(max(utterance_dict.values())/total)
+        return sum(conformities) / len(conformities)
+
 
 ilm = Ilm(2, 50, A_COMP, B_COMP, ALPHABET)
-ilm.run_generations(30)
-
+ilm.run_generations(10)
+ilm.split_population("BASE")
+ilm.run_generations(10)
+ilm.merge_populations(["BASE-A", "BASE-B"], "MERGED POPULATION")
+ilm.run_generations(10)
