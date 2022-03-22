@@ -349,13 +349,13 @@ class Grammar:
                 self.validate()
 
         # Attempt substring
-        if not changed:
-            changed = self.attempt_substring(rule_a, rule_b)
-            if changed:
-                self.remove_duplicates()
-                self.log.write("Substring occurred on rules:\n" + str(rule_a) + "\n" + str(rule_b) + "\n")
-                self.log.write("Old Grammar:\n" + old_grammar + "\nNew Grammar:\n" + str(self))
-                self.validate()
+        # if not changed:
+        #     changed = self.attempt_substring(rule_a, rule_b)
+        #     if changed:
+        #         self.remove_duplicates()
+        #         self.log.write("Substring occurred on rules:\n" + str(rule_a) + "\n" + str(rule_b) + "\n")
+        #         self.log.write("Old Grammar:\n" + old_grammar + "\nNew Grammar:\n" + str(self))
+        #         self.validate()
 
         return changed
 
@@ -396,26 +396,26 @@ class Grammar:
             else:
                 comparison += ["-"]
 
-        # a_comp_single_chunkable = comparison[0] == "c=v" and (comparison[1] == "c=c" or comparison[1] == "v=v")
-        # b_comp_single_chunkable = comparison[1] == "c=v" and (comparison[0] == "c=c" or comparison[0] == "v=v")
-        # chunk_a_is_label = len(chunk_a) == 1 and chunk_a_contains_label
-        # chunk_b_is_label = len(chunk_b) == 1 and chunk_b_contains_label
-        #
-        # if (a_comp_single_chunkable or b_comp_single_chunkable) and (chunk_a_is_label or chunk_b_is_label):
-        #     if chunk_a_is_label:
-        #         if a_comp_single_chunkable:
-        #             self.add_rule(Rule(chunk_a[0], rule_b.meaning[0], chunk_b))
-        #         else:
-        #             self.add_rule(Rule(chunk_a[0], rule_b.meaning[1], chunk_b))
-        #         self.remove_rule(rule_b)
-        #     else:
-        #         if a_comp_single_chunkable:
-        #             self.add_rule(Rule(chunk_b[0], rule_a.meaning[0], chunk_a))
-        #         else:
-        #             self.add_rule(Rule(chunk_b[0], rule_a.meaning[1], chunk_a))
-        #         self.remove_rule(rule_a)
-        #
-        #     return True
+        a_comp_single_chunkable = comparison[0] == "c=v" and (comparison[1] == "c=c" or comparison[1] == "v=v")
+        b_comp_single_chunkable = comparison[1] == "c=v" and (comparison[0] == "c=c" or comparison[0] == "v=v")
+        chunk_a_is_label = len(chunk_a) == 1 and chunk_a_contains_label
+        chunk_b_is_label = len(chunk_b) == 1 and chunk_b_contains_label
+
+        if (a_comp_single_chunkable or b_comp_single_chunkable) and (chunk_a_is_label or chunk_b_is_label):
+            if chunk_a_is_label:
+                if a_comp_single_chunkable:
+                    self.add_rule(Rule(chunk_a[0], rule_b.meaning[0], chunk_b))
+                else:
+                    self.add_rule(Rule(chunk_a[0], rule_b.meaning[1], chunk_b))
+                self.remove_rule(rule_b)
+            else:
+                if a_comp_single_chunkable:
+                    self.add_rule(Rule(chunk_b[0], rule_a.meaning[0], chunk_a))
+                else:
+                    self.add_rule(Rule(chunk_b[0], rule_a.meaning[1], chunk_a))
+                self.remove_rule(rule_a)
+
+            return True
 
         for item in (chunk_a + chunk_b):
             if item not in self.alphabet:

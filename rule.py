@@ -71,6 +71,8 @@ class Rule:
         return [(a,b) for a in a_comp for b in b_comp]
 
     def is_substring(self, rule):
+        if len(self.output) >= len(rule.output):
+            return None
         for i in range(len(rule.output)):
             for j in range(len(self.output)):
                 if i+j > len(rule.output) - 1 or rule.output[i+j] != self.output[j]:
