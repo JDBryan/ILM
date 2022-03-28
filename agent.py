@@ -3,10 +3,11 @@ import random
 
 
 class Agent:
-    def __init__(self, a_comp, b_comp, alphabet, name):
+    def __init__(self, l_parameters, name):
         self.name = name
+        self.l_parameters = l_parameters
         self.log = open("logs/" + name + ".txt", "w+")
-        self.grammar = Grammar(a_comp, b_comp, alphabet, self.log)
+        self.grammar = Grammar(l_parameters, self.log)
         self.log.write("AGENT " + name + ":\n")
 
     def __repr__(self):
@@ -23,12 +24,12 @@ class Agent:
 
     def get_e_language(self):
         output = " xx "
-        for a in self.grammar.a_comp:
+        for a in self.l_parameters.a_comp:
             output += "| " + a + " "
         output += "\n"
-        for b in self.grammar.b_comp:
+        for b in self.l_parameters.b_comp:
             output += " " + b + " "
-            for a in self.grammar.a_comp:
+            for a in self.l_parameters.a_comp:
                 meaning = (a, b)
                 result = self.grammar.parse(meaning)
                 if result is None:

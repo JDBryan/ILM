@@ -3,12 +3,9 @@ import random
 
 
 class Grammar:
-    def __init__(self, a_comp, b_comp, alphabet, log):
-        self.a_comp = a_comp
-        self.b_comp = b_comp
+    def __init__(self, l_parameters, log):
         self.a_count = 1
-        self.meanings = [(x, y) for x in self.a_comp for y in self.b_comp]
-        self.alphabet = [x for x in alphabet]
+        self.l_parameters = l_parameters
         self.categories = {"S": []}
         self.latest_rule = None
         self.log = log
@@ -23,7 +20,7 @@ class Grammar:
     # --SETTERS--
 
     def add_rule(self, rule):
-        rule.validate(self.alphabet, self.a_comp, self.b_comp)
+        rule.validate(self.l_parameters)
         self.log.write("Adding rule " + str(rule) + "\n")
         if rule.label in self.categories.keys():
             self.categories[rule.label] += [rule]
@@ -39,7 +36,9 @@ class Grammar:
     # --GETTERS--
 
     def get_random_meaning(self):
-        return self.meanings[random.randint(0, len(self.meanings)-1)]
+        # randint = random.randint(0, len(self.l_parameters.freq_list)-1)
+        randint = random.randint(0, len(self.l_parameters.meanings) - 1)
+        return self.l_parameters.meanings[randint]
 
     def get_all_rules(self):
         rules = []
@@ -74,7 +73,7 @@ class Grammar:
     def get_closest_meaning(self, meaning):
         max_closeness = -1
         closest_meaning = None
-        meaning_list = self.meanings
+        meaning_list = self.l_parameters.meanings
         random.shuffle(meaning_list)
 
         for full_meaning in meaning_list:
@@ -92,7 +91,7 @@ class Grammar:
     def get_closest_non_equal_meaning(self, meaning):
         max_closeness = -1
         closest_meaning = None
-        meaning_list = self.meanings
+        meaning_list = self.l_parameters.meanings
         random.shuffle(meaning_list)
 
         for full_meaning in meaning_list:
@@ -109,7 +108,7 @@ class Grammar:
 
     def get_compositionality(self):
         inventable_meanings = 0
-        for meaning in self.meanings:
+        for meaning in self.l_parameters.meanings:
             closest_meaning = self.get_closest_non_equal_meaning(meaning)
             if closest_meaning is None:
                 return self.generate_random_string()
@@ -139,21 +138,23 @@ class Grammar:
             if d2_rule is not None:
                 self.remove_rule(d2_rule)
 
-        return inventable_meanings/len(self.meanings)
+        return inventable_meanings/len(self.l_parameters.meanings)
 
     # --VALIDATION--
 
     def validate_domain(self):
         domain = []
+        a_comp = self.l_parameters.a_comp
+        b_comp = self.l_parameters.b_comp
         for rule in self.get_category("S"):
-            new_domain = rule.get_domain(self.get_all_sub_rules(), self.a_comp + self.b_comp)
+            new_domain = rule.get_domain(self.get_all_sub_rules(), a_comp + b_comp)
             for meaning in new_domain:
                 if meaning in domain:
                     raise Exception("Multiple utterances for meaning: " + meaning)
 
     def validate(self):
         for rule in self.get_all_rules():
-            rule.validate(self.alphabet, self.a_comp, self.b_comp)
+            rule.validate(self.l_parameters)
 
     # --OTHER--
 
@@ -164,7 +165,7 @@ class Grammar:
             output = []
 
             for item in start_rule.output:
-                if item in self.alphabet:
+                if item in self.l_parameters.alphabet:
                     output += item
                 else:
                     if start_rule.meaning[0] == item:
@@ -243,10 +244,12 @@ class Grammar:
         if d2_rule is not None:
             self.remove_rule(d2_rule)
 
+        self.incorporate(meaning, invention)
+
         return invention
 
     def find_start_rule(self, meaning):
-        meaning_components = self.a_comp + self.b_comp
+        meaning_components = self.l_parameters.a_comp + self.l_parameters.b_comp
 
         for rule in self.get_category("S"):
             found = True
@@ -283,10 +286,10 @@ class Grammar:
             self.log.write("Already have utterance for meaning" + str(meaning) + "\n\n")
 
     def generate_random_string(self):
-        length = random.randint(2, 7)
+        length = random.randint(1, 10)
         string = []
         for i in range(length):
-            string += [self.alphabet[random.randint(0, 25)]]
+            string += [self.l_parameters.alphabet[random.randint(0, 25)]]
         return string
 
     # --GENERALISATION
@@ -349,13 +352,13 @@ class Grammar:
                 self.validate()
 
         # Attempt substring
-        # if not changed:
-        #     changed = self.attempt_substring(rule_a, rule_b)
-        #     if changed:
-        #         self.remove_duplicates()
-        #         self.log.write("Substring occurred on rules:\n" + str(rule_a) + "\n" + str(rule_b) + "\n")
-        #         self.log.write("Old Grammar:\n" + old_grammar + "\nNew Grammar:\n" + str(self))
-        #         self.validate()
+        if not changed:
+            changed = self.attempt_substring(rule_a, rule_b)
+            if changed:
+                self.remove_duplicates()
+                self.log.write("Substring occurred on rules:\n" + str(rule_a) + "\n" + str(rule_b) + "\n")
+                self.log.write("Old Grammar:\n" + old_grammar + "\nNew Grammar:\n" + str(self))
+                self.validate()
 
         return changed
 
@@ -367,20 +370,20 @@ class Grammar:
             chunk_b = None
             remaining = None
 
-        comparison = []
-        meaning_components = self.a_comp + self.b_comp
-
         if chunk_a is None or chunk_b is None:
             return False
 
+        comparison = []
+        meaning_components = self.l_parameters.a_comp + self.l_parameters.b_comp
+
         chunk_a_contains_label = False
         for item in chunk_a:
-            if item not in self.alphabet:
+            if item not in self.l_parameters.alphabet:
                 chunk_a_contains_label = True
 
         chunk_b_contains_label = False
         for item in chunk_b:
-            if item not in self.alphabet:
+            if item not in self.l_parameters.alphabet:
                 chunk_b_contains_label = True
 
         if chunk_a_contains_label and chunk_b_contains_label:
@@ -395,6 +398,24 @@ class Grammar:
                 comparison += ["c=v"]
             else:
                 comparison += ["-"]
+
+        changed = self.attempt_double_chunk(rule_a, rule_b, chunk_a, chunk_b, remaining, comparison)
+
+        if changed:
+            return True
+        else:
+            return self.attempt_single_chunk(rule_a, rule_b, chunk_a, chunk_b, comparison)
+
+    def attempt_single_chunk(self, rule_a, rule_b, chunk_a, chunk_b, comparison):
+        chunk_a_contains_label = False
+        for item in chunk_a:
+            if item not in self.l_parameters.alphabet:
+                chunk_a_contains_label = True
+
+        chunk_b_contains_label = False
+        for item in chunk_b:
+            if item not in self.l_parameters.alphabet:
+                chunk_b_contains_label = True
 
         a_comp_single_chunkable = comparison[0] == "c=v" and (comparison[1] == "c=c" or comparison[1] == "v=v")
         b_comp_single_chunkable = comparison[1] == "c=v" and (comparison[0] == "c=c" or comparison[0] == "v=v")
@@ -417,8 +438,11 @@ class Grammar:
 
             return True
 
+        return False
+
+    def attempt_double_chunk(self, rule_a, rule_b, chunk_a, chunk_b, remaining, comparison):
         for item in (chunk_a + chunk_b):
-            if item not in self.alphabet:
+            if item not in self.l_parameters.alphabet:
                 return False
 
         b_comp_double_chunkable = (comparison[0] == "c=c" or comparison[0] == "v=v") and comparison[1] == "-"
@@ -448,8 +472,8 @@ class Grammar:
         substring_marker = None
 
         if rule_b.label == "S" and rule_a.label != "S":
-            if rule_a.meaning == rule_b.meaning[0] or rule_a.meaning == rule_b.meaning[0]:
-                substring_marker = rule_a.is_substring(rule_b)
+            if rule_a.meaning == rule_b.meaning[0] or rule_a.meaning == rule_b.meaning[1]:
+                substring_marker = rule_a.is_proper_substring(rule_b)
 
         if substring_marker is None:
             return False
@@ -468,7 +492,8 @@ class Grammar:
         return True
 
     def attempt_relabel(self, rule_a, rule_b):
-        if rule_a.label != "S" and rule_a.meaning == rule_b.meaning:
+        alphabet = self.l_parameters.alphabet
+        if rule_a.label != rule_b.label and rule_a.meaning == rule_b.meaning and rule_a.output == rule_b.output:
             self.relabel(rule_b.label, rule_a.label)
             return True
 
@@ -476,10 +501,10 @@ class Grammar:
 
             relabel = {}
             for i in range(2):
-                if rule_a.meaning[i] in self.alphabet and rule_b.meaning[i] in self.alphabet:
+                if rule_a.meaning[i] in alphabet and rule_b.meaning[i] in alphabet:
                     if rule_a.meaning[i] != rule_b.meaning[i]:
                         return False
-                elif rule_a.meaning[i] not in self.alphabet and rule_b.meaning[i] not in self.alphabet:
+                elif rule_a.meaning[i] not in alphabet and rule_b.meaning[i] not in alphabet:
                     relabel[rule_b.meaning[i]] = rule_a.meaning[i]
                 else:
                     return False

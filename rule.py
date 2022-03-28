@@ -18,29 +18,27 @@ class Rule:
     def __eq__(self, other):
         return self.label == other.label and self.meaning == other.meaning and self.output == other.output
 
-    def validate(self, alphabet, comp_a, comp_b):
+    def validate(self, l_parameters):
         valid = True
         if len(self.output) == 0:
             valid = False
 
         if self.label != "S":
             for item in self.output:
-                if item not in alphabet:
+                if item not in l_parameters.alphabet:
                     valid = False
         else:
-            if len(self.output) <= 1:
-                valid = False
 
             # if self.meaning[0] == self.meaning[1]:
             #     valid = False
 
             meaning_labels = []
             for i in range(2):
-                if self.meaning[i] not in comp_a + comp_b:
+                if self.meaning[i] not in l_parameters.a_comp + l_parameters.b_comp:
                     meaning_labels += self.meaning[i]
             output_labels = []
             for item in self.output:
-                if item not in alphabet:
+                if item not in l_parameters.alphabet:
                     output_labels += item
             meaning_labels.sort()
             output_labels.sort()
@@ -70,10 +68,11 @@ class Rule:
 
         return [(a,b) for a in a_comp for b in b_comp]
 
-    def is_substring(self, rule):
+    def is_proper_substring(self, rule):
         if len(self.output) >= len(rule.output):
             return None
         for i in range(len(rule.output)):
+            # i = 0
             for j in range(len(self.output)):
                 if i+j > len(rule.output) - 1 or rule.output[i+j] != self.output[j]:
                     break
