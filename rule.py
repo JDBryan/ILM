@@ -18,6 +18,32 @@ class Rule:
     def __eq__(self, other):
         return self.label == other.label and self.meaning == other.meaning and self.output == other.output
 
+    def variable_degree(self, l_parameters):
+        if self.label != "S":
+            return 0
+        else:
+            degree = 0
+            if self.meaning[0] not in l_parameters.a_comp:
+                degree += 1
+            if self.meaning[1] not in l_parameters.b_comp:
+                degree += 1
+        return degree
+
+    def remove_terminals(self):
+        new_output = []
+        print(self.output)
+        for char in self.output:
+            print(char)
+            if len(char) > 1:
+                new_output.append(char)
+        self.output = new_output
+        print(self.output)
+
+    def contains_terminals(self):
+        for char in self.output:
+            if len(char) == 1:
+                return True
+
     def validate(self, l_parameters):
         valid = True
         if len(self.output) == 0:

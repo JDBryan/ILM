@@ -77,7 +77,7 @@ class Grammar:
         random.shuffle(meaning_list)
 
         for full_meaning in meaning_list:
-            if self.find_start_rule(full_meaning) is not None:
+            if len(self.find_start_rules(full_meaning)) != 0:
                 closeness = 0
                 for i in range(2):
                     if full_meaning[i] == meaning[i]:
@@ -95,7 +95,7 @@ class Grammar:
         random.shuffle(meaning_list)
 
         for full_meaning in meaning_list:
-            if self.find_start_rule(full_meaning) is not None:
+            if len(self.find_start_rules(full_meaning)) != 0:
                 closeness = 0
                 for i in range(2):
                     if full_meaning[i] == meaning[i]:
@@ -159,9 +159,10 @@ class Grammar:
     # --OTHER--
 
     def parse(self, meaning):
-        start_rule = self.find_start_rule(meaning)
-        self.validate()
-        if start_rule is not None:
+        start_rules = self.find_start_rules(meaning)
+        shortest_parse = None
+
+        for start_rule in start_rules:
             output = []
 
             for item in start_rule.output:
@@ -175,11 +176,13 @@ class Grammar:
                     sub_rule = self.get_sub_rule(item, sub_meaning)
                     if sub_rule is None:
                         sub_rule = self.get_sub_rule("X", sub_meaning)
+
                     output += sub_rule.output
 
-            return output
-        else:
-            return None
+            if shortest_parse is None or len(shortest_parse) >= len(output):
+                shortest_parse = output
+
+        return shortest_parse
 
     def relabel(self, old_label, new_label):
 
@@ -248,8 +251,9 @@ class Grammar:
 
         return invention
 
-    def find_start_rule(self, meaning):
+    def find_start_rules(self, meaning):
         meaning_components = self.l_parameters.a_comp + self.l_parameters.b_comp
+        start_rules = []
 
         for rule in self.get_category("S"):
             found = True
@@ -267,12 +271,12 @@ class Grammar:
                     found = False
 
             if found:
-                return rule
-        return None
+                start_rules.append(rule)
+        return start_rules
 
     def incorporate(self, meaning, string):
-        start_rule = self.find_start_rule(meaning)
-        if start_rule is None:
+        start_rules = self.find_start_rules(meaning)
+        if len(start_rules) == 0:
             print_string = ""
             for item in string:
                 print_string += item
@@ -425,16 +429,19 @@ class Grammar:
         if (a_comp_single_chunkable or b_comp_single_chunkable) and (chunk_a_is_label or chunk_b_is_label):
             if chunk_a_is_label:
                 if a_comp_single_chunkable:
-                    self.add_rule(Rule(chunk_a[0], rule_b.meaning[0], chunk_b))
+                    new_rule = Rule(chunk_a[0], rule_b.meaning[0], chunk_b)
                 else:
-                    self.add_rule(Rule(chunk_a[0], rule_b.meaning[1], chunk_b))
-                self.remove_rule(rule_b)
+                    new_rule = Rule(chunk_a[0], rule_b.meaning[1], chunk_b)
+                remove_rule = rule_b
             else:
                 if a_comp_single_chunkable:
-                    self.add_rule(Rule(chunk_b[0], rule_a.meaning[0], chunk_a))
+                    new_rule = Rule(chunk_b[0], rule_a.meaning[0], chunk_a)
                 else:
-                    self.add_rule(Rule(chunk_b[0], rule_a.meaning[1], chunk_a))
-                self.remove_rule(rule_a)
+                    new_rule = Rule(chunk_b[0], rule_a.meaning[1], chunk_a)
+                remove_rule = rule_a
+
+            self.add_rule(new_rule)
+            self.remove_rule(remove_rule)
 
             return True
 
@@ -454,14 +461,17 @@ class Grammar:
             new_string = splits[0] + [new_label] + splits[1]
 
             if b_comp_double_chunkable:
-                self.add_rule(Rule(new_label, rule_a.meaning[1], chunk_a))
-                self.add_rule(Rule(new_label, rule_b.meaning[1], chunk_b))
-                self.add_rule(Rule("S", (rule_a.meaning[0], new_label), new_string))
+                new_a_rule = Rule(new_label, rule_a.meaning[1], chunk_a)
+                new_b_rule = Rule(new_label, rule_b.meaning[1], chunk_b)
+                new_s_rule = Rule("S", (rule_a.meaning[0], new_label), new_string)
             else:
-                self.add_rule(Rule(new_label, rule_a.meaning[0], chunk_a))
-                self.add_rule(Rule(new_label, rule_b.meaning[0], chunk_b))
-                self.add_rule(Rule("S", (new_label, rule_a.meaning[1]), new_string))
+                new_a_rule = Rule(new_label, rule_a.meaning[0], chunk_a)
+                new_b_rule = Rule(new_label, rule_b.meaning[0], chunk_b)
+                new_s_rule = Rule("S", (new_label, rule_a.meaning[1]), new_string)
 
+            self.add_rule(new_s_rule)
+            self.add_rule(new_a_rule)
+            self.add_rule(new_b_rule)
             self.remove_rule(rule_a)
             self.remove_rule(rule_b)
             return True
@@ -484,11 +494,13 @@ class Grammar:
         new_string += rule_b.output[substring_marker + len(rule_a.output):]
 
         if rule_a.meaning == rule_b.meaning[0]:
-            self.add_rule(Rule("S", (rule_a.label, rule_b.meaning[1]), new_string))
-            self.remove_rule(rule_b)
+            new_rule = Rule("S", (rule_a.label, rule_b.meaning[1]), new_string)
         else:
-            self.add_rule(Rule("S", (rule_b.meaning[0], rule_a.label), new_string))
-            self.remove_rule(rule_b)
+            new_rule = Rule("S", (rule_b.meaning[0], rule_a.label), new_string)
+
+        self.add_rule(new_rule)
+        self.remove_rule(rule_b)
+
         return True
 
     def attempt_relabel(self, rule_a, rule_b):
@@ -558,6 +570,15 @@ class Grammar:
         chunk_a = string_a[i:len_a - j]
         chunk_b = string_b[i:len_b - j]
         remaining = string_a[:i] + ["-"] + string_a[len_a - j:]
+
+        # if i >= j:
+        #     chunk_a = string_a[i:]
+        #     chunk_b = string_b[i:]
+        #     remaining = string_a[:i] + ["-"]
+        # else:
+        #     chunk_a = string_a[:len_a-j]
+        #     chunk_b = string_b[:len_b-j]
+        #     remaining = ["-"] + string_a[len_a-j:]
 
         if (i == 0 and j == 0) or len(chunk_a) == 0 or len(chunk_b) == 0:
             return None, None, None

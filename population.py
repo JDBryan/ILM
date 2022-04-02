@@ -134,6 +134,9 @@ class Population:
         for learner in self.agents:
             learner.learn(self.previous_agents, self.exposure)
 
+        for learner in self.agents:
+            learner.learn(self.agents, self.exposure)
+
         self.log.write(self.name + ":\n\n")
         for agent in self.agents:
             self.log.write(str(agent) + "\n\n")

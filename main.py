@@ -9,7 +9,7 @@ B_COMP = ["b" + str(i) for i in range(1, 6)]
 MEANINGS = [(x, y) for x in A_COMP for y in B_COMP]
 
 
-def basic_single_language_check():
+def basic_single_language_check(name):
     l_parameters = LanguageParameters(ALPHABET, A_COMP, B_COMP)
 
     sizes = []
@@ -18,28 +18,30 @@ def basic_single_language_check():
 
     ilm = Ilm(l_parameters, 1, 50)
 
-    for i in range(50):
+    for i in range(100):
         ilm.run_single_generation()
         sizes.append(ilm.populations["BASE"].average_grammar_size())
         regularities.append(ilm.populations["BASE"].regularity())
         generations.append(ilm.gen)
 
-    plt.figure(0)
+    plt.figure(str(name) + "-0")
     plt.plot(generations, regularities)
     plt.xlabel('Generation')
     plt.ylabel('Regularity')
     plt.title('Language regularity at each generation of the ILM')
-    plt.savefig("graphs/Regularities")
+    plt.savefig("graphs/Regularities-" + str(name))
 
-    plt.figure(1)
+    plt.figure(str(name) + "-1")
     plt.plot(generations, sizes)
     plt.xlabel('Generation')
     plt.ylabel('Size')
     plt.title('Language grammar size at each generation of the ILM')
-    plt.savefig("graphs/Sizes")
+    plt.savefig("graphs/Sizes-" + str(name))
 
 
-basic_single_language_check()
+for i in range(10):
+    basic_single_language_check(i)
+
 # ilm = Ilm(1, 50, A_COMP, B_COMP, ALPHABET)
 # ilm.split_population("BASE")
 #
