@@ -44,7 +44,7 @@ def basic_single_language_check(name, exposure, pop_size):
 
 
 def ratio_test(a_amount, l_parameters):
-    ilm = Ilm(l_parameters, 10, 100)
+    ilm = Ilm(l_parameters, 6, 100)
 
     ilm.split_population("BASE")
     ilm.run_generations(50)
@@ -61,17 +61,17 @@ def ratio_test(a_amount, l_parameters):
     return results
 
 
-def dominance_graphs():
+def dominance_graphs(number_of_agents):
     a_amounts = []
     avg_a_dominances = []
     avg_b_dominances = []
     l_parameters = LanguageParameters(ALPHABET, A_COMP, B_COMP)
 
-    for i in range(1):
-        a_amount = 1
+    for i in range(number_of_agents+1):
+        a_amount = i / number_of_agents
         a_dominances = []
         b_dominances = []
-        for j in range(1):
+        for j in range(10):
             a_b_dom = ratio_test(a_amount, l_parameters)
             a_dominances.append(a_b_dom[0])
             b_dominances.append(a_b_dom[1])
@@ -93,11 +93,11 @@ def setup():
         os.remove(os.path.join(DIRNAME, "graphs/" + filename))
 
 
-setup()
-for i in range(1):
-    basic_single_language_check(i, 50, 1)
+# setup()
+# for i in range(1):
+#     basic_single_language_check(i, 100, 10)
 
-# dominance_graphs()
+dominance_graphs(6)
 
 # ilm = Ilm(1, 50, A_COMP, B_COMP, ALPHABET)
 # ilm.split_population("BASE")
