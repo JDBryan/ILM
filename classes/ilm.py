@@ -51,16 +51,17 @@ class Ilm:
             self.add_population(pop_name + "-A", a_agents)
             self.add_population(pop_name + "-B", b_agents)
 
-    def merge_populations(self, pop_a_name, pop_b_name, new_name, a_ratio):
+    def merge_populations(self, pop_a_name, pop_b_name, new_name, a_amount):
         print("Merging populations " + pop_a_name + " and " + pop_b_name + " into population " + new_name)
         self.populations[new_name] = []
-        pop_a_amount = int(self.pop_size * a_ratio)
-        pop_b_amount = int(self.pop_size * (1-a_ratio))
-        print(pop_b_amount)
-        print(pop_a_amount)
+        b_amount = self.pop_size - a_amount
+        # pop_a_amount = int(self.pop_size * a_ratio)
+        # pop_b_amount = int(self.pop_size * (1-a_ratio))
+        print(a_amount)
+        print(b_amount)
         pop_a = self.populations.pop(pop_a_name)
         pop_b = self.populations.pop(pop_b_name)
-        self.add_population(new_name, pop_a.agents[:pop_a_amount] + pop_b.agents[:pop_b_amount])
+        self.add_population(new_name, pop_a.agents[:a_amount] + pop_b.agents[:b_amount])
 
     def multi_language_conformity(self, a_e_language, b_e_language):
         similarity = 0

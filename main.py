@@ -68,7 +68,7 @@ def dominance_graphs(number_of_agents):
     l_parameters = LanguageParameters(ALPHABET, A_COMP, B_COMP)
 
     for i in range(number_of_agents+1):
-        a_amount = i / number_of_agents
+        a_amount = i
         a_dominances = []
         b_dominances = []
         for j in range(10):
