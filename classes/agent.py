@@ -1,12 +1,14 @@
-from grammar import Grammar
+from classes.grammar import Grammar
 import random
+import os
+DIRNAME = os.path.dirname(__file__)
 
 
 class Agent:
     def __init__(self, l_parameters, name):
         self.name = name
         self.l_parameters = l_parameters
-        self.log = open("logs/" + name + ".txt", "w+")
+        self.log = open(os.path.join(DIRNAME, "../logs/" + name + ".txt"), "w+")
         self.grammar = Grammar(l_parameters, self.log)
         self.log.write("AGENT " + name + ":\n")
 

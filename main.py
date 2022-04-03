@@ -1,7 +1,9 @@
-from ilm import Ilm
+from classes.ilm import Ilm
 import matplotlib.pyplot as plt
-from language_parameters import LanguageParameters
+from classes.language_parameters import LanguageParameters
 import statistics
+import os
+DIRNAME = os.path.dirname(__file__)
 
 ALPHABET = "abcdefghijklmnopqrstuvwxyz"
 A_COMP = ["a" + str(i) for i in range(1, 6)]
@@ -9,16 +11,16 @@ B_COMP = ["b" + str(i) for i in range(1, 6)]
 MEANINGS = [(x, y) for x in A_COMP for y in B_COMP]
 
 
-def basic_single_language_check(name):
+def basic_single_language_check(name, exposure, pop_size):
     l_parameters = LanguageParameters(ALPHABET, A_COMP, B_COMP)
 
     sizes = []
     regularities = []
     generations = []
 
-    ilm = Ilm(l_parameters, 1, 50)
+    ilm = Ilm(l_parameters, pop_size, exposure)
 
-    for i in range(100):
+    for i in range(50):
         ilm.run_single_generation()
         sizes.append(ilm.populations["BASE"].average_grammar_size())
         regularities.append(ilm.populations["BASE"].regularity())
@@ -29,18 +31,73 @@ def basic_single_language_check(name):
     plt.xlabel('Generation')
     plt.ylabel('Regularity')
     plt.title('Language regularity at each generation of the ILM')
-    plt.savefig("graphs/Regularities-" + str(name))
+    reg_filename = os.path.join(DIRNAME, "graphs/Regularities-" + str(name))
+    plt.savefig(reg_filename)
 
     plt.figure(str(name) + "-1")
     plt.plot(generations, sizes)
     plt.xlabel('Generation')
     plt.ylabel('Size')
     plt.title('Language grammar size at each generation of the ILM')
-    plt.savefig("graphs/Sizes-" + str(name))
+    size_filename = os.path.join(DIRNAME, "graphs/Sizes-" + str(name))
+    plt.savefig(size_filename)
 
 
-for i in range(10):
-    basic_single_language_check(i)
+def ratio_test(a_amount, l_parameters):
+    ilm = Ilm(l_parameters, 10, 100)
+
+    ilm.split_population("BASE")
+    ilm.run_generations(50)
+    final_a_e_language = ilm.populations["BASE-A"].current_e_language()
+    final_b_e_language = ilm.populations["BASE-B"].current_e_language()
+
+    ilm.merge_populations("BASE-A", "BASE-B", "MERGED", a_amount)
+    ilm.run_generations(50)
+    final_merged_e_language = ilm.populations["MERGED"].current_e_language()
+
+    results = [ilm.multi_language_conformity(final_a_e_language, final_merged_e_language),
+               ilm.multi_language_conformity(final_b_e_language, final_merged_e_language)]
+
+    return results
+
+
+def dominance_graphs():
+    a_amounts = []
+    avg_a_dominances = []
+    avg_b_dominances = []
+    l_parameters = LanguageParameters(ALPHABET, A_COMP, B_COMP)
+
+    for i in range(1):
+        a_amount = 1
+        a_dominances = []
+        b_dominances = []
+        for j in range(1):
+            a_b_dom = ratio_test(a_amount, l_parameters)
+            a_dominances.append(a_b_dom[0])
+            b_dominances.append(a_b_dom[1])
+        avg_a_dominances.append(statistics.mean(a_dominances))
+        avg_b_dominances.append(statistics.mean(b_dominances))
+
+    plt.figure(0)
+    plt.plot(a_amounts, avg_a_dominances)
+    plt.plot(a_amounts, avg_b_dominances)
+    plt.xlabel('Proportion of A')
+    plt.ylabel('Dominance of each language')
+    plt.title('Dominance of languages based on proportion')
+    dom_filename = os.path.join(DIRNAME, "graphs/dominance")
+    plt.savefig(dom_filename)
+
+
+def setup():
+    for filename in os.listdir(os.path.join(DIRNAME, "graphs")):
+        os.remove(os.path.join(DIRNAME, "graphs/" + filename))
+
+
+setup()
+for i in range(1):
+    basic_single_language_check(i, 50, 1)
+
+# dominance_graphs()
 
 # ilm = Ilm(1, 50, A_COMP, B_COMP, ALPHABET)
 # ilm.split_population("BASE")
@@ -84,47 +141,6 @@ for i in range(10):
 # print("Similarity to language A - " + str(ilm.multi_language_conformity(final_a_e_language, final_merged_e_language)))
 # print("Similarity to language B - " + str(ilm.multi_language_conformity(final_b_e_language, final_merged_e_language)))
 
-
-# def ratio_test(a_amount, l_parameters):
-#     ilm = Ilm(l_parameters, 2, 100)
-#
-#     ilm.split_population("BASE")
-#     ilm.run_generations(50)
-#     final_a_e_language = ilm.populations["BASE-A"].current_e_language()
-#     final_b_e_language = ilm.populations["BASE-B"].current_e_language()
-#
-#     ilm.merge_populations("BASE-A", "BASE-B", "MERGED", a_amount)
-#     ilm.run_generations(50)
-#     final_merged_e_language = ilm.populations["MERGED"].current_e_language()
-#
-#     results = [ilm.multi_language_conformity(final_a_e_language, final_merged_e_language),
-#                ilm.multi_language_conformity(final_b_e_language, final_merged_e_language)]
-#
-#     return results
-#
-# a_amounts = []
-# avg_a_dominances = []
-# avg_b_dominances = []
-# l_parameters = LanguageParameters(ALPHABET, A_COMP, B_COMP)
-#
-# for i in range(1):
-#     a_amount = 1
-#     a_dominances = []
-#     b_dominances = []
-#     for j in range(1):
-#         a_b_dom = ratio_test(a_amount, l_parameters)
-#         a_dominances.append(a_b_dom[0])
-#         b_dominances.append(a_b_dom[1])
-#     avg_a_dominances.append(statistics.mean(a_dominances))
-#     avg_b_dominances.append(statistics.mean(b_dominances))
-#
-# plt.figure(0)
-# plt.plot(a_amounts, avg_a_dominances)
-# plt.plot(a_amounts, avg_b_dominances)
-# plt.xlabel('Proportion of A')
-# plt.ylabel('Dominance of each language')
-# plt.title('Dominance of languages based on proportion')
-# plt.savefig("graphs/dominance")
 
 # plt.figure(0)
 # plt.plot(generations, a_regularities)

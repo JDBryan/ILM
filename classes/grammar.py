@@ -1,4 +1,4 @@
-from rule import Rule
+from classes.rule import Rule
 import random
 
 
@@ -276,7 +276,7 @@ class Grammar:
 
     def incorporate(self, meaning, string):
         start_rules = self.find_start_rules(meaning)
-        if len(start_rules) == 0:
+        if len(start_rules) == 0 or len(self.parse(meaning)) > len(string):
             print_string = ""
             for item in string:
                 print_string += item
@@ -287,7 +287,7 @@ class Grammar:
             self.generalise()
             self.log.write("Finished generalisation\n\n")
         else:
-            self.log.write("Already have utterance for meaning" + str(meaning) + "\n\n")
+            self.log.write("Already have shorter utterance for meaning" + str(meaning) + "\n\n")
 
     def generate_random_string(self):
         length = random.randint(1, 10)

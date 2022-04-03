@@ -1,4 +1,4 @@
-from agent import Agent
+from classes.agent import Agent
 
 
 class Population:

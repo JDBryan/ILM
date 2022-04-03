@@ -1,12 +1,15 @@
-import os
-from population import Population
 
+import os
+from classes.population import Population
+
+DIRNAME = os.path.dirname(__file__)
 
 class Ilm:
     def __init__(self, l_parameters, pop_size, exposure):
-        for filename in os.listdir("logs"):
-            os.remove("logs/" + filename)
-        self.log = open("logs/ilm.txt", "w+")
+        for filename in os.listdir(os.path.join(DIRNAME, "../logs")):
+            os.remove(os.path.join(DIRNAME, "../logs/" + filename))
+        log_filename = os.path.join(DIRNAME, "../logs/ilm.txt")
+        self.log = open(log_filename, "w+")
         self.pop_size = pop_size
         self.l_parameters = l_parameters
         self.exposure = exposure
