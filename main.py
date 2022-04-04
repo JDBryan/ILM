@@ -77,6 +77,7 @@ def dominance_graphs(number_of_agents):
             b_dominances.append(a_b_dom[1])
         avg_a_dominances.append(statistics.mean(a_dominances))
         avg_b_dominances.append(statistics.mean(b_dominances))
+        a_amounts.append(a_amount)
 
     plt.figure(0)
     plt.plot(a_amounts, avg_a_dominances)
