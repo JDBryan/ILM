@@ -61,6 +61,29 @@ def ratio_test(a_amount, l_parameters):
     return results
 
 
+def exposure_test(number_of_agents):
+    l_parameters = LanguageParameters(ALPHABET, A_COMP, B_COMP)
+    exposures = []
+    convergences = []
+    for i in range(1, 51):
+        exposures.append(i)
+        convergence = 0
+        for j in range(10):
+            ilm = Ilm(l_parameters, number_of_agents, i)
+            ilm.run_generations(30)
+            if ilm.populations["BASE"].has_converged():
+                convergence += 1
+        convergences.append(convergence/10)
+
+    plt.figure(0)
+    plt.plot(exposures, convergences)
+    plt.xlabel('Exposure')
+    plt.ylabel('Proportion of languages converged after 30 generations')
+    plt.title('Dominance of languages based on proportion')
+    dom_filename = os.path.join(DIRNAME, "graphs/convergence")
+    plt.savefig(dom_filename)
+
+
 def dominance_graphs(number_of_agents):
     a_amounts = []
     avg_a_dominances = []
@@ -98,7 +121,9 @@ def setup():
 # for i in range(1):
 #     basic_single_language_check(i, 100, 10)
 
-dominance_graphs(6)
+# dominance_graphs(6)
+
+exposure_test(1)
 
 # ilm = Ilm(1, 50, A_COMP, B_COMP, ALPHABET)
 # ilm.split_population("BASE")

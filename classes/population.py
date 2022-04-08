@@ -11,6 +11,8 @@ class Population:
         self.log = log
         self.exposure = exposure
         self.initialise_agents()
+        self.regularities = []
+        self.is_stable = False
 
     def initialise_agents(self):
         new_agents = []
@@ -18,6 +20,19 @@ class Population:
             name = "Gen:" + str(self.gen) + "_Pop:" + self.name + "_Agent:" + str(i)
             new_agents.append(Agent(self.l_parameters, name))
         self.agents = new_agents
+
+    def has_converged(self):
+        print(self.regularities)
+        if len(self.regularities) < 5:
+            for reg in self.regularities:
+                if reg != 1:
+                    return False
+
+        else:
+            for reg in self.regularities[len(self.regularities)-5:]:
+                if reg != 1:
+                    return False
+        return True
 
     def set_agents(self, agents):
         if len(agents) != self.pop_size:
@@ -140,7 +155,8 @@ class Population:
         self.log.write(self.name + ":\n\n")
         for agent in self.agents:
             self.log.write(str(agent) + "\n\n")
-        self.log.write("Compositionality - " + str(self.compositionality()) + "\n")
+        # self.log.write("Compositionality - " + str(self.compositionality()) + "\n")
         self.log.write("Conformity -  " + str(self.conformity()) + "\n")
         self.log.write("Size - " + str(self.average_grammar_size()) + "\n")
         self.log.write("Regularity - " + str(self.regularity()) + "\n\n")
+        self.regularities.append(self.regularity())
