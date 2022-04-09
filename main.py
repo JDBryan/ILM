@@ -70,7 +70,7 @@ def exposure_test(number_of_agents):
         convergence = 0
         for j in range(10):
             ilm = Ilm(l_parameters, number_of_agents, i)
-            ilm.run_generations(30)
+            ilm.run_generations(50)
             if ilm.populations["BASE"].has_converged():
                 convergence += 1
         convergences.append(convergence/10)
@@ -79,7 +79,7 @@ def exposure_test(number_of_agents):
     plt.plot(exposures, convergences)
     plt.xlabel('Exposure')
     plt.ylabel('Proportion of languages converged after 30 generations')
-    plt.title('Dominance of languages based on proportion')
+    plt.title('Convergence of lanuguages relative to exposure')
     dom_filename = os.path.join(DIRNAME, "graphs/convergence")
     plt.savefig(dom_filename)
 
