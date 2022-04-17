@@ -90,16 +90,6 @@ class Grammar:
 
     # --VALIDATION--
 
-    def validate_domain(self):
-        domain = []
-        a_comp = self.l_parameters.a_comp
-        b_comp = self.l_parameters.b_comp
-        for rule in self.get_category("S"):
-            new_domain = rule.get_domain(self.get_all_sub_rules(), a_comp + b_comp)
-            for meaning in new_domain:
-                if meaning in domain:
-                    raise Exception("Multiple utterances for meaning: " + meaning)
-
     def validate(self):
         for rule in self.get_all_rules():
             rule.validate(self.l_parameters)
