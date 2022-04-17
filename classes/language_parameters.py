@@ -2,9 +2,9 @@ class LanguageParameters:
     def __init__(self, alphabet, a_comp, b_comp, a_freqs=None, b_freqs=None):
         self.a_comp = a_comp
         self.b_comp = b_comp
-        self.meaning_components = a_comp + b_comp
+        self.m_comp = a_comp + b_comp
         self.alphabet = [char for char in alphabet]
-        self.meanings = [(x, y) for x in a_comp for y in b_comp]
+        self.meanings = [[x, y] for x in a_comp for y in b_comp]
         self.freq_list = []
         if a_freqs is None:
             a_freqs = {}

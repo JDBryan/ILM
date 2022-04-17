@@ -67,7 +67,7 @@ class Ilm:
         similarity = 0
 
         for meaning in self.l_parameters.meanings:
-            if a_e_language[meaning] == b_e_language[meaning]:
+            if a_e_language[tuple(meaning)] == b_e_language[tuple(meaning)]:
                 similarity += 1
 
         return similarity / len(self.l_parameters.meanings)

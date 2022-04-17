@@ -69,13 +69,13 @@ class Population:
         previous_language = self.previous_e_language()
         current_language = self.current_e_language()
         for meaning in self.l_parameters.meanings:
-            if previous_language[meaning] == current_language[meaning]:
+            if previous_language[tuple(meaning)] == current_language[tuple(meaning)]:
                 similarity += 1
 
         return similarity / len(self.l_parameters.meanings)
 
     def current_e_language(self):
-        e_language = {meaning: "" for meaning in self.l_parameters.meanings}
+        e_language = {tuple(meaning): "" for meaning in self.l_parameters.meanings}
 
         for meaning in self.l_parameters.meanings:
             frequency_table = {}
@@ -97,12 +97,12 @@ class Population:
                     highest_frequency = frequency_table[utterance]
                     most_common_utterance = utterance
 
-            e_language[meaning] = most_common_utterance
+            e_language[tuple(meaning)] = most_common_utterance
 
         return e_language
 
     def previous_e_language(self):
-        e_language = {meaning: "" for meaning in self.l_parameters.meanings}
+        e_language = {tuple(meaning): "" for meaning in self.l_parameters.meanings}
 
         for meaning in self.l_parameters.meanings:
             frequency_table = {}
@@ -124,7 +124,7 @@ class Population:
                     highest_frequency = frequency_table[utterance]
                     most_common_utterance = utterance
 
-            e_language[meaning] = most_common_utterance
+            e_language[tuple(meaning)] = most_common_utterance
 
         return e_language
 
@@ -143,13 +143,10 @@ class Population:
         for learner in self.agents:
             learner.learn(self.previous_agents, self.exposure)
 
-        # for learner in self.agents:
-        #     learner.learn(self.agents, self.exposure)
-
         self.log.write(self.name + ":\n\n")
         for agent in self.agents:
             self.log.write(str(agent) + "\n\n")
-        self.log.write("Conformity -  " + str(self.conformity()) + "\n")
-        self.log.write("Size - " + str(self.average_grammar_size()) + "\n")
-        self.log.write("Regularity - " + str(self.regularity()) + "\n\n")
-        self.regularities.append(self.regularity())
+        # self.log.write("Conformity -  " + str(self.conformity()) + "\n")
+        # self.log.write("Size - " + str(self.average_grammar_size()) + "\n")
+        # self.log.write("Regularity - " + str(self.regularity()) + "\n\n")
+        # self.regularities.append(self.regularity())

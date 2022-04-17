@@ -1,7 +1,7 @@
 class Rule:
     def __init__(self, label, meaning, output):
         self.label = label
-        self.meaning = meaning
+        self.meaning = list(meaning)
         self.output = output
 
     def __repr__(self):
@@ -12,37 +12,23 @@ class Rule:
         if self.label == "S":
             meaning_str = "(" + self.meaning[0] + "," + self.meaning[1] + ")"
         else:
-            meaning_str = self.meaning
+            meaning_str = self.meaning[0]
         return self.label + ": " + meaning_str + " -> " + string_str
 
     def __eq__(self, other):
         return self.label == other.label and self.meaning == other.meaning and self.output == other.output
 
-    def variable_degree(self, l_parameters):
-        if self.label != "S":
-            return 0
-        else:
-            degree = 0
-            if self.meaning[0] not in l_parameters.a_comp:
-                degree += 1
-            if self.meaning[1] not in l_parameters.b_comp:
-                degree += 1
-        return degree
+    def relabel(self, old_label, new_label):
+        if self.label == old_label:
+            self.label = new_label
 
-    def remove_terminals(self):
-        new_output = []
-        print(self.output)
-        for char in self.output:
-            print(char)
-            if len(char) > 1:
-                new_output.append(char)
-        self.output = new_output
-        print(self.output)
+        for i in range(len(self.meaning)):
+            if self.meaning[i] == old_label:
+                self.meaning[i] = new_label
 
-    def contains_terminals(self):
-        for char in self.output:
-            if len(char) == 1:
-                return True
+        for i in range(len(self.output)):
+            if self.output[i] == old_label:
+                self.output[i] = new_label
 
     def validate(self, l_parameters):
         valid = True
@@ -60,7 +46,7 @@ class Rule:
 
             meaning_labels = []
             for i in range(2):
-                if self.meaning[i] not in l_parameters.a_comp + l_parameters.b_comp:
+                if self.meaning[i] not in l_parameters.m_comp:
                     meaning_labels += self.meaning[i]
             output_labels = []
             for item in self.output:
@@ -73,26 +59,6 @@ class Rule:
 
         if not valid:
             raise Exception("Invalid rule: " + str(self))
-
-    def get_domain(self, sub_rules, meaning_comps):
-        a_comp = []
-        b_comp = []
-
-        if self.meaning[0] in meaning_comps:
-            a_comp = [self.meaning[0]]
-        else:
-            for rule in sub_rules:
-                if rule.label == self.meaning[0]:
-                    a_comp.append(rule.meaning)
-
-        if self.meaning[1] in meaning_comps:
-            b_comp = [self.meaning[1]]
-        else:
-            for rule in sub_rules:
-                if rule.label == self.meaning[1]:
-                    b_comp.append(rule.meaning)
-
-        return [(a,b) for a in a_comp for b in b_comp]
 
     def is_proper_substring(self, rule):
         if len(self.output) >= len(rule.output):

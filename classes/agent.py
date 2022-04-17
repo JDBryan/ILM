@@ -32,7 +32,7 @@ class Agent:
         for b in self.l_parameters.b_comp:
             output += " " + b + " "
             for a in self.l_parameters.a_comp:
-                meaning = (a, b)
+                meaning = [a, b]
                 result = self.grammar.parse(meaning)
                 if result is None:
                     new_result = "-"
