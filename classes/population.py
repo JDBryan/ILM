@@ -40,12 +40,6 @@ class Population:
         else:
             self.agents = agents
 
-    def compositionality(self):
-        comps = 0
-        for agent in self.agents:
-            comps += agent.grammar.get_compositionality()
-        return comps / self.pop_size
-
     def conformity(self):
         conformities = []
         for meaning in self.l_parameters.meanings:
@@ -155,7 +149,6 @@ class Population:
         self.log.write(self.name + ":\n\n")
         for agent in self.agents:
             self.log.write(str(agent) + "\n\n")
-        # self.log.write("Compositionality - " + str(self.compositionality()) + "\n")
         self.log.write("Conformity -  " + str(self.conformity()) + "\n")
         self.log.write("Size - " + str(self.average_grammar_size()) + "\n")
         self.log.write("Regularity - " + str(self.regularity()) + "\n\n")

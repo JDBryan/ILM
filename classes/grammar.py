@@ -88,58 +88,6 @@ class Grammar:
 
         return closest_meaning
 
-    def get_closest_non_equal_meaning(self, meaning):
-        max_closeness = -1
-        closest_meaning = None
-        meaning_list = self.l_parameters.meanings
-        random.shuffle(meaning_list)
-
-        for full_meaning in meaning_list:
-            if len(self.find_start_rules(full_meaning)) != 0:
-                closeness = 0
-                for i in range(2):
-                    if full_meaning[i] == meaning[i]:
-                        closeness += 1
-                if closeness > max_closeness and closeness != 2:
-                    max_closeness = closeness
-                    closest_meaning = full_meaning
-
-        return closest_meaning
-
-    def get_compositionality(self):
-        inventable_meanings = 0
-        for meaning in self.l_parameters.meanings:
-            closest_meaning = self.get_closest_non_equal_meaning(meaning)
-            if closest_meaning is None:
-                return self.generate_random_string()
-
-            if meaning[0] == closest_meaning[0]:
-                intersection = (meaning[0], "d2")
-            elif meaning[1] == closest_meaning[1]:
-                intersection = ("d1", meaning[1])
-            else:
-                intersection = ("d1", "d2")
-
-            d1_rule = None
-            d2_rule = None
-            if intersection[0] == "d1":
-                d1_rule = Rule("X", "d1", self.generate_random_string())
-                self.add_rule(d1_rule)
-            if intersection[1] == "d2":
-                d2_rule = Rule("X", "d2", self.generate_random_string())
-                self.add_rule(d2_rule)
-
-            invention = self.parse(intersection)
-            if invention is not None:
-                inventable_meanings += 1
-
-            if d1_rule is not None:
-                self.remove_rule(d1_rule)
-            if d2_rule is not None:
-                self.remove_rule(d2_rule)
-
-        return inventable_meanings/len(self.l_parameters.meanings)
-
     # --VALIDATION--
 
     def validate_domain(self):
