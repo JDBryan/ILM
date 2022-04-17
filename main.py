@@ -112,100 +112,42 @@ def dominance_graphs(number_of_agents):
     plt.savefig(dom_filename)
 
 
+def single_ilm(number_of_agents, number_of_generations, exposure):
+    # a_freq = {"a1": 100, "a2": 20, "a3": 15, "a4": 10, "a5": 1}
+    # b_freq = {"b1": 100, "b2": 20, "b3": 15, "b4": 10, "b5": 1}
+    l_parameters = LanguageParameters(ALPHABET, A_COMP, B_COMP)
+    ilm = Ilm(l_parameters, number_of_agents, exposure)
+    generations = []
+    sizes = []
+    regularities = []
+    for i in range(number_of_generations):
+        ilm.run_single_generation()
+        generations.append(ilm.gen)
+        sizes.append(ilm.populations["BASE"].average_grammar_size())
+        regularities.append(ilm.populations["BASE"].regularity())
+
+    print(regularities)
+    print(sizes)
+
+    plt.figure(0)
+    plt.plot(generations, regularities)
+    plt.xlabel('Generation')
+    plt.ylabel('Regularity')
+    plt.title('Language regularity at each generation of the ILM')
+    plt.savefig("graphs/regularities")
+
+    plt.figure(1)
+    plt.plot(generations, sizes)
+    plt.xlabel('Generation')
+    plt.ylabel('Size')
+    plt.title('Average grammar size at each generation of the ILM')
+    plt.savefig("graphs/sizes")
+
+
 def setup():
     for filename in os.listdir(os.path.join(DIRNAME, "graphs")):
         os.remove(os.path.join(DIRNAME, "graphs/" + filename))
 
 
-# setup()
-# for i in range(1):
-#     basic_single_language_check(i, 100, 10)
-
-# dominance_graphs(6)
-
-exposure_test(1)
-
-# ilm = Ilm(1, 50, A_COMP, B_COMP, ALPHABET)
-# ilm.split_population("BASE")
-#
-# a_sizes = []
-# a_regularities = []
-# b_sizes = []
-# b_regularities = []
-# generations = []
-#
-# for i in range(50):
-#     old_a_e_language = ilm.population_e_language(ilm.populations["BASE-A"])
-#     old_b_e_language = ilm.population_e_language(ilm.populations["BASE-B"])
-#     ilm.run_single_generation()
-#     new_a_e_language = ilm.population_e_language(ilm.populations["BASE-A"])
-#     new_b_e_language = ilm.population_e_language(ilm.populations["BASE-B"])
-#     generations.append(ilm.gen)
-#     a_regularities.append(ilm.multi_language_conformity(old_a_e_language, new_a_e_language))
-#     a_sizes.append(ilm.population_grammar_size("BASE-A"))
-#     b_regularities.append(ilm.multi_language_conformity(old_b_e_language, new_b_e_language))
-#     b_sizes.append(ilm.population_grammar_size("BASE-B"))
-#
-# final_a_e_language = ilm.population_e_language(ilm.populations["BASE-A"])
-# final_b_e_language = ilm.population_e_language(ilm.populations["BASE-B"])
-# ilm.merge_populations("BASE-A", "BASE-B", "MERGED", 0)
-#
-# more_generations = []
-# merged_regularities = []
-# merged_sizes = []
-#
-# for i in range(50):
-#     old_e_language = ilm.population_e_language(ilm.populations["MERGED"])
-#     ilm.run_single_generation()
-#     new_e_language = ilm.population_e_language(ilm.populations["MERGED"])
-#     more_generations.append(ilm.gen)
-#     merged_regularities.append(ilm.multi_language_conformity(old_e_language, new_e_language))
-#     merged_sizes.append(ilm.population_grammar_size("MERGED"))
-#
-# final_merged_e_language = ilm.population_e_language(ilm.populations["MERGED"])
-#
-# print("Similarity to language A - " + str(ilm.multi_language_conformity(final_a_e_language, final_merged_e_language)))
-# print("Similarity to language B - " + str(ilm.multi_language_conformity(final_b_e_language, final_merged_e_language)))
-
-
-# plt.figure(0)
-# plt.plot(generations, a_regularities)
-# plt.xlabel('Generation')
-# plt.ylabel('Regularity')
-# plt.title('Language A regularity at each generation of the ILM')
-# plt.savefig("graphs/A-Regularities")
-#
-# plt.figure(1)
-# plt.plot(generations, a_sizes)
-# plt.xlabel('Generation')
-# plt.ylabel('Size')
-# plt.title('Language A Grammar size at each generation of the ILM')
-# plt.savefig("graphs/A-Sizes")
-#
-# plt.figure(2)
-# plt.plot(generations, b_regularities)
-# plt.xlabel('Generation')
-# plt.ylabel('Regularity')
-# plt.title('Language B regularity at each generation of the ILM')
-# plt.savefig("graphs/B-Regularities")
-#
-# plt.figure(3)
-# plt.plot(generations, b_sizes)
-# plt.xlabel('Generation')
-# plt.ylabel('Size')
-# plt.title('Language B Grammar size at each generation of the ILM')
-# plt.savefig("graphs/B-Sizes")
-#
-# plt.figure(4)
-# plt.plot(more_generations, merged_regularities)
-# plt.xlabel('Generation')
-# plt.ylabel('Regularity')
-# plt.title('Merged Language Grammar regularities at each generation of the ILM')
-# plt.savefig("graphs/M-Regularities")
-#
-# plt.figure(5)
-# plt.plot(more_generations, merged_sizes)
-# plt.xlabel('Generation')
-# plt.ylabel('Size')
-# plt.title('Merged Language Grammar size at each generation of the ILM')
-# plt.savefig("graphs/M-Sizes")
+setup()
+single_ilm(1, 50, 50)
