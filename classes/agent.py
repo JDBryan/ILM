@@ -33,7 +33,7 @@ class Agent:
             output += " " + b + " "
             for a in self.l_parameters.a_comp:
                 meaning = [a, b]
-                result = self.grammar.parse(meaning)
+                result = self.grammar.get_utterance(meaning)
                 if result is None:
                     new_result = "-"
                 else:
@@ -59,7 +59,7 @@ class Agent:
         self.grammar.incorporate(meaning, utterance)
 
     def produce_utterance(self, meaning):
-        attempt = self.grammar.parse(meaning)
+        attempt = self.grammar.get_utterance(meaning)
         if attempt is None:
             return self.grammar.invent(meaning)
         else:

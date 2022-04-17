@@ -147,6 +147,6 @@ class Population:
         for agent in self.agents:
             self.log.write(str(agent) + "\n\n")
         # self.log.write("Conformity -  " + str(self.conformity()) + "\n")
-        # self.log.write("Size - " + str(self.average_grammar_size()) + "\n")
-        # self.log.write("Regularity - " + str(self.regularity()) + "\n\n")
+        self.log.write("Size - " + str(self.average_grammar_size()) + "\n")
+        self.log.write("Regularity - " + str(self.regularity()) + "\n\n")
         # self.regularities.append(self.regularity())

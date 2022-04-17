@@ -9,6 +9,7 @@ class Grammar:
         self.l_parameters = l_parameters
         self.categories = {"S": []}
         self.log = log
+        self.map = {}
 
     def __repr__(self):
         output = ""
@@ -31,6 +32,26 @@ class Grammar:
         self.log.write("Removing rule " + str(rule) + "\n")
         if rule.label in self.categories.keys():
             self.categories[rule.label].remove(rule)
+
+    def update_map(self):
+        self.map = {}
+        co_domain = []
+        domain = []
+
+        for rule in self.categories["S"]:
+            rule_co_domain, rule_domain = self.get_rule_co_domain(rule)
+            co_domain += rule_co_domain
+            domain += rule_domain
+
+        for i in range(len(co_domain)):
+            meaning = tuple(domain[i])
+            if meaning not in self.map.keys():
+                self.map[meaning] = [co_domain[i]]
+            else:
+                self.map[meaning].append(co_domain[i])
+
+        # print(self)
+        # print(self.map)
 
     # --GETTERS--
 
@@ -87,6 +108,43 @@ class Grammar:
 
         return closest_meaning
 
+    def get_rule_co_domain(self, rule):
+        co_domain_strings = []
+        co_domain_meanings = []
+        comp_rules = [[] for _ in range(2)]
+        comp_labels = ["-" for _ in range(2)]
+
+        for i in range(2):
+            if rule.meaning[i] not in self.l_parameters.m_comp:
+                comp_labels[i] = rule.meaning[i]
+                for sub_rule in self.get_category(rule.meaning[i]):
+                    comp_rules[i].append(sub_rule)
+                for sub_rule in self.get_category("X"):
+                    comp_rules[i].append(sub_rule)
+
+        co_domain_strings.append(copy.deepcopy(rule.output))
+        co_domain_meanings.append(copy.deepcopy(rule.meaning))
+
+        # print("LABELS " + str(comp_labels))
+        # print("RULES" + str(comp_rules))
+        # print("STRINGS" + str(co_domain_strings))
+        # print("MEANINGS" + str(co_domain_meanings))
+
+        for i in range(2):
+            if comp_labels[i] != "-":
+                new_domain = []
+                new_meanings = []
+                for j in range(len(co_domain_strings)):
+                    signal = co_domain_strings[j]
+                    meaning = co_domain_meanings[j]
+                    for rule in comp_rules[i]:
+                        new_domain.append(self.replace_label_in_output(copy.deepcopy(signal), comp_labels[i], rule.output))
+                        new_meanings.append(self.replace_label_in_meaning(copy.deepcopy(meaning), comp_labels[i], rule.meaning))
+                co_domain_strings = new_domain
+                co_domain_meanings = new_meanings
+
+        return co_domain_strings, co_domain_meanings
+
     # --VALIDATION--
 
     def validate(self):
@@ -95,28 +153,40 @@ class Grammar:
 
     # --OTHER--
 
-    def parse(self, meaning):
-        start_rules = self.find_start_rules(meaning)
+    def can_parse(self, utterance):
+        all_utterances = []
+        for utterances in self.map.values():
+            all_utterances += utterances
 
-        for start_rule in start_rules:
-            output = []
+        return utterance in all_utterances
 
-            for item in start_rule.output:
-                if item in self.l_parameters.alphabet:
-                    output += item
-                else:
-                    if start_rule.meaning[0] == item:
-                        sub_meaning = [meaning[0]]
-                    else:
-                        sub_meaning = [meaning[1]]
-                    sub_rule = self.get_sub_rule(item, sub_meaning)
-                    if sub_rule is None:
-                        sub_rule = self.get_sub_rule("X", sub_meaning)
-
-                    output += sub_rule.output
-
-            return output
-
+    def get_utterance(self, meaning):
+        if tuple(meaning) in self.map.keys():
+            utterances = self.map[tuple(meaning)]
+            utterance = utterances[random.randint(0, len(utterances)-1)]
+            return utterance
+        else:
+            return None
+        # start_rules = self.find_start_rules(meaning)
+        #
+        # for start_rule in start_rules:
+        #     output = []
+        #
+        #     for item in start_rule.output:
+        #         if item in self.l_parameters.alphabet:
+        #             output += item
+        #         else:
+        #             if start_rule.meaning[0] == item:
+        #                 sub_meaning = [meaning[0]]
+        #             else:
+        #                 sub_meaning = [meaning[1]]
+        #             sub_rule = self.get_sub_rule(item, sub_meaning)
+        #             if sub_rule is None:
+        #                 sub_rule = self.get_sub_rule("X", sub_meaning)
+        #
+        #             output += sub_rule.output
+        #
+        #     return output
 
     def relabel(self, old_label, new_label):
 
@@ -139,7 +209,9 @@ class Grammar:
     def invent(self, meaning):
         closest_meaning = self.get_closest_meaning(meaning)
         if closest_meaning is None:
-            return self.generate_random_string()
+            invention = self.generate_random_string()
+            self.incorporate(meaning, invention)
+            return invention
 
         if meaning[0] == closest_meaning[0]:
             intersection = [meaning[0], "d2"]
@@ -157,7 +229,9 @@ class Grammar:
             d2_rule = Rule("X", ["d2"], self.generate_random_string())
             self.add_rule(d2_rule)
 
-        invention = self.parse(intersection)
+        self.update_map()
+
+        invention = self.get_utterance(intersection)
         if invention is None:
             invention = self.generate_random_string()
 
@@ -165,6 +239,8 @@ class Grammar:
             self.remove_rule(d1_rule)
         if d2_rule is not None:
             self.remove_rule(d2_rule)
+
+        self.update_map()
 
         self.incorporate(meaning, invention)
 
@@ -193,8 +269,7 @@ class Grammar:
         return start_rules
 
     def incorporate(self, meaning, string):
-        start_rules = self.find_start_rules(meaning)
-        if len(start_rules) == 0 or len(self.parse(meaning)) > len(string):
+        if not self.can_parse(string):
             print_string = ""
             for item in string:
                 print_string += item
@@ -230,20 +305,7 @@ class Grammar:
                             changed = self.generalise_pair(rule_a, rule_b)
                 else:
                     break
-        # changed = True
-        # while changed:
-        #     changed = False
-        #     all_rules = self.get_all_rules()
-        #     if len(all_rules) > 1:
-        #         for i in range(len(all_rules)):
-        #             if changed:
-        #                 break
-        #             elif all_rules[i] == self.latest_rule:
-        #                 continue
-        #             else:
-        #                 changed = self.generalise_pair(self.latest_rule, all_rules[i])
-        #     else:
-        #         changed = False
+        self.update_map()
 
     def generalise_pair(self, rule_a, rule_b):
         old_grammar = str(self)
@@ -263,7 +325,6 @@ class Grammar:
         if not changed:
             changed = self.attempt_chunk(rule_a, rule_b)
             if changed:
-
                 self.remove_duplicates()
                 self.log.write("Chunking occurred on rules:\n" + str(rule_a) + "\n" + str(rule_b) + "\n")
                 self.log.write("Old Grammar:\n" + old_grammar + "\nNew Grammar:\n" + str(self) + "\n")
@@ -516,4 +577,19 @@ class Grammar:
 
         new_list.append(list_l[marker + 1:])
         return new_list
+
+    def replace_label_in_output(self, output, label, string):
+        if label not in output:
+            return
+
+        for i in range(len(output)):
+            if output[i] == label:
+                return output[:i] + string + output[i+1:]
+
+    def replace_label_in_meaning(self, meaning, label, sub_meaning):
+        for i in range(len(meaning)):
+            if meaning[i] == label:
+                meaning[i] = sub_meaning[0]
+
+        return meaning
 
