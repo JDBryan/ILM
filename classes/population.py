@@ -1,5 +1,5 @@
 from classes.agent import Agent
-
+import random
 
 class Population:
     def __init__(self, name, size, exposure, l_parameters, gen, log):
@@ -64,67 +64,87 @@ class Population:
         return sum(conformities) / len(conformities)
 
     def regularity(self):
-        similarity = 0
-
         previous_language = self.previous_e_language()
         current_language = self.current_e_language()
-        for meaning in self.l_parameters.meanings:
-            if previous_language[tuple(meaning)] == current_language[tuple(meaning)]:
-                similarity += 1
+        successful_communications = 0
 
-        return similarity / len(self.l_parameters.meanings)
+        for meaning in previous_language.keys():
+            for i in range(10):
+                utterances = previous_language[meaning]
+                if utterances != []:
+                    utterance = utterances[random.randint(0, len(utterances)-1)]
+                    if utterance in current_language[meaning]:
+                        successful_communications += 1
+
+        for meaning in current_language.keys():
+            for i in range(10):
+                utterances = current_language[meaning]
+                if utterances != []:
+                    utterance = utterances[random.randint(0, len(utterances)-1)]
+                    if utterance in previous_language[meaning]:
+                        successful_communications += 1
+
+        return successful_communications/500
 
     def current_e_language(self):
-        e_language = {tuple(meaning): "" for meaning in self.l_parameters.meanings}
+        e_language = {tuple(meaning): [] for meaning in self.l_parameters.meanings}
 
-        for meaning in self.l_parameters.meanings:
-            frequency_table = {}
-            most_common_utterance = None
-            highest_frequency = 0
+        # for meaning in self.l_parameters.meanings:
+        #     frequency_table = {}
+        #     most_common_utterance = None
+        #     highest_frequency = 0
+        #
+        #     for agent in self.agents:
+        #         utterance = ""
+        #         for char in agent.produce_utterance(meaning):
+        #             utterance += char
+        #
+        #         if utterance in frequency_table.keys():
+        #             frequency_table[utterance] += 1
+        #         else:
+        #             frequency_table[utterance] = 1
+        #
+        #     for utterance in frequency_table.keys():
+        #         if frequency_table[utterance] > highest_frequency:
+        #             highest_frequency = frequency_table[utterance]
+        #             most_common_utterance = utterance
+        #
+        #     e_language[tuple(meaning)] = most_common_utterance
 
-            for agent in self.agents:
-                utterance = ""
-                for char in agent.produce_utterance(meaning):
-                    utterance += char
-
-                if utterance in frequency_table.keys():
-                    frequency_table[utterance] += 1
-                else:
-                    frequency_table[utterance] = 1
-
-            for utterance in frequency_table.keys():
-                if frequency_table[utterance] > highest_frequency:
-                    highest_frequency = frequency_table[utterance]
-                    most_common_utterance = utterance
-
-            e_language[tuple(meaning)] = most_common_utterance
+        for agent in self.agents:
+            for meaning in agent.grammar.map.keys():
+                e_language[meaning] += agent.grammar.map[meaning]
 
         return e_language
 
     def previous_e_language(self):
-        e_language = {tuple(meaning): "" for meaning in self.l_parameters.meanings}
+        e_language = {tuple(meaning): [] for meaning in self.l_parameters.meanings}
 
-        for meaning in self.l_parameters.meanings:
-            frequency_table = {}
-            most_common_utterance = None
-            highest_frequency = 0
+        # for meaning in self.l_parameters.meanings:
+        #     frequency_table = {}
+        #     most_common_utterance = None
+        #     highest_frequency = 0
+        #
+        #     for agent in self.previous_agents:
+        #         utterance = ""
+        #         for char in agent.produce_utterance(meaning):
+        #             utterance += char
+        #
+        #         if utterance in frequency_table.keys():
+        #             frequency_table[utterance] += 1
+        #         else:
+        #             frequency_table[utterance] = 1
+        #
+        #     for utterance in frequency_table.keys():
+        #         if frequency_table[utterance] > highest_frequency:
+        #             highest_frequency = frequency_table[utterance]
+        #             most_common_utterance = utterance
+        #
+        #     e_language[tuple(meaning)] = most_common_utterance
 
-            for agent in self.previous_agents:
-                utterance = ""
-                for char in agent.produce_utterance(meaning):
-                    utterance += char
-
-                if utterance in frequency_table.keys():
-                    frequency_table[utterance] += 1
-                else:
-                    frequency_table[utterance] = 1
-
-            for utterance in frequency_table.keys():
-                if frequency_table[utterance] > highest_frequency:
-                    highest_frequency = frequency_table[utterance]
-                    most_common_utterance = utterance
-
-            e_language[tuple(meaning)] = most_common_utterance
+        for agent in self.previous_agents:
+            for meaning in agent.grammar.map.keys():
+                e_language[meaning] += agent.grammar.map[meaning]
 
         return e_language
 

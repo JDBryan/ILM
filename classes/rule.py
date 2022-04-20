@@ -1,8 +1,9 @@
 class Rule:
-    def __init__(self, label, meaning, output):
+    def __init__(self, label, meaning, output, l_parameters):
         self.label = label
         self.meaning = list(meaning)
         self.output = output
+        self.l_parameters = l_parameters
 
     def __repr__(self):
         string_str = ""
@@ -29,6 +30,25 @@ class Rule:
         for i in range(len(self.output)):
             if self.output[i] == old_label:
                 self.output[i] = new_label
+
+    def order_val(self):
+        value = 0
+        if self.label != "S":
+            value += 10000
+            if self.meaning[0][0] == "b":
+                value += 1000
+            value += int(self.meaning[0][1])
+
+        else:
+            if self.meaning[0] in self.l_parameters.a_comp:
+                value += 1000
+                value += int(self.meaning[0][1]) * 10
+
+            if self.meaning[1] in self.l_parameters.b_comp:
+                value += 2000
+                value += int(self.meaning[1][1])
+
+        return value
 
     def validate(self, l_parameters):
         valid = True

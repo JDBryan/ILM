@@ -45,9 +45,26 @@ class Agent:
         return output
 
     def learn(self, teachers, exposure):
+        training_data = []
+
         for i in range(exposure):
-            teacher = teachers[random.randint(0, len(teachers)-1)]
-            self.learn_single_utterance(teacher)
+            teacher = teachers[random.randint(0, len(teachers) - 1)]
+            meaning = self.grammar.get_random_meaning()
+            utterance = teacher.produce_utterance(meaning)
+            training_data.append((meaning, utterance))
+            # self.learn_single_utterance(teacher)
+
+        training_data = sorted(training_data, key=self.meaning_order)
+
+        for pair in training_data:
+            utterance = pair[1]
+            meaning = pair[0]
+            utterance_string = ""
+            for char in utterance:
+                utterance_string += char
+            self.log.write("Learning utterance " + utterance_string + " for meaning " + str(
+                meaning) + "\n")
+            self.grammar.incorporate(meaning, utterance)
 
     def learn_single_utterance(self, teacher):
         meaning = self.grammar.get_random_meaning()
@@ -64,3 +81,9 @@ class Agent:
             return self.grammar.invent(meaning)
         else:
             return attempt
+
+    def meaning_order(self, meaning_utterance):
+        meaning = meaning_utterance[0]
+        a_value = 6 - int(meaning[0][1])
+        b_value = (6 - int(meaning[1][1]))/10
+        return a_value + b_value
