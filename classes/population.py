@@ -12,6 +12,7 @@ class Population:
         self.exposure = exposure
         self.initialise_agents()
         self.regularities = []
+        self.sizes = []
         self.is_stable = False
 
     def initialise_agents(self):
@@ -22,15 +23,21 @@ class Population:
         self.agents = new_agents
 
     def has_converged(self):
-        print(self.regularities)
+        # if len(self.sizes) < 5:
+        #     return False
+        #
+        # else:
+        #     s = self.sizes[len(self.sizes)-1]
+        #     for size in self.sizes[len(self.sizes)-5:]:
+        #         if size != s:
+        #             return False
+
         if len(self.regularities) < 5:
-            for reg in self.regularities:
-                if reg != 1:
-                    return False
+            return False
 
         else:
-            for reg in self.regularities[len(self.regularities)-5:]:
-                if reg != 1:
+            for reg in self.regularities[len(self.regularities) - 5:]:
+                if reg < 0.95:
                     return False
         return True
 
@@ -40,13 +47,13 @@ class Population:
         else:
             self.agents = agents
 
-    def conformity(self):
+    def coherence(self):
         conformities = []
         for meaning in self.l_parameters.meanings:
             utterance_dict = {}
             total = 0
             for agent in self.agents:
-                char_list = agent.grammar.parse(meaning)
+                char_list = agent.grammar.get_utterance(meaning)
 
                 if char_list is not None:
                     utterance = ""
@@ -57,10 +64,10 @@ class Population:
                         utterance_dict[utterance] += 1
                     else:
                         utterance_dict[utterance] = 1
-                if len(utterance_dict) == 0:
-                    conformities.append(1)
-                else:
-                    conformities.append(max(utterance_dict.values()) / total)
+            if len(utterance_dict) == 0:
+                conformities.append(0)
+            else:
+                conformities.append(max(utterance_dict.values()) / total)
         return sum(conformities) / len(conformities)
 
     def regularity(self):
@@ -89,28 +96,6 @@ class Population:
     def current_e_language(self):
         e_language = {tuple(meaning): [] for meaning in self.l_parameters.meanings}
 
-        # for meaning in self.l_parameters.meanings:
-        #     frequency_table = {}
-        #     most_common_utterance = None
-        #     highest_frequency = 0
-        #
-        #     for agent in self.agents:
-        #         utterance = ""
-        #         for char in agent.produce_utterance(meaning):
-        #             utterance += char
-        #
-        #         if utterance in frequency_table.keys():
-        #             frequency_table[utterance] += 1
-        #         else:
-        #             frequency_table[utterance] = 1
-        #
-        #     for utterance in frequency_table.keys():
-        #         if frequency_table[utterance] > highest_frequency:
-        #             highest_frequency = frequency_table[utterance]
-        #             most_common_utterance = utterance
-        #
-        #     e_language[tuple(meaning)] = most_common_utterance
-
         for agent in self.agents:
             for meaning in agent.grammar.map.keys():
                 e_language[meaning] += agent.grammar.map[meaning]
@@ -119,28 +104,6 @@ class Population:
 
     def previous_e_language(self):
         e_language = {tuple(meaning): [] for meaning in self.l_parameters.meanings}
-
-        # for meaning in self.l_parameters.meanings:
-        #     frequency_table = {}
-        #     most_common_utterance = None
-        #     highest_frequency = 0
-        #
-        #     for agent in self.previous_agents:
-        #         utterance = ""
-        #         for char in agent.produce_utterance(meaning):
-        #             utterance += char
-        #
-        #         if utterance in frequency_table.keys():
-        #             frequency_table[utterance] += 1
-        #         else:
-        #             frequency_table[utterance] = 1
-        #
-        #     for utterance in frequency_table.keys():
-        #         if frequency_table[utterance] > highest_frequency:
-        #             highest_frequency = frequency_table[utterance]
-        #             most_common_utterance = utterance
-        #
-        #     e_language[tuple(meaning)] = most_common_utterance
 
         for agent in self.previous_agents:
             for meaning in agent.grammar.map.keys():
@@ -169,4 +132,5 @@ class Population:
         # self.log.write("Conformity -  " + str(self.conformity()) + "\n")
         self.log.write("Size - " + str(self.average_grammar_size()) + "\n")
         self.log.write("Regularity - " + str(self.regularity()) + "\n\n")
-        # self.regularities.append(self.regularity())
+        self.sizes.append(self.average_grammar_size())
+        self.regularities.append(self.regularity())

@@ -111,6 +111,40 @@ def dominance_graphs(number_of_agents):
     dom_filename = os.path.join(DIRNAME, "graphs/dominance")
     plt.savefig(dom_filename)
 
+def average_time_to_converge(number_of_agents, exposure):
+    l_parameters = LanguageParameters(ALPHABET, A_COMP, B_COMP)
+    total = 0
+    for i in range(100):
+        ilm = Ilm(l_parameters, number_of_agents, exposure)
+        for j in range(500):
+            ilm.run_single_generation()
+            if ilm.populations["BASE"].has_converged():
+                print(ilm.gen)
+                total += (ilm.gen - 5)
+                break
+        if ilm.gen >= 199:
+            total += ilm.gen
+    print(total/100)
+    return total/100
+
+
+def exposure_graph(number_of_agents):
+    exposures = []
+    convergence_times = []
+    for i in range(100):
+        exposures.append(i)
+        convergence_times.append(average_time_to_converge(number_of_agents, i))
+
+    print(exposures)
+    print(convergence_times)
+
+    plt.figure(0)
+    plt.plot(exposures, convergence_times)
+    plt.xlabel('Exposure')
+    plt.ylabel('Avg. time taken to converge')
+    plt.title('Change in convergence time with respect to exposure')
+    plt.savefig("graphs/convergence_times")
+
 
 def single_ilm(number_of_agents, number_of_generations, exposure):
     # a_freq = {"a1": 100, "a2": 20, "a3": 15, "a4": 10, "a5": 1}
@@ -150,4 +184,4 @@ def setup():
 
 
 setup()
-single_ilm(1, 100, 50)
+exposure_graph(1)
