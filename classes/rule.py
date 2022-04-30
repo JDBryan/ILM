@@ -19,6 +19,9 @@ class Rule:
     def __eq__(self, other):
         return self.label == other.label and self.meaning == other.meaning and self.output == other.output
 
+    def set_parameters(self, new_params):
+        self.l_parameters = new_params
+
     def relabel(self, old_label, new_label):
         if self.label == old_label:
             self.label = new_label

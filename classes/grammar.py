@@ -34,6 +34,7 @@ class Grammar:
             self.categories[rule.label].remove(rule)
 
     def sort_rules(self):
+        # return
         cats = []
         for label in self.categories.keys():
             if label == "S":
@@ -59,6 +60,10 @@ class Grammar:
         for cat in cats:
             self.categories[cat[0]] = cat[1]
 
+    def set_parameters(self, new_params):
+        self.l_parameters = new_params
+        for rule in self.get_all_rules():
+            rule.set_parameters(new_params)
 
     def update_map(self):
         self.map = {}
@@ -81,8 +86,8 @@ class Grammar:
     # --GETTERS--
 
     def get_random_meaning(self):
-        randint = random.randint(0, len(self.l_parameters.meanings) - 1)
-        return self.l_parameters.meanings[randint]
+        randint = random.randint(0, len(self.l_parameters.freq_list) - 1)
+        return self.l_parameters.freq_list[randint]
 
     def get_all_rules(self):
         rules = []
@@ -172,13 +177,23 @@ class Grammar:
 
         return utterance in all_utterances
 
-    def get_utterance(self, meaning):
+    def get_shortest_utterance(self, meaning):
         if tuple(meaning) in self.map.keys():
             utterances = self.map[tuple(meaning)]
+            utterances = sorted(utterances, key = len)
             utterance = utterances[random.randint(0, len(utterances)-1)]
             return utterance
         else:
             return None
+
+    def get_utterance(self, meaning):
+        return self.get_shortest_utterance(meaning)
+        # if tuple(meaning) in self.map.keys():
+        #     utterances = self.map[tuple(meaning)]
+        #     utterance = utterances[random.randint(0, len(utterances)-1)]
+        #     return utterance
+        # else:
+        #     return None
 
     def relabel(self, old_label, new_label):
 
@@ -264,7 +279,8 @@ class Grammar:
         return start_rules
 
     def incorporate(self, meaning, string):
-        if not self.can_parse(string):
+        s_utt = self.get_shortest_utterance(meaning)
+        if not self.can_parse(string) and (s_utt is None or len(s_utt) > len(string)):
             print_string = ""
             for item in string:
                 print_string += item
@@ -287,6 +303,7 @@ class Grammar:
         changed = True
         while changed:
             changed = False
+            self.sort_rules()
             all_rules = self.get_all_rules()
             for i in range(len(all_rules)):
                 if not changed:
@@ -312,33 +329,38 @@ class Grammar:
         if not changed:
             changed = self.attempt_relabel(rule_a, rule_b)
             if changed:
-                self.remove_duplicates()
+                self.cleanup()
                 self.log.write("Relabelling occurred on rules:\n" + str(rule_a) + "\n" + str(rule_b) + "\n\n")
                 self.log.write("Old Grammar:\n" + old_grammar + "\nNew Grammar:\n" + str(self))
-                self.validate()
-                self.sort_rules()
 
         # Attempt chunk
         if not changed:
             changed = self.attempt_chunk(rule_a, rule_b)
             if changed:
-                self.remove_duplicates()
+                self.cleanup()
                 self.log.write("Chunking occurred on rules:\n" + str(rule_a) + "\n" + str(rule_b) + "\n")
                 self.log.write("Old Grammar:\n" + old_grammar + "\nNew Grammar:\n" + str(self) + "\n")
-                self.validate()
-                self.sort_rules()
 
         # Attempt substring
         if not changed:
             changed = self.attempt_substring(rule_a, rule_b)
             if changed:
-                self.remove_duplicates()
+                self.cleanup()
                 self.log.write("Substring occurred on rules:\n" + str(rule_a) + "\n" + str(rule_b) + "\n")
                 self.log.write("Old Grammar:\n" + old_grammar + "\nNew Grammar:\n" + str(self))
-                self.validate()
-                self.sort_rules()
+
+        if not changed:
+            changed = self.attempt_substring(rule_b, rule_a)
+            if changed:
+                self.cleanup()
+                self.log.write("Substring occurred on rules:\n" + str(rule_a) + "\n" + str(rule_b) + "\n")
+                self.log.write("Old Grammar:\n" + old_grammar + "\nNew Grammar:\n" + str(self))
 
         return changed
+
+    def cleanup(self):
+        self.remove_duplicates()
+        self.validate()
 
     def attempt_chunk(self, rule_a, rule_b):
         if rule_a.label == "S" and rule_b.label == "S":

@@ -21,6 +21,10 @@ class Agent:
         output += self.get_e_language() + "\n"
         return output
 
+    def set_parameters(self, new_params):
+        self.l_parameters = new_params
+        self.grammar.set_parameters(new_params)
+
     def get_i_language(self):
         return str(self.grammar)
 
@@ -52,7 +56,6 @@ class Agent:
             meaning = self.grammar.get_random_meaning()
             utterance = teacher.produce_utterance(meaning)
             training_data.append((meaning, utterance))
-            # self.learn_single_utterance(teacher)
 
         training_data = sorted(training_data, key=self.meaning_order)
 

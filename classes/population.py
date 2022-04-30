@@ -15,6 +15,11 @@ class Population:
         self.sizes = []
         self.is_stable = False
 
+    def set_parameters(self, new_params):
+        self.l_parameters = new_params
+        for agent in self.agents:
+            agent.set_parameters(new_params)
+
     def initialise_agents(self):
         new_agents = []
         for i in range(self.pop_size):
@@ -124,7 +129,12 @@ class Population:
         self.initialise_agents()
 
         for learner in self.agents:
+            # print(learner.name + "is learning from teachers")
             learner.learn(self.previous_agents, self.exposure)
+
+        for learner in self.agents:
+            # print(learner.name + "is learning from learners")
+            learner.learn(self.agents, self.exposure)
 
         self.log.write(self.name + ":\n\n")
         for agent in self.agents:
