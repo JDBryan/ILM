@@ -28,14 +28,6 @@ class Population:
         self.agents = new_agents
 
     def has_converged(self):
-        # if len(self.sizes) < 5:
-        #     return False
-        #
-        # else:
-        #     s = self.sizes[len(self.sizes)-1]
-        #     for size in self.sizes[len(self.sizes)-5:]:
-        #         if size != s:
-        #             return False
 
         if len(self.regularities) < 5:
             return False
@@ -58,7 +50,7 @@ class Population:
             utterance_dict = {}
             total = 0
             for agent in self.agents:
-                char_list = agent.grammar.get_utterance(meaning)
+                char_list = agent.grammar.get_shortest_utterance(meaning)
 
                 if char_list is not None:
                     utterance = ""
@@ -129,17 +121,14 @@ class Population:
         self.initialise_agents()
 
         for learner in self.agents:
-            # print(learner.name + "is learning from teachers")
             learner.learn(self.previous_agents, self.exposure)
 
         for learner in self.agents:
-            # print(learner.name + "is learning from learners")
             learner.learn(self.agents, self.exposure)
 
         self.log.write(self.name + ":\n\n")
         for agent in self.agents:
             self.log.write(str(agent) + "\n\n")
-        # self.log.write("Conformity -  " + str(self.conformity()) + "\n")
         self.log.write("Size - " + str(self.average_grammar_size()) + "\n")
         self.log.write("Regularity - " + str(self.regularity()) + "\n\n")
         self.sizes.append(self.average_grammar_size())

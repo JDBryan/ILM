@@ -37,7 +37,7 @@ class Agent:
             output += " " + b + " "
             for a in self.l_parameters.a_comp:
                 meaning = [a, b]
-                result = self.grammar.get_utterance(meaning)
+                result = self.grammar.get_shortest_utterance(meaning)
                 if result is None:
                     new_result = "-"
                 else:
@@ -56,8 +56,6 @@ class Agent:
             meaning = self.grammar.get_random_meaning()
             utterance = teacher.produce_utterance(meaning)
             training_data.append((meaning, utterance))
-
-        training_data = sorted(training_data, key=self.meaning_order)
 
         for pair in training_data:
             utterance = pair[1]
@@ -79,14 +77,8 @@ class Agent:
         self.grammar.incorporate(meaning, utterance)
 
     def produce_utterance(self, meaning):
-        attempt = self.grammar.get_utterance(meaning)
+        attempt = self.grammar.get_shortest_utterance(meaning)
         if attempt is None:
             return self.grammar.invent(meaning)
         else:
             return attempt
-
-    def meaning_order(self, meaning_utterance):
-        meaning = meaning_utterance[0]
-        a_value = 6 - int(meaning[0][1])
-        b_value = (6 - int(meaning[1][1]))/10
-        return a_value + b_value

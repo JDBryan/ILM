@@ -34,25 +34,6 @@ class Rule:
             if self.output[i] == old_label:
                 self.output[i] = new_label
 
-    def order_val(self):
-        value = 0
-        if self.label != "S":
-            value += 10000
-            if self.meaning[0][0] == "b":
-                value += 1000
-            value += int(self.meaning[0][1])
-
-        else:
-            if self.meaning[0] in self.l_parameters.a_comp:
-                value += 1000
-                value += int(self.meaning[0][1]) * 10
-
-            if self.meaning[1] in self.l_parameters.b_comp:
-                value += 2000
-                value += int(self.meaning[1][1])
-
-        return value
-
     def validate(self, l_parameters):
         valid = True
         if len(self.output) == 0:
@@ -63,10 +44,6 @@ class Rule:
                 if item not in l_parameters.alphabet:
                     valid = False
         else:
-
-            # if self.meaning[0] == self.meaning[1]:
-            #     valid = False
-
             meaning_labels = []
             for i in range(2):
                 if self.meaning[i] not in l_parameters.m_comp:
@@ -87,7 +64,6 @@ class Rule:
         if len(self.output) >= len(rule.output):
             return None
         for i in range(len(rule.output)):
-            # i = 0
             for j in range(len(self.output)):
                 if i+j > len(rule.output) - 1 or rule.output[i+j] != self.output[j]:
                     break

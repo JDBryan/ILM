@@ -1,3 +1,5 @@
+import numpy as np
+
 from classes.ilm import Ilm
 import matplotlib.pyplot as plt
 from classes.language_parameters import LanguageParameters
@@ -112,32 +114,49 @@ def dominance_graphs(number_of_agents, sample_size):
     plt.savefig("graphs/dominance.svg", format="svg")
 
 
-def average_time_to_converge(number_of_agents, exposure):
+def average_time_to_converge(number_of_agents, exposure, samples, max_generation):
     l_parameters = LanguageParameters(ALPHABET, A_COMP, B_COMP)
     total_time = 0
     total_size = 0
-    for i in range(10):
+    total_coherence = 0
+    for i in range(samples):
         ilm = Ilm(l_parameters, number_of_agents, exposure)
-        for j in range(500):
+        for j in range(max_generation):
             ilm.run_single_generation()
             if ilm.populations["BASE"].has_converged():
-                print(ilm.gen)
                 total_time += (ilm.gen - 5)
                 total_size += ilm.populations["BASE"].average_grammar_size()
+                total_coherence += ilm.populations["BASE"].coherence()
                 break
-        if ilm.gen >= 400:
+
+        if ilm.gen >= max_generation - 10:
             total_time += ilm.gen
-    print(total_time/10)
-    print(total_size/10)
-    return total_time/10, total_size/10
+            total_size += ilm.populations["BASE"].average_grammar_size()
+            total_coherence += ilm.populations["BASE"].coherence()
+
+    print(total_time/samples)
+    print(total_size/samples)
+    print(total_coherence/samples)
+    return total_time/samples, total_size/samples, total_coherence/samples
 
 
 def population_graph():
     convergence_times = []
     pop_size = []
-    for i in range(1, 6):
+    grammar_sizes = []
+    coherences = []
+    for i in range(3, 4):
+
         pop_size.append(i)
-        convergence_times.append(average_time_to_converge(i, 50))
+        if i == 1:
+            time, size, coherence = average_time_to_converge(i, 25, 10, 200)
+        else:
+            time, size, coherence = average_time_to_converge(i, 50, 10, 200)
+        convergence_times.append(time)
+        grammar_sizes.append(size)
+        coherences.append(coherence)
+
+
     plt.figure(0)
     plt.plot(pop_size, convergence_times)
     plt.xlabel('Population Size')
@@ -146,6 +165,8 @@ def population_graph():
     plt.savefig("graphs/convergence_times.svg", format="svg")
     print(pop_size)
     print(convergence_times)
+    print(grammar_sizes)
+    print(coherences)
     return
 
 
@@ -156,7 +177,7 @@ def exposure_graph(number_of_agents):
 
     for i in range(16, 101):
         exposures.append(i)
-        time, size = average_time_to_converge(number_of_agents, i)
+        time, size, coherence = average_time_to_converge(number_of_agents, i, 10, 200)
         convergence_times.append(time)
         average_sizes.append(size)
 
@@ -179,9 +200,11 @@ def exposure_graph(number_of_agents):
     plt.savefig("graphs/grammar_sizes.svg", format="svg")
 
 
+def single_convergence(number_of_agents, max_generations, exposure):
+    average_time_to_converge(number_of_agents, exposure, 1, max_generations)
+
+
 def single_ilm(number_of_agents, number_of_generations, exposure):
-    # a_freq = {"a1": 100, "a2": 20, "a3": 15, "a4": 10, "a5": 1}
-    # b_freq = {"b1": 100, "b2": 20, "b3": 15, "b4": 10, "b5": 1}
     l_parameters = LanguageParameters(ALPHABET, A_COMP, B_COMP)
     ilm = Ilm(l_parameters, number_of_agents, exposure)
     generations = []
@@ -222,11 +245,11 @@ def single_ilm(number_of_agents, number_of_generations, exposure):
 
 def meaning_freq_graph(number_of_agents, sample_size):
     freq_dists = [
-        {"a1": 20, "a2": 15, "a3": 10, "a4": 5, "a5": 0},
-        {"a1": 15, "a2": 13, "a3": 10, "a4": 7, "a5": 5},
+        {"a1": 20, "a2": 15, "a3": 10, "a4": 5,  "a5": 0},
+        {"a1": 15, "a2": 13, "a3": 10, "a4": 7,  "a5": 5},
         {"a1": 10, "a2": 10, "a3": 10, "a4": 10, "a5": 10},
-        {"a1": 5, "a2": 7, "a3": 10, "a4": 13, "a5": 15},
-        {"a1": 0, "a2": 5, "a3": 10, "a4": 15, "a5": 20}
+        {"a1": 5,  "a2": 7,  "a3": 10, "a4": 13, "a5": 15},
+        {"a1": 0,  "a2": 5,  "a3": 10, "a4": 15, "a5": 20}
     ]
 
     a_dist = freq_dists[4]
@@ -234,9 +257,12 @@ def meaning_freq_graph(number_of_agents, sample_size):
     dist_indexes = []
     a_doms = []
     b_doms = []
-    for i in range(5):
+    for i in range(10):
+        print(a_dist)
+        print(b_dist)
         dist_indexes.append(i)
         final_dist = freq_dists[i]
+        print(final_dist)
         total_a_dom = 0
         total_b_dom = 0
         for j in range(sample_size):
@@ -298,38 +324,24 @@ def setup():
 def plot_graph(x_values, y_values):
     plt.figure(1)
     plt.plot(x_values, y_values)
-    plt.xlabel('Exposure')
-    plt.ylabel('Avg number of generations to converge')
-    plt.title('Avg. time taken to converge vs exposure')
-    plt.savefig("graphs/generated", format="svg")
+    plt.xlabel('Population size')
+    plt.ylabel('Avg. time taken to converge')
+    plt.title('Convergence Time by Population Size')
+    plt.xticks(np.arange(min(x_values), max(x_values) + 1, 1.0))
+    plt.savefig("graphs/pop_size.svg", format="svg")
 
 
 def plot_double_graph(x_values, other_y_values, y_values):
     plt.figure(1)
-    plt.plot(x_values, y_values)
-    plt.plot(x_values, other_y_values)
-    plt.xlabel('Frequency Distribution')
+    plt.plot(x_values, y_values, "-b", label="Language A")
+    plt.plot(x_values, other_y_values, "-r", label="Language B")
+    plt.xlabel('Number of agents from Population A')
     plt.ylabel('Language Dominance')
-    plt.title('Dominance of Language for meaning frequencies')
-    plt.savefig("graphs/freqs.svg", format="svg")
+    plt.title('Language Dominance vs Number of Merged Agents')
+    plt.legend(loc="upper center")
+    plt.xticks(np.arange(min(x), max(x) + 1, 1.0))
+    plt.savefig("graphs/dominances.svg", format="svg")
 
-# y = [65.7, 71.2, 52.9, 69.6, 44.1, 108.6, 55.9, 49.5, 50.2, 24.7, 46.8, 25.4, 24.3, 34.7, 18.3, 32.0, 24.0, 30.1, 29.6, 33.1, 48.8, 40.9, 20.6, 60.5, 42.4, 36.4, 45.6, 40.3, 21.4, 28.9, 34.9, 33.4, 33.4, 30.0, 25.7, 23.0, 32.0, 21.9, 31.1, 33.7, 26.4, 32.5, 21.7, 26.7, 29.2, 17.0, 25.7, 24.6, 9.8, 22.2, 12.7, 21.9, 15.0, 18.7, 17.7, 7.8, 18.1, 9.6, 15.4, 10.8, 5.3, 7.1, 4.2, 4.7, 10.6, 8.1, 5.1, 7.6, 4.1, 2.1, 2.8, 2.9, 3.2, 1.8, 2.5, 1.6, 1.4, 2.3, 0.7, 1.2, 0.4, 2.2, 0.6, 0.7]
-# x = [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
-
-
-# aa_freq = {"a1": 20, "a2": 15, "a3": 10, "a4": 5, "a5": 0}
-# ba_freq = {"a1": 0, "a2": 5, "a3": 10, "a4": 15, "a5": 20}
-#
-# x = [0,1,2,3,4]
-# a_dom = [0.9040000000000001, 0.27999999999999997, 0.196, 0.44799999999999995, 0.304]
-# b_dom = [0.144, 0.42399999999999993, 0.34800000000000003, 0.33199999999999996, 0.7000000000000001]
 
 setup()
-# plot_double_graph(x, a_dom, b_dom)
-# meaning_freq_test(2, aa_freq, ba_freq, aa_freq)
-# meaning_freq_graph(2)
-# dominance_graphs(2, 1)
-single_ilm(1, 100, 50)
-# population_graph()
-# plot_graph(x, y)
-# exposure_graph(1)
+single_ilm(2, 50, 50)

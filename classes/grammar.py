@@ -33,33 +33,6 @@ class Grammar:
         if rule.label in self.categories.keys():
             self.categories[rule.label].remove(rule)
 
-    def sort_rules(self):
-        # return
-        cats = []
-        for label in self.categories.keys():
-            if label == "S":
-                cats.append(["S", self.get_category("S"), 0])
-                continue
-            category = self.get_category(label)
-            comp = category[0].meaning[0]
-            if comp == "a":
-                value = 1
-            else:
-                value = 100
-            size = len(category)
-            value += size
-            cats.append([label, category, value])
-
-        cats = sorted(cats, key=lambda x: x[2])
-
-        for i in range(len(cats)):
-            cats[i][1] = sorted(cats[i][1], key=lambda x: x.order_val())
-
-        self.categories = {}
-
-        for cat in cats:
-            self.categories[cat[0]] = cat[1]
-
     def set_parameters(self, new_params):
         self.l_parameters = new_params
         for rule in self.get_all_rules():
@@ -186,15 +159,6 @@ class Grammar:
         else:
             return None
 
-    def get_utterance(self, meaning):
-        return self.get_shortest_utterance(meaning)
-        # if tuple(meaning) in self.map.keys():
-        #     utterances = self.map[tuple(meaning)]
-        #     utterance = utterances[random.randint(0, len(utterances)-1)]
-        #     return utterance
-        # else:
-        #     return None
-
     def relabel(self, old_label, new_label):
 
         self.log.write("Relabelling " + old_label + " to " + new_label + "\n")
@@ -239,7 +203,7 @@ class Grammar:
 
         self.update_map()
 
-        invention = self.get_utterance(intersection)
+        invention = self.get_shortest_utterance(intersection)
         if invention is None:
             invention = self.generate_random_string()
 
@@ -289,7 +253,7 @@ class Grammar:
             self.log.write("\n")
             self.log.write("Beginning generalisation\n")
             self.generalise()
-            self.sort_rules()
+            # self.sort_rules()
             self.log.write("Finished generalisation\n\n")
         else:
             self.log.write("Already have shorter utterance for meaning" + str(meaning) + "\n\n")
@@ -301,24 +265,24 @@ class Grammar:
 
     def generalise(self):
         changed = True
+
         while changed:
-            changed = False
-            self.sort_rules()
-            all_rules = self.get_all_rules()
-            for i in range(len(all_rules)):
-                if not changed:
-                    rule_a = all_rules[i]
-                    for j in range(len(all_rules)):
-                        rule_b = all_rules[j]
-                        if rule_a == rule_b:
-                            continue
-                        elif changed:
-                            break
-                        else:
-                            changed = self.generalise_pair(rule_a, rule_b)
-                else:
-                    break
+            changed = self.single_gen_run()
+
         self.update_map()
+
+    def single_gen_run(self):
+        # self.sort_rules()
+        all_rules = self.get_all_rules()
+        random.shuffle(all_rules)
+        for i in range(len(all_rules) - 1):
+            rule_a = all_rules[i]
+            for j in range(len(all_rules[i + 1:])):
+                rule_b = all_rules[i+j+1]
+                changed = self.generalise_pair(rule_a, rule_b)
+                if changed:
+                    return True
+        return False
 
     def generalise_pair(self, rule_a, rule_b):
         old_grammar = str(self)
@@ -515,10 +479,6 @@ class Grammar:
         relabel = {}
         m_comp = self.l_parameters.m_comp
 
-        # if rule_a.label != rule_b.label and rule_a.meaning == rule_b.meaning:
-        #     self.relabel(rule_a.label, rule_b.label)
-        #     return True
-
         # Check if labels are different
         if rule_a.label != rule_b.label:
             relabel[rule_b.label] = rule_a.label
@@ -585,15 +545,6 @@ class Grammar:
         chunk_b = string_b[i:len_b - j]
         remaining = string_a[:i] + ["-"] + string_a[len_a - j:]
 
-        # if i >= j:
-        #     chunk_a = string_a[i:]
-        #     chunk_b = string_b[i:]
-        #     remaining = string_a[:i] + ["-"]
-        # else:
-        #     chunk_a = string_a[:len_a-j]
-        #     chunk_b = string_b[:len_b-j]
-        #     remaining = ["-"] + string_a[len_a-j:]
-
         if len(chunk_a) == 0 or len(chunk_b) == 0:
             if i == 0:
                 j -= 1
@@ -620,21 +571,6 @@ class Grammar:
 
         new_list.append(list_l[marker + 1:])
         return new_list
-
-    # def replace_label_in_output(self, output, label, string):
-    #     if label not in output:
-    #         return
-    #
-    #     for i in range(len(output)):
-    #         if output[i] == label:
-    #             return output[:i] + string + output[i+1:]
-    #
-    # def replace_label_in_meaning(self, meaning, label, sub_meaning):
-    #     for i in range(len(meaning)):
-    #         if meaning[i] == label:
-    #             meaning[i] = sub_meaning[0]
-    #
-    #     return meaning
 
     def insert_list_into_array(self, array, item, replacement_list):
         for i in range(len(array)):
