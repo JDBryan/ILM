@@ -344,4 +344,4 @@ def plot_double_graph(x_values, other_y_values, y_values):
 
 
 setup()
-single_ilm(2, 50, 50)
+print(average_time_to_converge(1, 50, 1, 500))
